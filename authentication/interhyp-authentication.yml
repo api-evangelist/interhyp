@@ -1,0 +1,37 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/interhyp-submission-openapi.yml, openapi/interhyp-submission-documents-openapi.yml
+docs: https://developer.ehyphome.de/first-steps
+summary:
+  types:
+  - http
+  - apiKey
+  api_key_in:
+  - header
+  model: >-
+    Every request carries two credentials: an Api-Key header identifying the
+    partner application, and an OAuth 2.0 JWT bearer access token in the
+    Authorization header. Both the API key and the OAuth client credentials are
+    generated in the Interhyp Developer Studio. An active partnership agreement
+    with Prohyp is required to obtain credentials.
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    OAuth 2.0 access token in JSON Web Token format. Retrieved from the
+    Authorization API using client credentials, then sent in the Authorization
+    header on each request until it expires or is revoked.
+  sources:
+  - openapi/interhyp-submission-openapi.yml
+  - openapi/interhyp-submission-documents-openapi.yml
+- name: StandardApiKey
+  type: apiKey
+  in: header
+  parameter: Api-Key
+  description: >-
+    Partner API key issued by Interhyp, passed in the Api-Key header on every
+    request to identify and authorize the client application.
+  sources:
+  - openapi/interhyp-submission-openapi.yml
