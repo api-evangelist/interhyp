@@ -1,0 +1,245 @@
+openapi: 3.0.2
+info:
+  title: Interhyp Submission commands API
+  version: 2.0.0
+  contact:
+    name: Interhyp AG (Team Provider Excellence)
+    email: support_submission_api@interhyp.de
+  license:
+    name: Interhyp AG
+  description: '### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>
+
+    ### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.
+
+    + **Bank Partners**
+
+    ### API design Principles <p> During API design a set of principles were taken into consideration.
+
+    + **API First**
+
+    + **Mobile First**
+
+    ### API client <p> As an API client you should adhere to the following robustness principle
+
+    + **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests
+
+    + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.'
+servers:
+- url: https://api-test.interhyp.de/submission
+  description: Test-Staging
+- url: https://api.interhyp.de/submission
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: commands
+  description: provides endpoints to access to commands sent to the submission API
+paths:
+  /commands/{commandId}:
+    get:
+      summary: Get an existing command
+      description: 'Delivers information about an existing command
+
+
+        A Command is a unit of execution which has been created to perform asynchronous operation.
+
+        '
+      operationId: getCommandsById
+      tags:
+      - commands
+      parameters:
+      - $ref: '#/components/parameters/command-id'
+      responses:
+        '200':
+          description: Command is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+        '400':
+          description: Error indicates missing or wrong request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFC7807Problem'
+        '401':
+          description: Error indicates no access to the required resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthProblem'
+        '404':
+          description: Error indicates that a requested command resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFC7807Problem'
+        '500':
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFC7807Problem'
+components:
+  schemas:
+    CommandError:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+          x-extensible-enum:
+          - SBM_ARCHIVE_SUBMISSION_DENIED
+          - SBM_NOT_UNARCHIVABLE
+          - SBM_ASSIGN_PROCESSOR_UNIT_MISMATCH
+          - SBM_STATUS_CHANGE_DENIED
+          - UNEXPECTED_ERROR
+          - NO_PROCESSOR_ASSIGNED
+          - FINAL_STATE
+          - PRE_INQUIRY_NOT_SUBMITTED
+          - PRE_INQUIRY_ALREADY_SUBMITTED
+          - PRE_INQUIRY_NOT_ARCHIVABLE
+          - PRE_INQUIRY_IS_ARCHIVED
+    RFC7807Problem:
+      type: object
+      title: RFC7807Problem
+      description: 'DE: Angaben zum zurueckgegebenen Fehler. EN: Holds information on the returned error.
+
+        '
+      required:
+      - timestamp
+      - traceId
+      - instance
+      - title
+      - status
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: 'DE: Ein UTC-Zeitstempel, der den Fehlerzeitpunkt angibt (https://de.wikipedia.org/wiki/Koordinierte_Weltzeit). EN: A UTC date-time indicating the error timestamp (https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+
+            '
+          example: 2024-06-29 19:22:50+00:00
+        type:
+          type: string
+          format: uri
+          description: 'DE: Verknuepfung zum Abruf von mehr Informationen zu dem Fehler. EN: URL referring to more information about the error.
+
+            '
+          default: about:blank
+        title:
+          type: string
+          description: 'DE: Kurzbeschreibung des Fehlers. EN: Error short description.
+
+            '
+          example: Bad Request
+        status:
+          type: integer
+          format: int32
+          description: 'DE: HTTP-Status-Code gemaess Konvention (https://tools.ietf.org/html/rfc2616#section-10). EN: HTTP status code following standared error codes (https://tools.ietf.org/html/rfc2616#section-10).
+
+            '
+          example: 400
+          minimum: 100
+          maximum: 599
+        detail:
+          type: string
+          description: 'DE: Detaillierte Beschreibung des Fehlers. EN: Detailed description for the returned error.
+
+            '
+          example: JSON parse error
+        traceId:
+          type: string
+          description: 'DE: Eindeutige Kennung zur Verfolgung der Anfrage. EN: Unique trace id for problematic request.
+
+            '
+          example: avx1234asd
+        instance:
+          type: string
+          format: uri
+          description: 'DE: Pfad zur betreffenden Resource. EN: Path of requested resource.
+
+            '
+          example: http://localhost/resources/123
+        violations:
+          type: array
+          description: 'DE: Abfolge der Verstoesse in der Anfrage. EN: Collection of the invalid content of the request.
+
+            '
+          items:
+            $ref: '#/components/schemas/Violation'
+    OAuthProblem:
+      type: object
+      description: Error while Authentication
+      required:
+      - error
+      - error_description
+      properties:
+        error:
+          type: string
+          description: Summary of the error type
+          example: invalid_token
+        error_description:
+          type: string
+          description: Detailed information about the error
+          example: Access token expired
+    Violation:
+      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
+
+        '
+      type: object
+      title: Violation
+      properties:
+        field:
+          type: string
+          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+
+            '
+          example: address.city.numberOfInhabitants
+        message:
+          type: string
+          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
+
+            '
+          example: Must be greater than or equal to 0.
+    Command:
+      type: object
+      required:
+      - commandId
+      - result
+      - traceId
+      - aggregateId
+      properties:
+        commandId:
+          type: string
+        result:
+          type: string
+          x-extensible-enum:
+          - SUCCESSFUL
+          - FAILED
+          - DLQ
+          - PARKING_LOT
+          - DLQ_PURGE
+          - UNPROCESSABLE
+        traceId:
+          type: string
+        aggregateId:
+          type: string
+        error:
+          $ref: '#/components/schemas/CommandError'
+  parameters:
+    command-id:
+      name: commandId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id of the requested command
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

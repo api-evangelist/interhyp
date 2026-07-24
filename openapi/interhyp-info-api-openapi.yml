@@ -1,0 +1,184 @@
+openapi: 3.0.2
+info:
+  title: Interhyp Submission commands info API
+  version: 2.0.0
+  contact:
+    name: Interhyp AG (Team Provider Excellence)
+    email: support_submission_api@interhyp.de
+  license:
+    name: Interhyp AG
+  description: '### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>
+
+    ### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.
+
+    + **Bank Partners**
+
+    ### API design Principles <p> During API design a set of principles were taken into consideration.
+
+    + **API First**
+
+    + **Mobile First**
+
+    ### API client <p> As an API client you should adhere to the following robustness principle
+
+    + **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests
+
+    + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.'
+servers:
+- url: https://api-test.interhyp.de/submission
+  description: Test-Staging
+- url: https://api.interhyp.de/submission
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: info
+  description: provides basic info about service status and version of the submission API specs used
+paths:
+  /info:
+    get:
+      summary: Get Submission API service status and info
+      description: Delivers information about Submission API service status and basic information about the current version
+      operationId: getServiceInfo
+      tags:
+      - info
+      responses:
+        '200':
+          description: Service Info is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInfo'
+              example: ' { "apiSpecificationVersion" : "1.0.0" }'
+        '401':
+          description: Error indicates no access to the service.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthProblem'
+              example: '{ "error": "invalid token", "error_description": "Access token expired", }'
+        '500':
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFC7807Problem'
+              example: '{ "timestamp": "2023-03-14T10:00:00.995Z", "title": "Internal Server Error", "status": 500, "traceId": "64077933c36912de13fb3cd7ae0c00c8", "instance": "/v2/info" }'
+components:
+  schemas:
+    Violation:
+      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
+
+        '
+      type: object
+      title: Violation
+      properties:
+        field:
+          type: string
+          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+
+            '
+          example: address.city.numberOfInhabitants
+        message:
+          type: string
+          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
+
+            '
+          example: Must be greater than or equal to 0.
+    ServiceInfo:
+      type: object
+      description: 'DE: Informationen zum Dienst Submission API <br/> EN: Information about Submission API service
+
+        '
+      properties:
+        apiSpecificationVersion:
+          type: string
+          description: Currently used version of the Submission API specification
+    OAuthProblem:
+      type: object
+      description: Error while Authentication
+      required:
+      - error
+      - error_description
+      properties:
+        error:
+          type: string
+          description: Summary of the error type
+          example: invalid_token
+        error_description:
+          type: string
+          description: Detailed information about the error
+          example: Access token expired
+    RFC7807Problem:
+      type: object
+      title: RFC7807Problem
+      description: 'DE: Angaben zum zurueckgegebenen Fehler. EN: Holds information on the returned error.
+
+        '
+      required:
+      - timestamp
+      - traceId
+      - instance
+      - title
+      - status
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: 'DE: Ein UTC-Zeitstempel, der den Fehlerzeitpunkt angibt (https://de.wikipedia.org/wiki/Koordinierte_Weltzeit). EN: A UTC date-time indicating the error timestamp (https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+
+            '
+          example: 2024-06-29 19:22:50+00:00
+        type:
+          type: string
+          format: uri
+          description: 'DE: Verknuepfung zum Abruf von mehr Informationen zu dem Fehler. EN: URL referring to more information about the error.
+
+            '
+          default: about:blank
+        title:
+          type: string
+          description: 'DE: Kurzbeschreibung des Fehlers. EN: Error short description.
+
+            '
+          example: Bad Request
+        status:
+          type: integer
+          format: int32
+          description: 'DE: HTTP-Status-Code gemaess Konvention (https://tools.ietf.org/html/rfc2616#section-10). EN: HTTP status code following standared error codes (https://tools.ietf.org/html/rfc2616#section-10).
+
+            '
+          example: 400
+          minimum: 100
+          maximum: 599
+        detail:
+          type: string
+          description: 'DE: Detaillierte Beschreibung des Fehlers. EN: Detailed description for the returned error.
+
+            '
+          example: JSON parse error
+        traceId:
+          type: string
+          description: 'DE: Eindeutige Kennung zur Verfolgung der Anfrage. EN: Unique trace id for problematic request.
+
+            '
+          example: avx1234asd
+        instance:
+          type: string
+          format: uri
+          description: 'DE: Pfad zur betreffenden Resource. EN: Path of requested resource.
+
+            '
+          example: http://localhost/resources/123
+        violations:
+          type: array
+          description: 'DE: Abfolge der Verstoesse in der Anfrage. EN: Collection of the invalid content of the request.
+
+            '
+          items:
+            $ref: '#/components/schemas/Violation'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

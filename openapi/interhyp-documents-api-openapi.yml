@@ -1,0 +1,311 @@
+openapi: 3.0.2
+info:
+  title: Interhyp Submission commands documents API
+  version: 2.0.0
+  contact:
+    name: Interhyp AG (Team Provider Excellence)
+    email: support_submission_api@interhyp.de
+  license:
+    name: Interhyp AG
+  description: '### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>
+
+    ### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.
+
+    + **Bank Partners**
+
+    ### API design Principles <p> During API design a set of principles were taken into consideration.
+
+    + **API First**
+
+    + **Mobile First**
+
+    ### API client <p> As an API client you should adhere to the following robustness principle
+
+    + **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests
+
+    + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.'
+servers:
+- url: https://api-test.interhyp.de/submission
+  description: Test-Staging
+- url: https://api.interhyp.de/submission
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: documents
+  description: access to submission documents
+paths:
+  /v2/submissions/{submissionId}/documents/metadata:
+    get:
+      deprecated: true
+      tags:
+      - documents
+      summary: Delievers all submission relevant documents metadata
+      operationId: getDocumentsMetadata
+      description: Retrieve all submission relevant documents in the requested format. <p>
+      parameters:
+      - $ref: '#/components/parameters/submission-id'
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/embed'
+      responses:
+        '200':
+          description: Submission documents matching provided criteria in the requested format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        '202':
+          description: Documents metadata are being prepared, try again later, please refer to Retry-After Header
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: metadata is expected to be ready after the specified amout of seconds
+        '400':
+          description: Error indicates missing or wrong request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Error indicates no access to the required resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: Error indicates that a requested submission resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+  /v2/submissions/{submissionId}/documents/{documentId}/binaries:
+    get:
+      deprecated: true
+      tags:
+      - documents
+      summary: Delievers specific submission document in `pdf` format
+      operationId: getDocumentBinary
+      description: 'Retrieve specific submission document based on an identifier in `pdf` format<p /> Note: retries following a 202 *must* provide the If-Match header.'
+      parameters:
+      - in: header
+        name: If-Match
+        schema:
+          type: string
+          format: etag
+        required: false
+      - $ref: '#/components/parameters/submission-id'
+      - $ref: '#/components/parameters/document-id'
+      responses:
+        '200':
+          description: Requested submission document is returned
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/Binary'
+        '202':
+          description: Payload is being prepared, try again later
+          headers:
+            ETag:
+              schema:
+                type: string
+                format: etag
+              description: unique ID of payload creation request; use as If-Match in subsequent calls to retrieve payload
+            Retry-After:
+              schema:
+                type: integer
+              description: payload is expected to be ready after the specified amout of seconds
+        '400':
+          description: Error indicates missing or wrong request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Error indicates no access to the required resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: Error indicates that a requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '409':
+          description: Error indicates the document has a stale state. Maybe the document was modified or deleted. Please refresh the documents metadata of the submission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnexpectedError'
+components:
+  schemas:
+    DocumentCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: KONTOAUSZUG
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentCategoryTag'
+    NotFound:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    DocumentValidity:
+      type: object
+      required:
+      - value
+      - resolution
+      properties:
+        resolution:
+          type: string
+          description: open ended enum contains type of resolutions, possible values are (MONTH, YEAR)
+          example: MONTH
+          x-extensible-enum:
+          - MONTH
+          - YEAR
+      discriminator:
+        propertyName: resolution
+        mapping:
+          MONTH: '#/components/schemas/MonthlyResolution'
+          YEAR: '#/components/schemas/YearlyResolution'
+    UnexpectedError:
+      required:
+      - status
+      - message
+      - timestamp
+      - path
+      - traceId
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+        path:
+          type: string
+        traceId:
+          type: string
+        errorCode:
+          type: integer
+          format: int32
+    Documents:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+    ClientError:
+      type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
+    DocumentItem:
+      type: object
+      required:
+      - id
+      - content
+      - category
+      properties:
+        id:
+          type: string
+        content:
+          $ref: '#/components/schemas/ResourceRef'
+        category:
+          $ref: '#/components/schemas/DocumentCategory'
+        reference:
+          type: string
+          description: holds information about who/what this document category references
+          example: Mustermann, Max
+        validity:
+          $ref: '#/components/schemas/DocumentValidity'
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    ResourceRef:
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          description: Link to retrieve a specific resource
+          example: http://some-domain/some/link/to/somewhere
+    Conflict:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    Unauthorized:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    Binary:
+      type: string
+      format: binary
+    DocumentCategoryTag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: MIETAUSGANG
+  parameters:
+    document-id:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission document.
+    submission-id:
+      name: submissionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission.
+    embed:
+      name: embed
+      in: query
+      style: form
+      required: false
+      schema:
+        type: boolean
+      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
+    startDate:
+      name: startDate
+      in: query
+      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: true
+      schema:
+        type: string
+        format: date-time
+        example: 2019-12-29 10:22:50+00:00
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
