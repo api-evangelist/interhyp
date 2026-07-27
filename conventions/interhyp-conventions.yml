@@ -1,0 +1,60 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/interhyp-submission-openapi.yml
+docs: https://developer.ehyphome.de/first-steps
+note: >-
+  Cross-cutting request/response semantics for the Interhyp Submission API,
+  derived from the OpenAPI and confirmed against the Developer Studio docs.
+authentication:
+  style: OAuth 2.0 JWT bearer + Api-Key header
+  detail: See authentication/interhyp-authentication.yml
+idempotency:
+  supported: true
+  mechanism: command-resource
+  detail: >-
+    Mutations are modeled as command resources rather than direct writes. A
+    client POSTs a command (modifySubmission / modifyPreSubmissionCheck) and
+    receives a commandId; the command is processed asynchronously and its result
+    is polled via getCommandsById. Re-reading a command by its id is safe and
+    repeatable, and business-rule conflicts are surfaced as CommandError codes
+    (e.g. FINAL_STATE, PRE_INQUIRY_ALREADY_SUBMITTED) rather than duplicating an
+    effect. This command/async pattern is the provider's idempotency and
+    exactly-once contract for state changes.
+pagination:
+  style: cursor
+  detail: >-
+    Cursor-based pagination over large collections. Responses carry a Cursor
+    object with before/after string cursors marking the page boundaries; the
+    cursor is invalidated if the item it points to is removed.
+  response_fields:
+  - before
+  - after
+expansion:
+  supported: true
+  mechanisms:
+  - param: embed
+    detail: query parameter to expand related resources inline
+  - header: Prefer
+    values:
+    - return=full
+    - return=essential
+    detail: controls whether full or essential representations are returned (Mobile First bandwidth optimization)
+request_tracing:
+  field: traceId
+  detail: >-
+    Every RFC 7807 problem response includes a traceId; partners quote it to
+    Interhyp support (am@prohyp.de) for correlation.
+versioning:
+  scheme: uri-path
+  current: v2
+  detail: >-
+    The API is versioned in the URI path (/submission/v2). The underlying spec
+    document is independently versioned (info.version 6.10.0). Deprecated
+    endpoints are marked DEPRECATED in the Developer Studio and later deactivated.
+error_envelope:
+  transport: RFC 7807 problem (schema RFC7807Problem), application/json
+  domain: CommandError code registry (see errors/interhyp-error-codes.yml)
+async_processing:
+  detail: >-
+    Long-running operations return asynchronously via the command pattern;
+    clients poll the command resource until completion.

@@ -1,0 +1,94 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/interhyp-submission-openapi.yml, openapi/interhyp-submission-documents-openapi.yml
+note: >-
+  Entity-relationship graph derived from the Interhyp Submission API path
+  hierarchy and $ref schema links. financingApplication is the root aggregate;
+  a submission is the partner-facing case that a financing application is handed
+  over into. The API exposes 714 component schemas; the entities below are the
+  addressable REST resources.
+entities:
+- name: FinancingApplication
+  id: financingApplicationId
+  description: Root aggregate for a mortgage financing case (Baufinanzierung).
+  relationships:
+  - has_many: applicants
+    via: financingApplicationId
+  - has_many: applicantRelationships
+    via: financingApplicationId
+  - has_many: estates
+    via: financingApplicationId
+  - has_many: households
+    via: financingApplicationId
+  - has_many: financialStandings
+    via: financingApplicationId
+  - has_one: consultation
+    via: financingApplicationId
+  - has_one: offer
+    via: financingApplicationId
+  - has_one: venture
+    via: financingApplicationId
+  - has_many: informers
+    via: financingApplicationId
+  - has_many: submissions
+    via: financingApplicationId
+- name: Applicant
+  id: applicantId
+  belongs_to: FinancingApplication
+  relationships:
+  - has_many: financialStandings
+    via: applicantId
+- name: Estate
+  id: estateId
+  belongs_to: FinancingApplication
+- name: Household
+  belongs_to: FinancingApplication
+- name: FinancialStanding
+  id: financialStandingId
+  belongs_to: FinancingApplication
+  relationships:
+  - has_many: existingLoans
+    via: debtId
+- name: Consultation
+  belongs_to: FinancingApplication
+- name: Offer
+  belongs_to: FinancingApplication
+- name: Venture
+  belongs_to: FinancingApplication
+- name: Informer
+  id: informerId
+  belongs_to: FinancingApplication
+- name: Submission
+  id: submissionId
+  belongs_to: FinancingApplication
+  description: Partner-facing case handed to a loan partner; carries status, logbook, calculations, credit-loans and documents.
+  relationships:
+  - has_one: financingApplication
+    via: submissionId
+  - has_many: calculations
+    via: calculationType
+  - has_many: creditLoans
+    via: creditLoanId
+  - has_one: logbook
+    via: submissionId
+  - has_one: status
+    via: submissionId
+  - has_many: handoverDocuments
+    via: submissionId
+  - has_many: uploadedDocuments
+    via: documentId
+  - has_many: commands
+    via: submissionId
+- name: PreSubmissionCheck
+  id: preSubmissionCheckId
+  description: Pre-flight eligibility check against an intent + loan partner before a submission is created.
+  relationships:
+  - has_many: commands
+    via: preSubmissionCheckId
+- name: Command
+  id: commandId
+  description: Asynchronous mutation request (modifySubmission / modifyPreSubmissionCheck); polled via getCommandsById.
+- name: Document
+  id: documentId
+  belongs_to: Submission
+  description: Submission document metadata + binary content (Submission Documents API).

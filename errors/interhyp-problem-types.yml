@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/interhyp-submission-openapi.yml
+format: rfc7807
+media_type: application/json
+envelope:
+  schema: RFC7807Problem
+  required:
+  - timestamp
+  - traceId
+  - instance
+  - title
+  - status
+  fields:
+  - timestamp
+  - type
+  - title
+  - status
+  - detail
+  - traceId
+  - instance
+  - violations
+note: Every 4xx/5xx response returns an RFC 7807 problem object (schema RFC7807Problem) carrying a traceId
+  for support correlation and a violations[] array for field-level validation errors.
+problems:
+- status: 400
+  title: Bad Request
+  remediation: Validate the request body/parameters against the schema before retrying.
+- status: 401
+  title: Unauthorized
+  remediation: Obtain a fresh OAuth 2.0 JWT bearer token and include a valid Api-Key header.
+- status: 403
+  title: Forbidden
+  remediation: The authenticated partner is not authorized for this resource.
+- status: 404
+  title: Not Found
+  remediation: The referenced resource id does not exist or is not visible to this partner.
+- status: 500
+  title: Internal Server Error
+  remediation: Transient server error; retry with backoff and contact am@prohyp.de if it persists.

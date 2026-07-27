@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/interhyp-submission-openapi.yml
+skills:
+- file: interhyp-read-financing-application.md
+  name: Read a mortgage financing application
+  api: openapi/interhyp-submission-openapi.yml
+  operations:
+  - getFinancingApplicationById
+  - getApplicantsByFinancingApplicationId
+  - getApplicantById
+  - getEstatesByFinancingApplicationId
+  - getHouseholdsByFinancingApplicationId
+  - getFinanceStandingsByFinancingApplicationId
+  - getOfferByFinancingApplicationId
+  - getSubmissionsByFinancingApplicationId
+- file: interhyp-manage-submission.md
+  name: Manage a mortgage submission
+  api: openapi/interhyp-submission-openapi.yml
+  operations:
+  - getPreSubmissionChecksByIntentIdAndLoanPartnerId
+  - modifyPreSubmissionCheck
+  - getSubmissions
+  - getSubmissionById
+  - getSubmissionStatusById
+  - getLogbookBySubmissionId
+  - modifySubmission
+  - getCommandsById

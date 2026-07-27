@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Interhyp/SubmissionAPI/blob/master/CHANGELOG.md
+docs: https://developer.ehyphome.de/changelog
+scheme: semver
+current_version: 6.10.0
+note: >-
+  The Interhyp Submission Data API maintains a semver changelog in the public
+  SubmissionAPI GitHub repo and a live changelog in the Developer Studio. Recent
+  window captured below; the source files are authoritative for full history.
+entries:
+- version: 6.10.0
+  breaking: false
+  highlights:
+  - Add endpoint to retrieve pre-submission checks by intent ID and loan partner ID (getPreSubmissionChecksByIntentIdAndLoanPartnerId)
+- version: 6.9.2
+  breaking: false
+  highlights:
+  - Add approved flag to submission additional products
+- version: 6.9.1
+  breaking: false
+  highlights:
+  - Add collection of performed pre-submission checks to submission
+- version: 6.9.0
+  breaking: true
+  highlights:
+  - Rename totalRating to commissionBase
+  - Rename netAmount to netBurden and change type MonetaryAmount -> PeriodicalAmount
+- version: 6.8.0
+  breaking: true
+  highlights:
+  - Remove obsolete submission additional products
+- version: 6.7.23
+  breaking: false
+  highlights:
+  - Add modify-submission command with additional products

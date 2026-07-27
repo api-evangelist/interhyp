@@ -1,0 +1,124 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/interhyp-submission-openapi.yml, openapi/interhyp-submission-documents-openapi.yml
+note: Candidate MCP tool list derived one-to-one from Interhyp Submission API operationIds. No official
+  hosted MCP server was found on developer.ehyphome.de as of this pass.
+server:
+  name: interhyp-submission
+  transport: http
+tools:
+- name: getCommandsById
+  description: Get an existing command
+  source_operation: openapi/interhyp-submission-openapi.yml#getCommandsById
+- name: getFinancingApplicationById
+  description: Get a exisiting financing application
+  source_operation: openapi/interhyp-submission-openapi.yml#getFinancingApplicationById
+- name: getApplicantRelationshipsByFinancingApplicationId
+  description: Get a list of applicant-relationships
+  source_operation: openapi/interhyp-submission-openapi.yml#getApplicantRelationshipsByFinancingApplicationId
+- name: getApplicantsByFinancingApplicationId
+  description: Get applicants for a specific submission package.
+  source_operation: openapi/interhyp-submission-openapi.yml#getApplicantsByFinancingApplicationId
+- name: getApplicantById
+  description: Get a specific mortgage applicant
+  source_operation: openapi/interhyp-submission-openapi.yml#getApplicantById
+- name: getFinanceStandingsForApplicant
+  description: Get applicant financial standings
+  source_operation: openapi/interhyp-submission-openapi.yml#getFinanceStandingsForApplicant
+- name: getConsultationByFinancingApplicationId
+  description: Get financing consultation
+  source_operation: openapi/interhyp-submission-openapi.yml#getConsultationByFinancingApplicationId
+- name: getEstatesByFinancingApplicationId
+  description: Get estates for a specific financing application.
+  source_operation: openapi/interhyp-submission-openapi.yml#getEstatesByFinancingApplicationId
+- name: getEstateById
+  description: Get a specific estate.
+  source_operation: openapi/interhyp-submission-openapi.yml#getEstateById
+- name: getFinanceStandingsByFinancingApplicationId
+  description: Get applicants financial standings
+  source_operation: openapi/interhyp-submission-openapi.yml#getFinanceStandingsByFinancingApplicationId
+- name: getExistingLoanById
+  description: Get a specific existing loan.
+  source_operation: openapi/interhyp-submission-openapi.yml#getExistingLoanById
+- name: getFinanceStandingsById
+  description: Get a specific financial standing
+  source_operation: openapi/interhyp-submission-openapi.yml#getFinanceStandingsById
+- name: getHouseholdsByFinancingApplicationId
+  description: Get applicants household
+  source_operation: openapi/interhyp-submission-openapi.yml#getHouseholdsByFinancingApplicationId
+- name: getFinancingApplicationInformers
+  description: Get consultation informers
+  source_operation: openapi/interhyp-submission-openapi.yml#getFinancingApplicationInformers
+- name: getFinancingApplicationInformerById
+  description: Get a specific mortgage informer
+  source_operation: openapi/interhyp-submission-openapi.yml#getFinancingApplicationInformerById
+- name: getOfferByFinancingApplicationId
+  description: Get financing offer
+  source_operation: openapi/interhyp-submission-openapi.yml#getOfferByFinancingApplicationId
+- name: getSubmissionsByFinancingApplicationId
+  description: Get financing application's submission
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionsByFinancingApplicationId
+- name: getVentureByFinancingApplicationId
+  description: Get financing venture
+  source_operation: openapi/interhyp-submission-openapi.yml#getVentureByFinancingApplicationId
+- name: getServiceInfo
+  description: Get Submission API service status and info
+  source_operation: openapi/interhyp-submission-openapi.yml#getServiceInfo
+- name: getPreSubmissionChecksByIntentIdAndLoanPartnerId
+  description: Get a collection of pre submission checks for intent ID and loan partner ID
+  source_operation: openapi/interhyp-submission-openapi.yml#getPreSubmissionChecksByIntentIdAndLoanPartnerId
+- name: getPreSubmissionCheckById
+  description: Get a specific pre submission check
+  source_operation: openapi/interhyp-submission-openapi.yml#getPreSubmissionCheckById
+- name: modifyPreSubmissionCheck
+  description: Modify an existing pre submission check.
+  source_operation: openapi/interhyp-submission-openapi.yml#modifyPreSubmissionCheck
+- name: getSubmissions
+  description: Delivers all active submissions for a specific financing partner.
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissions
+- name: getSubmissionById
+  description: Get a specific submission
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionById
+- name: getSubmissionCalculationByType
+  description: Get calculation data
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionCalculationByType
+- name: modifySubmission
+  description: Modify an existing submission.
+  source_operation: openapi/interhyp-submission-openapi.yml#modifySubmission
+- name: getSubmissionCreditLoanById
+  description: Get a specific credit loan
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionCreditLoanById
+- name: getSubmissionFinancingApplication
+  description: Get a submitted financing application
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionFinancingApplication
+- name: getHandoverDocuments
+  description: Get handover documents
+  source_operation: openapi/interhyp-submission-openapi.yml#getHandoverDocuments
+- name: getSubmissionHandoverReports
+  description: Get handover reports
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionHandoverReports
+- name: getSubmissionHandoverReportByName
+  description: Get a specific handover report as `PDF`
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionHandoverReportByName
+- name: getLogbookBySubmissionId
+  description: Get submission logbook entries
+  source_operation: openapi/interhyp-submission-openapi.yml#getLogbookBySubmissionId
+- name: getSubmissionOverview
+  description: Get the overview for a submission
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionOverview
+- name: getSubmissionStatusById
+  description: Get current status of specified submission
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionStatusById
+- name: getSubmissionDocumentById
+  description: Get a specific submission document as `PDF`
+  source_operation: openapi/interhyp-submission-openapi.yml#getSubmissionDocumentById
+- name: getDocumentsMetadata
+  description: Delievers all submission relevant documents metadata
+  source_operation: openapi/interhyp-submission-documents-openapi.yml#getDocumentsMetadata
+- name: getDocumentBinary
+  description: Delievers specific submission document in `pdf` format
+  source_operation: openapi/interhyp-submission-documents-openapi.yml#getDocumentBinary
+- name: getSubmissionsProtocol
+  description: Delivers all submissions protocol for a provider
+  source_operation: openapi/interhyp-submission-documents-openapi.yml#getSubmissionsProtocol

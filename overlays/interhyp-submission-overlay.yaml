@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Interhyp Submission API
+  version: 1.0.0
+extends: openapi/interhyp-submission-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: interhyp
+    x-apievangelist-auth: OAuth 2.0 JWT bearer + Api-Key header
+    x-apievangelist-pagination: cursor
+    x-apievangelist-error-format: rfc7807
+    x-apievangelist-idempotency: command-resource (async, poll by commandId)
+    x-apievangelist-conventions: conventions/interhyp-conventions.yml
+- target: $.info
+  update:
+    x-apievangelist-agent-skills:
+    - skills/interhyp-read-financing-application.md
+    - skills/interhyp-manage-submission.md

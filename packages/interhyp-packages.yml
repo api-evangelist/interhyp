@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Interhyp/SubmissionAPI
+note: >-
+  Interhyp does not publish a first-party client SDK to a public package registry
+  (npm/Maven Central/PyPI checked — none). It ships a generated okhttp3 (Java)
+  example client and an OpenAPI spec from which partners generate their own
+  clients via OpenAPI Generator. No SDKs pointer is wired since no official
+  published, maintained SDK package exists.
+packages:
+- language: java
+  registry: null
+  name: submission-api-okhttp3-client
+  url: https://github.com/Interhyp/SubmissionAPI/tree/master/submission-api-documents/examples/submission-api-okhttp3-client
+  install: generate from openapi/interhyp-submission-openapi.yml via OpenAPI Generator
+  official: false
+  kind: example-client

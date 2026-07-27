@@ -1,0 +1,26 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Interhyp/SubmissionAPI, https://developer.ehyphome.de/first-steps
+note: >-
+  Interhyp exposes non-production stages for partner integration. Credentials
+  (Api-Key + OAuth client) are issued per environment from the Developer Studio;
+  no public shared test values are published. Postman collections and an
+  okhttp3 example client are provided in the SubmissionAPI GitHub repo.
+environments:
+- name: development
+  base_url: https://api-dev.ehyphome.de/submission/v2
+- name: acceptance
+  base_url: https://api-acc.ehyphome.de/submission/v2
+- name: test
+  base_url: https://api-test.interhyp.de/submission
+production_base_url: https://api.interhyp.de/submission/v2
+tooling:
+- type: postman
+  detail: Postman collection + test environment shipped in SubmissionAPI/submission-api-data/postman-collection/
+  url: https://github.com/Interhyp/SubmissionAPI/tree/master/submission-api-data/postman-collection
+- type: example-client
+  detail: okhttp3 (Java) example client generated from the OpenAPI spec
+  url: https://github.com/Interhyp/SubmissionAPI/tree/master/submission-api-documents/examples/submission-api-okhttp3-client
+access: >-
+  Requires an active partnership agreement with Prohyp; brokers register at
+  prohyp.de/partner-werden. No self-service public sandbox keys are published.

@@ -1,0 +1,50 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/interhyp-submission-openapi.yml#components/schemas/CommandError
+note: >-
+  Domain error-code registry returned by command operations (modifySubmission,
+  modifyPreSubmissionCheck) on the CommandError envelope. These are business-rule
+  rejections, distinct from the transport-level RFC 7807 problem responses in
+  interhyp-problem-types.yml. The errorCode field is an x-extensible-enum, so new
+  codes may appear; clients must tolerate unknown values.
+envelope:
+  schema: CommandError
+  required:
+  - errorCode
+  fields:
+  - errorMessage
+  - errorCode
+error_codes:
+- code: SBM_ARCHIVE_SUBMISSION_DENIED
+  meaning: The submission cannot be archived in its current state.
+  area: submissions
+- code: SBM_NOT_UNARCHIVABLE
+  meaning: The submission cannot be un-archived.
+  area: submissions
+- code: SBM_ASSIGN_PROCESSOR_UNIT_MISMATCH
+  meaning: The processor being assigned does not belong to the submission's organizational unit.
+  area: submissions
+- code: SBM_STATUS_CHANGE_DENIED
+  meaning: The requested submission status transition is not allowed.
+  area: submissions
+- code: NO_PROCESSOR_ASSIGNED
+  meaning: The operation requires a processor to be assigned to the submission first.
+  area: submissions
+- code: FINAL_STATE
+  meaning: The submission is in a final state and can no longer be modified.
+  area: submissions
+- code: PRE_INQUIRY_NOT_SUBMITTED
+  meaning: The pre-submission check has not been submitted yet.
+  area: pre-submission-checks
+- code: PRE_INQUIRY_ALREADY_SUBMITTED
+  meaning: The pre-submission check has already been submitted.
+  area: pre-submission-checks
+- code: PRE_INQUIRY_NOT_ARCHIVABLE
+  meaning: The pre-submission check cannot be archived in its current state.
+  area: pre-submission-checks
+- code: PRE_INQUIRY_IS_ARCHIVED
+  meaning: The pre-submission check is already archived.
+  area: pre-submission-checks
+- code: UNEXPECTED_ERROR
+  meaning: An unexpected internal error occurred while processing the command.
+  area: general

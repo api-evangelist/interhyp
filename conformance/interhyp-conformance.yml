@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/interhyp-submission-openapi.yml
+standards:
+- id: oauth2-bearer-jwt
+  conforms: true
+  evidence: http bearer securityScheme with bearerFormat JWT; OAuth 2.0 token flow documented at developer.ehyphome.de/first-steps
+- id: apikey-header
+  conforms: true
+  evidence: apiKey securityScheme in header (Api-Key)
+- id: rfc7807-problem-details
+  conforms: true
+  evidence: all 4xx/5xx responses use schema RFC7807Problem (type/title/status/detail/instance + traceId)
+- id: cursor-pagination
+  conforms: true
+  evidence: Cursor component schema with before/after cursors on collection responses
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.2 documents published for both submission services
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+- id: scim
+  conforms: false
+- id: odata
+  conforms: false
+- id: psd2
+  conforms: false
+- id: json-api
+  conforms: false

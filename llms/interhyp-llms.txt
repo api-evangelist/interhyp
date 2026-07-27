@@ -1,0 +1,29 @@
+# Interhyp
+
+> Interhyp AG is Germany's leading platform for residential mortgage financing (Baufinanzierung), comparing offers from 500+ loan partners. Its Developer Studio publishes partner REST APIs — the Submission API and Submission Documents API — for integrating mortgage submission workflows, financing applications, documents, logbooks and pre-submission checks. Auth is OAuth 2.0 JWT bearer + an Api-Key header; responses use cursor pagination and RFC 7807 problem+json errors with a traceId. Interhyp is part of ING Group and runs the broker brand Prohyp.
+
+## APIs
+- [Interhyp Submission API](https://developer.ehyphome.de/products): financing applications, applicants, households, estates, financial standings, offers, submissions, logbooks, commands, pre-submission checks. Base: https://api.interhyp.de/submission/v2
+- [Interhyp Submission Documents API](https://developer.ehyphome.de/products): submission document metadata + binary content + submissions protocol. Base: https://api.interhyp.de/submission
+
+## Specs
+- [Submission API OpenAPI 3.0](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/openapi/interhyp-submission-openapi.yml)
+- [Submission Documents API OpenAPI 3.0](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/openapi/interhyp-submission-documents-openapi.yml)
+
+## Artifacts
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/authentication/interhyp-authentication.yml)
+- [Conventions (idempotency, pagination, tracing)](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/conventions/interhyp-conventions.yml)
+- [Error catalog (RFC 7807)](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/errors/interhyp-problem-types.yml)
+- [Error codes (CommandError registry)](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/errors/interhyp-error-codes.yml)
+- [Data model / ERD](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/data-model/interhyp-data-model.yml)
+- [Lifecycle & versioning](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/lifecycle/interhyp-lifecycle.yml)
+- [MCP candidate tools](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/mcp/interhyp-mcp.yml)
+- [Agent skills index](https://raw.githubusercontent.com/api-evangelist/interhyp/refs/heads/main/skills/_index.yml)
+
+## Docs
+- [Developer Studio](https://developer.ehyphome.de/)
+- [Products](https://developer.ehyphome.de/products)
+- [First steps / getting started](https://developer.ehyphome.de/first-steps)
+- [Changelog](https://developer.ehyphome.de/changelog)
+- [GitHub org](https://github.com/Interhyp)
+- [Become a partner (Prohyp)](https://www.prohyp.de/partner-werden/)

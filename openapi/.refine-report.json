@@ -1,0 +1,28 @@
+{
+  "provider": "interhyp",
+  "sources": [
+    "interhyp-commands-api-openapi.yml",
+    "interhyp-documents-api-openapi.yml",
+    "interhyp-financing-application-api-openapi.yml",
+    "interhyp-info-api-openapi.yml",
+    "interhyp-logbook-api-openapi.yml",
+    "interhyp-pre-submission-checks-api-openapi.yml",
+    "interhyp-protocol-api-openapi.yml",
+    "interhyp-submissions-api-openapi.yml"
+  ],
+  "outputs": [
+    "interhyp-commands-api-openapi.yml",
+    "interhyp-documents-api-openapi.yml",
+    "interhyp-financing-application-api-openapi.yml",
+    "interhyp-info-api-openapi.yml",
+    "interhyp-logbook-api-openapi.yml",
+    "interhyp-pre-submission-checks-api-openapi.yml",
+    "interhyp-protocol-api-openapi.yml",
+    "interhyp-submissions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: searched
+source: https://developer.ehyphome.de/first-steps
+versioning:
+  scheme: uri-path
+  current: v2
+  spec_version: 6.10.0
+  docs: https://developer.ehyphome.de/first-steps
+deprecation:
+  policy: >-
+    Deprecated APIs are clearly marked as DEPRECATED in the Interhyp Developer
+    Studio and are subsequently deactivated; partners are advised to migrate to
+    the current versions. Environment stages (dev, acc, prod) are exposed via
+    distinct host names.
+  policy_url: https://developer.ehyphome.de/changelog
+changelog: https://developer.ehyphome.de/changelog
+environments:
+- name: development
+  base: https://api-dev.ehyphome.de/submission/v2
+- name: acceptance
+  base: https://api-acc.ehyphome.de/submission/v2
+- name: test
+  base: https://api-test.interhyp.de/submission
+- name: production
+  base: https://api.interhyp.de/submission/v2
+status_page: null
+deprecated_operations: []
