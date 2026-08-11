@@ -134,6 +134,8 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-submissions-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/interhyp-submission-documents-overlay.yaml
 - type: DeveloperPortal
   url: https://developer.ehyphome.de/
 - type: Documentation
