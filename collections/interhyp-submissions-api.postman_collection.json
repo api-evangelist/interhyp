@@ -1,0 +1,4117 @@
+{
+  "item": [
+    {
+      "id": "7a3bd6db-0f1d-4bbe-9511-5367f7b576bc",
+      "name": "submissions",
+      "description": {
+        "content": "provides endpoints for submission resources associated with a specific financing partner",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3fe9072-bc9c-4377-a669-4822bc761dd9",
+          "name": "Delivers all active submissions for a specific financing partner.",
+          "request": {
+            "name": "Delivers all active submissions for a specific financing partner.",
+            "description": {
+              "content": "This endpoint gives a possibility to retrieve information about active submissions that belong to a specific financing partner\nfiltered by submission date using `since` query parameter.\n\n**Tip:** A submission is considered to be active, when it has not been revoked.\n\n*By Default*, we will return the first *20* matching records. However, this is not a hard limitation! `limit` parameter can be used\nto tell the API how many records you want to receive at once *(max 50)*.</br>\n\nTo get further matching records, `after` or `before` parameters can be used to tell the API the start of each page using specified\ncursor.</br>\n\nTo navigate through the query result, a reference to the following navigations are included in the response *(next, previous)*.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "(Required) A UTC date-time value that points to the start of the range of time-based data.\n\nDefined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "A UTC date-time value that points to the end of the range of time-based data. If not provided, current date-time is used.\n\nDefined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Specifies how many items to return at one time (max 50).\n\nA query may return fewer than the value of limit due to filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor that points to the end of the page of data that has been returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor that points to the start of the page of data that has been returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "To indicate sorting direction, fields may be prefixed with `+` ascending or `-` descending.\n\nNote: sorting applies only within a single result page when multiple pages are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f16cf6cf-b147-4438-9dec-4bcbcd42d85f",
+              "name": "A paged array of submissions matching the provided criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"submissionRef\": {\n        \"_href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"submittedAt\": \"2019-12-29 10:22:50+00:00\"\n    },\n    {\n      \"submissionRef\": {\n        \"_href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"submittedAt\": \"2019-12-29 10:22:50+00:00\"\n    }\n  ],\n  \"paging\": {\n    \"cursor\": {\n      \"before\": \"string\",\n      \"after\": \"string\"\n    },\n    \"previous\": \"https://MOhICKUBNmFDewaotMhGXAJ.odUH4kaCorotkoD\",\n    \"next\": \"http://dykS.levgHvQDOGvxCE.YDsiGLr\",\n    \"first\": \"http://NBuWat.lbU3lHroqW\",\n    \"last\": \"https://xebOAZKmZgLdytEWdHi.togxEaUjWK0R1N7yJ1Q3Bx,4-rqTitPSRiBrPhvFDevaXbdHBHb\",\n    \"self\": \"https://IwKiESpkqLQKBTwuRYZxrIyIvPAI.xeRzlIvJJT9Keq87tzlJSEujenRsIMCZOFg\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01e104c2-08c5-4b9a-b86b-595fadf55b59",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35bf0aa7-009e-4cf9-9908-2d18a76dc918",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d6b4096-358e-46c5-88ca-50991c63799d",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d88e67e-03fb-4c46-a1ce-9a52fe734d69",
+          "name": "Get a specific submission",
+          "request": {
+            "name": "Get a specific submission",
+            "description": {
+              "content": "This endpoint gives a possibility to retrieve information about a specific submission using it's id.\nA submission (Kreditantrag) holds all the information in order to help the financing partners during credit decision phase.\n\nThis endpoint utilizes *Expansion* feature, where *by default* only basic information shall be returned. In order to access more full details, two options are available\n\n  - follow provided links in order to navigate to submission sub-resources (i.e /v2/submissions/{submissionId}/overview)\n\n  - initiate the call with request parameter `embed` set to *TRUE* (i.e /v2/submissions/{submissionId}?embed=true)\n\nPlease refer to *Expansion* section for more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<boolean>",
+                  "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc83c53b-27d8-4202-9a83-511466bb3aca",
+              "name": "Requested submission is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"submissionId\": {\n    \"value\": \"string\"\n  },\n  \"financingApplication\": {\n    \"financingApplicationRef\": {\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"_href\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"embedded\": {\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"applicants\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"venture\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"financialStanding\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"estates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"subType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"applicantRelationships\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"households\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"consultation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"consultationInfo\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"offer\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"overview\": {\n    \"submittedAt\": \"2019-12-29 10:22:50+00:00\",\n    \"_href\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"embedded\": {\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"submittedAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reviewedAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"initialEstimate\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"timeline\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"submittedBy\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"submitter\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"contactUser\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"loanPartner\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"loanPartnerDetails\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additionalFields\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"useNewModifyCommandVersion\": true,\n      \"useNewUploadVersion\": true\n    }\n  },\n  \"creditLoans\": {\n    \"data\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"_href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"types\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"_href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"types\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"residualDebtProtections\": {\n    \"data\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ]\n  },\n  \"originInfo\": {\n    \"client\": {\n      \"key\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"externalId\": {\n      \"value\": \"string\"\n    },\n    \"intentId\": {\n      \"value\": \"string\"\n    }\n  },\n  \"preInquires\": {\n    \"preInquires\": [\n      {\n        \"preInquiryId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"createdAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"status\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"preInquiryId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"createdAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"status\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"preSubmissionChecks\": {\n    \"preSubmissionChecks\": [\n      {\n        \"preSubmissionCheckId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"createdAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"preSubmissionCheckId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"createdAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8208172-9b7d-4c4e-b49d-975b7eb3be49",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecf33c85-383b-48bf-addd-e31de73911fa",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9128c9ea-6b01-4bb2-90e7-ba1f311031aa",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a342ef7a-f061-4572-bb33-1628573a2521",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00d11525-0237-4b20-a6de-1d4ab3d0095f",
+          "name": "Get calculation data",
+          "request": {
+            "name": "Get calculation data",
+            "description": {
+              "content": "Delivers calculation basics for specified calculation type.\nCalculation type options:\n  - CONDITION (Konditionskalkulation)\n\n  - HOUSEHOLD (HH-Rechnung)\n\n  - LENDING_VALUE (Beleihungswert)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "calculations",
+                ":calculationType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "calculationType",
+                  "description": "(Required) Subtype of the calculation data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9163235b-2174-47dd-8775-e5851a4f8be6",
+              "name": "Requested calculation data is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "calculations",
+                    ":calculationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculationType",
+                      "description": "(Required) Subtype of the calculation data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"calculations\": [\n    {\n      \"context\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"calculation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"context\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"calculation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "541af7da-e248-4de8-9a22-bee3d4c065da",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "calculations",
+                    ":calculationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculationType",
+                      "description": "(Required) Subtype of the calculation data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1d65e1c-bf9c-4f75-9c83-7ca373bb358b",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "calculations",
+                    ":calculationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculationType",
+                      "description": "(Required) Subtype of the calculation data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f530e073-a0aa-4822-a666-116eb799131e",
+              "name": "Error indicates that a requested submission resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "calculations",
+                    ":calculationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculationType",
+                      "description": "(Required) Subtype of the calculation data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9332720f-d61f-4415-a64a-005d9507d3bc",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "calculations",
+                    ":calculationType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculationType",
+                      "description": "(Required) Subtype of the calculation data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27e62ca5-e01a-494d-9189-b9459074cdf8",
+          "name": "Modify an existing submission.",
+          "request": {
+            "name": "Modify an existing submission.",
+            "description": {
+              "content": "This endpoint gives a possibility to modify an existing submission asynchronously by creating a command to perform this operation, as a result a *command id* shall be returned.\n\nIn order to follow up the command execution result, a call to `/v2/commands` endpoint could be made providing the *command id*\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "commands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operation\": \"<string>\",\n  \"reason\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"remark\": \"<string>\",\n  \"trigger\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f9e5400-1f32-4972-a4cb-df0a547dc601",
+              "name": "Reference to the created resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"reason\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"remark\": \"<string>\",\n  \"trigger\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "http://some-domain/some/link/to/somewhere",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3da789c-57a4-4ebc-860a-483b1cc2bcdb",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"reason\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"remark\": \"<string>\",\n  \"trigger\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3968fa2e-869a-44ab-a4ad-d919d36c3eb1",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"reason\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"remark\": \"<string>\",\n  \"trigger\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3252fb08-7fb2-49ef-9749-d356ddcae984",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"reason\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"remark\": \"<string>\",\n  \"trigger\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "405f8057-6fa9-429a-acaf-5e13e5aff3ac",
+          "name": "Get a specific credit loan",
+          "request": {
+            "name": "Get a specific credit loan",
+            "description": {
+              "content": "Delivers detailed information about a specific credit loan associated with this submission.\n\nA Credit Loan represents specific financing structure component.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "credit-loans",
+                ":creditLoanId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "creditLoanId",
+                  "description": "(Required) Id for the requested credit loan."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d139261-2de8-4554-ba4f-ac8362835135",
+              "name": "Requested Credit Loan Details are returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "credit-loans",
+                    ":creditLoanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditLoanId",
+                      "description": "(Required) Id for the requested credit loan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": {\n    \"value\": \"string\"\n  },\n  \"financingLoans\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ],\n  \"handover\": {\n    \"hints\": \"string\",\n    \"documents\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"handoverReports\": [\n      {\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"createdAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"content\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"createdAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"context\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"content\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cd61317-3e3b-4be4-bb02-7beb7836aa2a",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "credit-loans",
+                    ":creditLoanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditLoanId",
+                      "description": "(Required) Id for the requested credit loan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "762f97d3-4584-4e12-bc44-e40d2dd76e33",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "credit-loans",
+                    ":creditLoanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditLoanId",
+                      "description": "(Required) Id for the requested credit loan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd84bfe9-b77f-42ee-901d-58d47b659b47",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "credit-loans",
+                    ":creditLoanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditLoanId",
+                      "description": "(Required) Id for the requested credit loan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2be8509f-6dd3-4e46-9364-ff2eadc2d570",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "credit-loans",
+                    ":creditLoanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditLoanId",
+                      "description": "(Required) Id for the requested credit loan."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "728116e6-0f80-490b-a70b-7960849ae8aa",
+          "name": "Get a submitted financing application",
+          "request": {
+            "name": "Get a submitted financing application",
+            "description": {
+              "content": "Delivers information about existing financing application associated with a specific submission.\n\nA Financing Application holds all the information which have been collected from the Applicants during the consultation phase. Holds information regarding\n  - Applicants Personal details\n\n  - Applicants Credit Worthiness\n\n  - Estates involved in the financing process\n\n  - Venture\n\n  - Consultation Unit\n\n  - Offer\n\n\nThis endpoint utilizes *Expansion* feature, where *by default* only basic information shall be returned. In order to access more full details, two options are available\n\n  - follow provided links in order to navigate to financing-application sub-resources (i.e /v2/financing-applications/{applicationId}/estates)\n\n  - initiate the call with request parameter `embed` set to *TRUE* (i.e /v2/submissions/{submissionId}/financing-application?embed=true)\n\nPlease refer to *Expansion* section for more details.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "financing-application"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<boolean>",
+                  "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5186d2e4-d56c-4282-bd37-c037ef4ae8cc",
+              "name": "Financing application is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "financing-application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": {\n    \"value\": \"string\"\n  },\n  \"applicants\": {\n    \"data\": [\n      {\n        \"applicantRef\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"person\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"venture\": {\n    \"_href\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"reason\": \"BUY_EXISTING\",\n    \"mortgageProperty\": {\n      \"estateId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"_href\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"mainApplicant\": {\n      \"_href\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"applicantId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"embedded\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"financialStanding\": {\n    \"data\": [\n      {\n        \"financialStandingRef\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"applicantId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"financialStandingRef\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"applicantId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"summary\": {\n      \"totalIncome\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"totalExpenses\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"surplus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reserves\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"totalLiabilities\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"estates\": {\n    \"data\": [\n      {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ref\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"status\": {\n    \"key\": \"string\"\n  },\n  \"subType\": {\n    \"key\": \"NEW_APPLICANT\"\n  },\n  \"applicantRelationships\": {\n    \"_href\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"embedded\": {\n      \"data\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  \"households\": {\n    \"_href\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"embedded\": {\n      \"data\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  \"consultation\": {\n    \"_href\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"embedded\": {\n      \"broker\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"advisory\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"subBroker\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"informers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"recommendation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"brokerageOrganization\": \"string\"\n    }\n  },\n  \"consultationInfo\": {\n    \"clientAdvisor\": {\n      \"userData\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"company\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"offer\": {\n    \"_href\": {\n      \"href\": \"http://some-domain/some/link/to/somewhere\"\n    },\n    \"embedded\": {\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"financingConfirmationRequired\": true,\n      \"loanQuota\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"financingNeed\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"financingStructures\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"validity\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"baserateIssueDate\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"offerDate\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additionalInfos\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90e7a2b6-3458-4850-b171-fb6d357df050",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "financing-application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95c2274f-8ffa-42b2-b8a8-e9728275c71e",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "financing-application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93417f3a-43ac-48fb-b125-29f194060759",
+              "name": "Error indicates that a requested financing application resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "financing-application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "811e402b-c7b8-47e0-84d0-61495c286826",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "financing-application"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cf16fc0-a623-4ece-a12c-15ab9dd80070",
+          "name": "Get handover documents",
+          "request": {
+            "name": "Get handover documents",
+            "description": {
+              "content": "Delivers metadata regarding the system generated reports for a specific submission.\nHandover reports including but not limited to\n  - Übergabeprotokoll (Handover protocol)\n\n  - Provideranschreiben (Provider cover letter)\n\n  - Überarbeiteter Antrag (Revised application)\n\n  - Kalkulation (Condition calculation)\n\n  - HH-Rechnung (Household calculation)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "handover-documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "893f7a01-117e-482e-a69d-29472e57a9b7",
+              "name": "Requested meta data are returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover-documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"documents\\\": [ { \\\"submissionId\\\": \\\"de-20230227-en9lndd-ev3y1\\\", \\\"documentId\\\": \\\"63a86906-ad38-45bc-a10e-c1d0b8978af5\\\", \\\"documentType\\\": \\\"CONDITION_CALCULATION\\\", \\\"documentName\\\": \\\"condition calculation\\\", \\\"createdAt\\\": \\\"2019-12-29T10:22:50Z\\\", \\\"href\\\": { \\\"href\\\": \\\"https://api.interhyp.de/submission/v2/submissions/de-20230424-krczwx6-5sves/handover/reports/NDMzOTk4Mi1QUk9WSURFUl9DT1ZFUl9MRVRURVItUHJvdmlkZXJhbnNjaHJlaWJlbg==\\\" } } ] }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bf4fc49-9637-4457-8fc1-98a7e53db323",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover-documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-07T17:49:39.995Z\\\", \\\"title\\\": \\\"Bad Request\\\", \\\"status\\\": 400, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/submissions/de-20230314-0rztcss-55vcy/status\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fc5dd14-cb01-47c8-92f3-8d59d5ae2c85",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover-documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"error\\\": \\\"invalid token\\\", \\\"error_description\\\": \\\"Access token expired\\\", }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f23fc05d-0336-4889-8fce-ff6ec50bfd0b",
+              "name": "Error indicates insufficient privileges to create/access the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover-documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-14T10:00:00.995Z\\\", \\\"title\\\": \\\"Forbidden\\\", \\\"status\\\": 403, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/submissions/de-20230314-0rztcss-55vcy/status\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc1be978-d0e5-4862-8d05-767bda7611c8",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover-documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-14T10:00:00.995Z\\\", \\\"title\\\": \\\"Internal Server Error\\\", \\\"status\\\": 500, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/submissions/de-20230314-0rztcss-55vcy/status\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "626a3ade-8ffc-4ed3-8f77-013e731a1512",
+          "name": "Get handover reports",
+          "request": {
+            "name": "Get handover reports",
+            "description": {
+              "content": "@deprecated: Please use instead endpoint: '/v2/submissions/{submissionId}/handover-documents:'\nDelivers metadata regarding the system generated reports for a specific submission.\nHandover reports including but not limited to\n  - Übergabeprotokoll\n\n  - Provideranschreiben\n\n  - Überarbeiteter Antrag\n\n  - Kalkulation\n\n  - HH-Rechnung\n\nHandover reports are associated with a specific financing structure context (i.e `Main` or `Nachrang` component).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "handover",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c68821cf-7fb3-4a2f-b63d-a249b10df342",
+              "name": "Requested handover reports are returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"createdAt\": \"2019-12-29 10:22:50+00:00\",\n      \"context\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"content\": {\n        \"href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"createdAt\": \"2019-12-29 10:22:50+00:00\",\n      \"context\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"content\": {\n        \"href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4754121e-4f23-41c8-aad0-d082127522bf",
+              "name": "Payload is being prepared, try again later",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "payload is expected to be ready after the specified amout of seconds",
+                  "key": "Retry-After",
+                  "value": "6370"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7346c041-5cc8-4a93-8a74-5300725c5e52",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb3f3913-acbc-4b72-b997-76b6310f0669",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2733cb9c-2f51-4d1f-b8f0-2297c3b7230c",
+              "name": "Error indicates that a requested submission resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e512392-e7de-4f53-8ae0-f4c745108d0a",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2c0a1a8-5c5c-4c5b-aee5-c0387d187406",
+          "name": "Get a specific handover report as `PDF`",
+          "request": {
+            "name": "Get a specific handover report as `PDF`",
+            "description": {
+              "content": "Delivers detailed information about a specific handover report as `PDF` document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "handover",
+                "reports",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Document Id for the requested handover report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bc40eaa-93f4-472c-a568-4b4d047cf54c",
+              "name": "Requested handover report is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Document Id for the requested handover report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f1a9081-3704-4116-8fab-70b2cfa3bea7",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Document Id for the requested handover report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e8d174f-770f-4f5a-b4e8-8c2c4fa5777a",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Document Id for the requested handover report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80571e58-344d-4446-9a25-bb77a05c9932",
+              "name": "Error indicates that a requested submission resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Document Id for the requested handover report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9e59199-13a1-4366-896c-4a02843ee772",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "handover",
+                    "reports",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Document Id for the requested handover report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "766ee460-7c1a-470e-b61a-03567f6d32cd",
+          "name": "Get the overview for a submission",
+          "request": {
+            "name": "Get the overview for a submission",
+            "description": {
+              "content": "Delivers an overview for the requested submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80ea185e-fc1c-4417-8d6b-6afebc3313b0",
+              "name": "Requested overview of the submission is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"reasons\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"type\": 7953\n  },\n  \"submittedAt\": \"2019-12-29 10:22:50+00:00\",\n  \"reviewedAt\": \"2019-12-29 10:22:50+00:00\",\n  \"initialEstimate\": {\n    \"createdAt\": \"2019-12-29 10:22:50+00:00\"\n  },\n  \"timeline\": {\n    \"predictedLoanPartnerDecisionDate\": {\n      \"date\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reason\": \"string\"\n    }\n  },\n  \"submittedBy\": {\n    \"advisorCompany\": {\n      \"companyAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyName\": \"string\",\n      \"regulatoryAuthorities\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"userId\": {\n      \"value\": \"string\"\n    },\n    \"companyId\": {\n      \"value\": \"string\"\n    },\n    \"responsiblePersons\": [\n      {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"personName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"personName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"submitter\": {\n    \"userData\": {\n      \"userId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"contact\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"jobTitle\": \"string\"\n    },\n    \"company\": {\n      \"companyId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyContact\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"regulatoryAuthority\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"contactUser\": {\n    \"userData\": {\n      \"userId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"contact\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"jobTitle\": \"string\"\n    },\n    \"company\": {\n      \"companyId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyAddress\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"companyContact\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"regulatoryAuthority\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"loanPartner\": {\n    \"unit\": {\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"parentUnit\": {\n        \"value\": \"<Circular reference to #/components/schemas/LoanPartnerProcessingUnit detected>\"\n      }\n    },\n    \"processor\": {\n      \"processorId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"processorName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"processorEmail\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"loanPartnerDetails\": {\n    \"loanPartner\": {\n      \"companyId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"processingUnit\": {\n      \"processingUnit\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"loanPartnerQueue\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"processor\": {\n      \"processorId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"processorName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"additionalFields\": {\n    \"fields\": [\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"_href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"_href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"useNewModifyCommandVersion\": false,\n  \"useNewUploadVersion\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da8774db-bec6-4b3a-bae4-b45f99e73442",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31083c1a-2aca-4418-936c-c895a18a5f32",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42de54f1-5d61-4b7a-9816-61fa09b618a0",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb0f2c03-7797-4119-a4bb-4a217027d9ca",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5e3a861-dcf6-4e77-b3dd-70d20f9d3d3d",
+          "name": "Get current status of specified submission",
+          "request": {
+            "name": "Get current status of specified submission",
+            "description": {
+              "content": "Delivers information about current status of a specific submission",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27e6fb3c-34dd-4d95-bab2-e3d5e8b2cae6",
+              "name": "Current status of the requested submission is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"type\\\": \\\"SUBMITTED\\\", \\\"remark\\\": \\\"Submission was submitted\\\", \\\"changedOn\\\": \\\"2023-03-14T10:22:50Z\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19bb7498-356a-4619-a5e8-4234a490e377",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-07T17:49:39.995Z\\\", \\\"title\\\": \\\"Bad Request\\\", \\\"status\\\": 400, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/submissions/de-20230314-0rztcss-55vcy/status\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17944c2c-0b70-430a-ab94-f770126c1383",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"error\\\": \\\"invalid token\\\", \\\"error_description\\\": \\\"Access token expired\\\", }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "799f1976-7863-4f45-9157-9091cabb4aa4",
+              "name": "Error indicates insufficient privileges to create/access the resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-14T10:00:00.995Z\\\", \\\"title\\\": \\\"Forbidden\\\", \\\"status\\\": 403, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/submissions/de-20230314-0rztcss-55vcy/status\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c504a86-3cae-4651-bd41-6ff73e60f8f7",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-14T10:00:00.995Z\\\", \\\"title\\\": \\\"Internal Server Error\\\", \\\"status\\\": 500, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/submissions/de-20230314-0rztcss-55vcy/status\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0648688-0746-40f7-9872-d74972f6ddb8",
+          "name": "Get a specific submission document as `PDF`",
+          "request": {
+            "name": "Get a specific submission document as `PDF`",
+            "description": {
+              "content": "Delivers detailed information about a specific submission document as `PDF` document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "uploaded-documents",
+                ":documentId",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) Id for the requested submission document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72156930-2e30-4651-89e2-85e32dadd7a8",
+              "name": "Requested submission document is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "uploaded-documents",
+                    ":documentId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d45b1c12-00d8-4119-b7e5-0d6cc4b0cf47",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "uploaded-documents",
+                    ":documentId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2f376c2-56ca-4cce-8f98-639b4b231eed",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "uploaded-documents",
+                    ":documentId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "300d5657-6144-44da-837c-8fd967b91651",
+              "name": "Error indicates that a requested submission document resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "uploaded-documents",
+                    ":documentId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d2bf3e7-be37-46ba-a4e8-4255824776c3",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "uploaded-documents",
+                    ":documentId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df954ff8-d715-4937-b38a-7ef10fa9d461",
+    "name": "Interhyp Submission commands submissions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

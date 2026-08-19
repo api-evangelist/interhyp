@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands documents API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delievers all submission relevant documents metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/v2/submissions/:submissionId/documents/metadata",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Retrieve all submission relevant documents in the requested format. <p>"
+        },
+        {
+          "info": {
+            "name": "Delievers specific submission document in `pdf` format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/v2/submissions/:submissionId/documents/:documentId/binaries",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission document."
+              }
+            ]
+          },
+          "docs": "Retrieve specific submission document based on an identifier in `pdf` format<p /> Note: retries following a 202 *must* provide the If-Match header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

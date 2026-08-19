@@ -1,0 +1,1039 @@
+{
+  "item": [
+    {
+      "id": "40167383-7820-41a9-9b72-bc39f036cd38",
+      "name": "documents",
+      "description": {
+        "content": "access to submission documents",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5f4594b-3eac-4d04-8625-4016a4564e61",
+          "name": "Delievers all submission relevant documents metadata",
+          "request": {
+            "name": "Delievers all submission relevant documents metadata",
+            "description": {
+              "content": "Retrieve all submission relevant documents in the requested format. <p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "submissions",
+                ":submissionId",
+                "documents",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<boolean>",
+                  "description": "Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a1313e6-37b7-4a74-b516-5c5f2f37fdfb",
+              "name": "Submission documents matching provided criteria in the requested format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"content\": {\n        \"href\": \"http://some-domain/some/link/to/somewhere\"\n      },\n      \"category\": {\n        \"name\": \"KONTOAUSZUG\",\n        \"tags\": [\n          {\n            \"name\": \"MIETAUSGANG\"\n          },\n          {\n            \"name\": \"MIETAUSGANG\"\n          }\n        ]\n      },\n      \"reference\": \"Mustermann, Max\",\n      \"validity\": {\n        \"resolution\": \"MONTH\",\n        \"value\": 2813.088139140777\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"content\": {\n        \"href\": \"http://some-domain/some/link/to/somewhere\"\n      },\n      \"category\": {\n        \"name\": \"KONTOAUSZUG\",\n        \"tags\": [\n          {\n            \"name\": \"MIETAUSGANG\"\n          },\n          {\n            \"name\": \"MIETAUSGANG\"\n          }\n        ]\n      },\n      \"reference\": \"Mustermann, Max\",\n      \"validity\": {\n        \"resolution\": \"MONTH\",\n        \"value\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe03c041-41c6-4b0a-81ef-7ff1f71005dc",
+              "name": "Documents metadata are being prepared, try again later, please refer to Retry-After Header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "metadata is expected to be ready after the specified amout of seconds",
+                  "key": "Retry-After",
+                  "value": "3110"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77c4032c-db71-4228-a60b-cde912b22d5d",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30085e58-d253-4c79-995f-59b763647f41",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a606278-2082-47fd-b9b6-186b3636239e",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85b5bacb-4df4-42af-88da-80534a012613",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 4701,\n  \"timestamp\": \"1994-10-24T07:36:28.981Z\",\n  \"path\": \"string\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 2523\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e78a1c89-b33f-4625-b6cc-9fe36c0ee699",
+          "name": "Delievers specific submission document in `pdf` format",
+          "request": {
+            "name": "Delievers specific submission document in `pdf` format",
+            "description": {
+              "content": "Retrieve specific submission document based on an identifier in `pdf` format<p /> Note: retries following a 202 *must* provide the If-Match header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "submissions",
+                ":submissionId",
+                "documents",
+                ":documentId",
+                "binaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) Id for the requested submission document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "If-Match",
+                "value": "<etag>",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53bc5a73-3b2f-4387-8146-477299c2a2e9",
+              "name": "Requested submission document is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "90515fab-5424-4cbd-9062-9de58ab61b2f",
+              "name": "Payload is being prepared, try again later",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "unique ID of payload creation request; use as If-Match in subsequent calls to retrieve payload",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "payload is expected to be ready after the specified amout of seconds",
+                  "key": "Retry-After",
+                  "value": "3110"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a02cf009-1d31-4581-9a10-ba6b6f4ee9bb",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b27e4f16-d329-46d2-9813-649b99e3290a",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb6c40a-7dd3-47bc-908d-9a8ff032c644",
+              "name": "Error indicates that a requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8abc20b-0516-4710-88cc-762acf5c0f15",
+              "name": "Error indicates the document has a stale state. Maybe the document was modified or deleted. Please refresh the documents metadata of the submission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 8090,\n  \"timestamp\": \"1986-06-19T20:11:30.628Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 6663,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "131824a4-f29e-4749-a2e1-2a69765dd840",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    ":submissionId",
+                    "documents",
+                    ":documentId",
+                    "binaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) Id for the requested submission document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "If-Match",
+                    "value": "<etag>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 4701,\n  \"timestamp\": \"1994-10-24T07:36:28.981Z\",\n  \"path\": \"string\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 2523\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f99cc2d-5d1f-4614-a8fa-fd71e9d09329",
+    "name": "Interhyp Submission commands documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

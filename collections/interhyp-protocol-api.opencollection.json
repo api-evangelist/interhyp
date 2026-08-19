@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands protocol API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "protocol",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delivers all submissions protocol for a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/v2/submissions/protocol",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+              },
+              {
+                "name": "protocolType",
+                "value": "",
+                "type": "query",
+                "description": "query parameter to restrict submissions associated to the provided protocol type."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many items to return at one time (max 40). <br> A query may return fewer than the value of limit due to filtering."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor that points to the end of the page of data that has been returned."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor that points to the start of the page of data that has been returned."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers a collection of submission protocol for a specific provider filtered by the date of protocol.<p> *By Default*, we will return the first *20* matching records. However, this is not a hard limitation! a parameter called `limit` can be used to tell the API how many records you want to return all at once *(max 40)*.<p> To get further matching records, a parameter called `after` or `before` can be used to tell the API the start of each page using specified cursor.<p> To navigate through the "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

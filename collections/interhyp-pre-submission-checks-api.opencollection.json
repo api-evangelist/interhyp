@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands pre-submission-checks API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pre-submission-checks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a collection of pre submission checks for intent ID and loan partner ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/pre-submission-checks",
+            "params": [
+              {
+                "name": "intentId",
+                "value": "",
+                "type": "query",
+                "description": "Intent ID of the requested pre-submission check"
+              },
+              {
+                "name": "loanPartnerId",
+                "value": "",
+                "type": "query",
+                "description": "Loan partner ID of the requested pre-submission check"
+              },
+              {
+                "name": "preSubmissionCheckStatus",
+                "value": "",
+                "type": "query",
+                "description": "Status of the PSCs to be returned"
+              }
+            ]
+          },
+          "docs": "This endpoint gives a possibility to retrieve collection of pre-submission checks using intent ID and loan partner ID.\nA pre-submission check provided a way of pre-scoring to allows financial advisors to get an early indication whether a submission can be created"
+        },
+        {
+          "info": {
+            "name": "Get a specific pre submission check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/pre-submission-checks/:preSubmissionCheckId",
+            "params": [
+              {
+                "name": "preSubmissionCheckId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested pre submission check id."
+              }
+            ]
+          },
+          "docs": "This endpoint gives a possibility to retrieve information about a specific pre-submission check using it's id.\nA pre-submission check provided a way of pre-scoring to allows financial advisors to get an early indication whether a submission can be created"
+        },
+        {
+          "info": {
+            "name": "Modify an existing pre submission check.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-test.interhyp.de/submission/pre-submission-checks/:preSubmissionCheckId/commands",
+            "params": [
+              {
+                "name": "preSubmissionCheckId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested pre submission check id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint gives a possibility to modify an existing pre-submission check asynchronously by creating a command to perform this operation, as a result a *command id* shall be returned.\n\nIn order to follow up the command execution result, a call to `/v2/commands` endpoint could be made providing the *command id*\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

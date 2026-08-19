@@ -1,0 +1,345 @@
+{
+  "item": [
+    {
+      "id": "a38efbec-9546-4302-adc9-5ed5e04677f9",
+      "name": "commands",
+      "description": {
+        "content": "provides endpoints to access to commands sent to the submission API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "296f76ed-55dc-4398-802e-cbdcb668bd1c",
+          "name": "Get an existing command",
+          "request": {
+            "name": "Get an existing command",
+            "description": {
+              "content": "Delivers information about an existing command\n\nA Command is a unit of execution which has been created to perform asynchronous operation.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commands",
+                ":commandId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "commandId",
+                  "description": "(Required) Id of the requested command"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e08356a3-576a-4a80-a085-9509079d66a3",
+              "name": "Command is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commands",
+                    ":commandId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "commandId",
+                      "description": "(Required) Id of the requested command"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"commandId\": \"string\",\n  \"result\": \"string\",\n  \"traceId\": \"string\",\n  \"aggregateId\": \"string\",\n  \"error\": {\n    \"errorCode\": \"string\",\n    \"errorMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0262c205-4997-41ad-93f2-1166c5520693",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commands",
+                    ":commandId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "commandId",
+                      "description": "(Required) Id of the requested command"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "999ceff5-e185-4b11-ab43-eb9a712167cf",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commands",
+                    ":commandId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "commandId",
+                      "description": "(Required) Id of the requested command"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12ed5009-4611-4da9-8691-781abe914fd8",
+              "name": "Error indicates that a requested command resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commands",
+                    ":commandId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "commandId",
+                      "description": "(Required) Id of the requested command"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbe8ccfd-bcc0-45b2-a0fd-35a1e340078a",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commands",
+                    ":commandId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "commandId",
+                      "description": "(Required) Id of the requested command"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0d418d8e-87d4-4370-a82d-e6ff2a515d08",
+    "name": "Interhyp Submission commands API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "item": [
+    {
+      "id": "b584f87a-585e-441b-a4b5-56ee0184d64c",
+      "name": "info",
+      "description": {
+        "content": "provides basic info about service status and version of the submission API specs used",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7ef1a92-5bf5-4cde-a363-3d2a17c254ab",
+          "name": "Get Submission API service status and info",
+          "request": {
+            "name": "Get Submission API service status and info",
+            "description": {
+              "content": "Delivers information about Submission API service status and basic information about the current version",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de7854e6-5475-41b6-a129-8d7c1e25db24",
+              "name": "Service Info is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\" { \\\"apiSpecificationVersion\\\" : \\\"1.0.0\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13ffd352-22ce-4d97-8bb9-d00303d3bcc1",
+              "name": "Error indicates no access to the service.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"error\\\": \\\"invalid token\\\", \\\"error_description\\\": \\\"Access token expired\\\", }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5dcf475-a141-4d42-adf5-cc50fd238ba3",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{ \\\"timestamp\\\": \\\"2023-03-14T10:00:00.995Z\\\", \\\"title\\\": \\\"Internal Server Error\\\", \\\"status\\\": 500, \\\"traceId\\\": \\\"64077933c36912de13fb3cd7ae0c00c8\\\", \\\"instance\\\": \\\"/v2/info\\\" }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de2c2a0b-1d79-4622-8ddd-33bea5684d19",
+    "name": "Interhyp Submission commands info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

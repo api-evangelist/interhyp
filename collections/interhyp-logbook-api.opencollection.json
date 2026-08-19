@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands logbook API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "logbook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get submission logbook entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/logbook",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about logbook entries associated with a specific submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

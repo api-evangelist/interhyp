@@ -1,0 +1,322 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands submissions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delivers all active submissions for a specific financing partner.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "A UTC date-time value that points to the start of the range of time-based data.\n\nDefined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "A UTC date-time value that points to the end of the range of time-based data. If not provided, current date-time is used.\n\nDefined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies how many items to return at one time (max 50).\n\nA query may return fewer than the value of limit due to filtering."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor that points to the end of the page of data that has been returned."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor that points to the start of the page of data that has been returned."
+              },
+              {
+                "name": "sort",
+                "value": "?sort=+submittedAt",
+                "type": "query",
+                "description": "To indicate sorting direction, fields may be prefixed with `+` ascending or `-` descending.\n\nNote: sorting applies only within a single result page when multiple pages are returned."
+              }
+            ]
+          },
+          "docs": "This endpoint gives a possibility to retrieve information about active submissions that belong to a specific financing partner\nfiltered by submission date using `since` query parameter.\n\n**Tip:** A submission is considered to be active, when it has not been revoked.\n\n*By Default*, we will return the first *20* matching records. However, this is not a hard limitation! `limit` parameter can be used\nto tell the API how many records you want to receive at once *(max 50)*.</br>\n\nTo get further matchi"
+        },
+        {
+          "info": {
+            "name": "Get a specific submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "This endpoint gives a possibility to retrieve information about a specific submission using it's id.\nA submission (Kreditantrag) holds all the information in order to help the financing partners during credit decision phase.\n\nThis endpoint utilizes *Expansion* feature, where *by default* only basic information shall be returned. In order to access more full details, two options are available\n\n  - follow provided links in order to navigate to submission sub-resources (i.e /v2/submissions/{submiss"
+        },
+        {
+          "info": {
+            "name": "Get calculation data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/calculations/:calculationType",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "calculationType",
+                "value": "",
+                "type": "path",
+                "description": "Subtype of the calculation data."
+              }
+            ]
+          },
+          "docs": "Delivers calculation basics for specified calculation type.\nCalculation type options:\n  - CONDITION (Konditionskalkulation)\n\n  - HOUSEHOLD (HH-Rechnung)\n\n  - LENDING_VALUE (Beleihungswert)"
+        },
+        {
+          "info": {
+            "name": "Modify an existing submission.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/commands",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint gives a possibility to modify an existing submission asynchronously by creating a command to perform this operation, as a result a *command id* shall be returned.\n\nIn order to follow up the command execution result, a call to `/v2/commands` endpoint could be made providing the *command id*\n"
+        },
+        {
+          "info": {
+            "name": "Get a specific credit loan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/credit-loans/:creditLoanId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "creditLoanId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested credit loan."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about a specific credit loan associated with this submission.\n\nA Credit Loan represents specific financing structure component."
+        },
+        {
+          "info": {
+            "name": "Get a submitted financing application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/financing-application",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers information about existing financing application associated with a specific submission.\n\nA Financing Application holds all the information which have been collected from the Applicants during the consultation phase. Holds information regarding\n  - Applicants Personal details\n\n  - Applicants Credit Worthiness\n\n  - Estates involved in the financing process\n\n  - Venture\n\n  - Consultation Unit\n\n  - Offer\n\n\nThis endpoint utilizes *Expansion* feature, where *by default* only basic information"
+        },
+        {
+          "info": {
+            "name": "Get handover documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/handover-documents",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              }
+            ]
+          },
+          "docs": "Delivers metadata regarding the system generated reports for a specific submission.\nHandover reports including but not limited to\n  - Übergabeprotokoll (Handover protocol)\n\n  - Provideranschreiben (Provider cover letter)\n\n  - Überarbeiteter Antrag (Revised application)\n\n  - Kalkulation (Condition calculation)\n\n  - HH-Rechnung (Household calculation)"
+        },
+        {
+          "info": {
+            "name": "Get handover reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/handover/reports",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              }
+            ]
+          },
+          "docs": "@deprecated: Please use instead endpoint: '/v2/submissions/{submissionId}/handover-documents:'\nDelivers metadata regarding the system generated reports for a specific submission.\nHandover reports including but not limited to\n  - Übergabeprotokoll\n\n  - Provideranschreiben\n\n  - Überarbeiteter Antrag\n\n  - Kalkulation\n\n  - HH-Rechnung\n\nHandover reports are associated with a specific financing structure context (i.e `Main` or `Nachrang` component)."
+        },
+        {
+          "info": {
+            "name": "Get a specific handover report as `PDF`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/handover/reports/:name",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "name",
+                "value": "MTIzNDU2Ny1QUk9WSURFUl9DT1ZFUl9MRVRURVItUHJvdmlkZXJhbnNjaHJlaWJlbg==",
+                "type": "path",
+                "description": "Document Id for the requested handover report."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about a specific handover report as `PDF` document."
+        },
+        {
+          "info": {
+            "name": "Get the overview for a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/overview",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              }
+            ]
+          },
+          "docs": "Delivers an overview for the requested submission."
+        },
+        {
+          "info": {
+            "name": "Get current status of specified submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/status",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              }
+            ]
+          },
+          "docs": "Delivers information about current status of a specific submission"
+        },
+        {
+          "info": {
+            "name": "Get a specific submission document as `PDF`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/submissions/:submissionId/uploaded-documents/:documentId/content",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested submission document."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about a specific submission document as `PDF` document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -122,3 +122,9 @@ tools:
 - name: getSubmissionsProtocol
   description: Delivers all submissions protocol for a provider
   source_operation: openapi/interhyp-submission-documents-openapi.yml#getSubmissionsProtocol
+deployment:
+  mode: none
+  verified: derived
+  tools: 38
+  checked: '2026-08-12'
+  source: catalog MCP census

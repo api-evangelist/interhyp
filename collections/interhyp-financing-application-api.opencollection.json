@@ -1,0 +1,431 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands financing-application API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "financing-application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a exisiting financing application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers information about existing financing application\n"
+        },
+        {
+          "info": {
+            "name": "Get a list of applicant-relationships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/applicant-relationships",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers information about the relationship of the applicants involved in this financing application.\n"
+        },
+        {
+          "info": {
+            "name": "Get applicants for a specific submission package.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/applicants",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information for applicants associated with this submission."
+        },
+        {
+          "info": {
+            "name": "Get a specific mortgage applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/applicants/:applicantId",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "applicantId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested applicant."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information for mortgage applicant by his id."
+        },
+        {
+          "info": {
+            "name": "Get applicant financial standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/applicants/:applicantId/financial-standings",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "applicantId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested applicant."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "query parameter to restrict financial state associated with the provided type."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about an applicant financial standings associated with this financing application.\n\nIncluding periodical income, expenses, general equity and debts"
+        },
+        {
+          "info": {
+            "name": "Get financing consultation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/consultation",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the consultation associated with this financing application."
+        },
+        {
+          "info": {
+            "name": "Get estates for a specific financing application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/estates",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information for the estates associated with this financing application. Estate could have a role as an object to be financed, an equity item or a guarantee (security)."
+        },
+        {
+          "info": {
+            "name": "Get a specific estate.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/estates/:estateId",
+            "params": [
+              {
+                "name": "estateId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested estate."
+              },
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information for an estate by it's id."
+        },
+        {
+          "info": {
+            "name": "Get applicants financial standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/financial-standings",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "query parameter to restrict financial state associated with the provided type."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the applicants financial standings associated with this financing application as provided by the applicant during the consultation phase.\n\nIncluding periodical Income, Expenses, General Equity and Debts"
+        },
+        {
+          "info": {
+            "name": "Get a specific existing loan.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/financial-standings/existing-loans/:debtId",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "debtId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested existing mortgage."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information for existing loan by it's id."
+        },
+        {
+          "info": {
+            "name": "Get a specific financial standing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/financial-standings/:financialStandingId",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "financialStandingId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the requested financial standing."
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about a specific financial standing associated with this submission package.\n\nIncluding periodical income, expenses, general equity and debts"
+        },
+        {
+          "info": {
+            "name": "Get applicants household",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/households",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the applicants households associated with this financing application."
+        },
+        {
+          "info": {
+            "name": "Get consultation informers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/informers",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Flag to expand or embed sub-resources in the response resource.\n\nBy default is set to `FALSE` where only a **ref** to the sub-resources will be returned. By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the consultation informers associated with this submission.\n\nThis endpoint utilizes *Expansion* feature, where *by default* only basic information shall be returned. In order to access more full details, two options are available\n\n  - follow provided links in order to navigate to submission sub-resources (i.e /v2/submissions/{submissionId}/overview)\n\n  - initiate the call with request parameter `embed` set to *TRUE* (i.e /v2/submissions/{submissionId}?embed=tr"
+        },
+        {
+          "info": {
+            "name": "Get a specific mortgage informer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/informers/:informerId",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              },
+              {
+                "name": "informerId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the requested informer"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information for mortgage informer by his id."
+        },
+        {
+          "info": {
+            "name": "Get financing offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/offer",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the financing offer associated with this financing application."
+        },
+        {
+          "info": {
+            "name": "Get financing application's submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/submissions",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the submission belong to specific loan partner and associated with this financing application."
+        },
+        {
+          "info": {
+            "name": "Get financing venture",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/financing-applications/:financingApplicationId/venture",
+            "params": [
+              {
+                "name": "financingApplicationId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the financing application"
+              }
+            ]
+          },
+          "docs": "Delivers detailed information about the financing venture associated with this financing application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

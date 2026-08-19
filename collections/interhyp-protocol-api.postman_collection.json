@@ -1,0 +1,417 @@
+{
+  "item": [
+    {
+      "id": "121d0166-324f-48ad-b48e-3d4beb17477a",
+      "name": "protocol",
+      "description": {
+        "content": "access to submission protocol",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c0f2bce-3f4b-484f-90e5-76fe4860f698",
+          "name": "Delivers all submissions protocol for a provider",
+          "request": {
+            "name": "Delivers all submissions protocol for a provider",
+            "description": {
+              "content": "Delivers a collection of submission protocol for a specific provider filtered by the date of protocol.<p> *By Default*, we will return the first *20* matching records. However, this is not a hard limitation! a parameter called `limit` can be used to tell the API how many records you want to return all at once *(max 40)*.<p> To get further matching records, a parameter called `after` or `before` can be used to tell the API the start of each page using specified cursor.<p> To navigate through the query result, a reference to the following navigations are included in the response *(next, prev, first, last, self)*.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "submissions",
+                "protocol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "(Required) A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)."
+                },
+                {
+                  "disabled": false,
+                  "key": "protocolType",
+                  "value": "<string>",
+                  "description": "query parameter to restrict submissions associated to the provided protocol type."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Specifies how many items to return at one time (max 40). <br> A query may return fewer than the value of limit due to filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor that points to the end of the page of data that has been returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor that points to the start of the page of data that has been returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<boolean>",
+                  "description": "Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f910d6e-51ab-41ca-a6c0-3fbb95ed8b7a",
+              "name": "A paged array of submissions protocol",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    "protocol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "protocolType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"submission\": {\n        \"href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": \"string\",\n        \"legacyId\": \"string\"\n      },\n      \"protocol\": {\n        \"href\": \"http://some-domain/some/link/to/somewhere\",\n        \"embedded\": {\n          \"protocol\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"submission\": {\n        \"href\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": \"string\",\n        \"legacyId\": \"string\"\n      },\n      \"protocol\": {\n        \"href\": \"http://some-domain/some/link/to/somewhere\",\n        \"embedded\": {\n          \"protocol\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      }\n    }\n  ],\n  \"paging\": {\n    \"cursor\": {\n      \"before\": \"string\",\n      \"after\": \"string\"\n    },\n    \"previous\": \"http://DnvAPuPBeBbUgYHevPX.naaOkukU6qEYn0\",\n    \"next\": \"https://vbdD.ninoIiv7+Fu2wAlLRjvQ2.-3cbG,yQGuqdFfRQbRZLWQ\",\n    \"first\": \"https://aHceWwXIodRTijXHj.azdiK5D9pIXNxfO0wfzx,g.fLHVmMvrKKUAWiXuSBB-w6ZBpHAg.AvTQnLREFUlfAeSBD-7BtTFyN\",\n    \"last\": \"https://hOaAMHVznkZicLqO.xteeM0IgkKrTzTHUj1,ythcyex\",\n    \"self\": \"http://YXS.nnuUCbl4-04y4hTS09T-EDHjuw1gqmuebUHmnNo\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0fc101d-607e-4f83-a243-537419a5f5ba",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    "protocol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "protocolType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 9526,\n  \"timestamp\": \"1959-08-24T16:39:46.897Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 9028,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce1664cf-5106-46c7-b0d8-5aec2894c59e",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    "protocol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "protocolType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"path\": \"string\",\n  \"status\": 9526,\n  \"timestamp\": \"1959-08-24T16:39:46.897Z\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 9028,\n  \"exception\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df5ec95b-5332-4d14-9154-ee2c4237c568",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "submissions",
+                    "protocol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2019-12-29 10:22:50+00:00"
+                    },
+                    {
+                      "key": "protocolType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 6332,\n  \"timestamp\": \"2022-08-07T19:56:12.024Z\",\n  \"path\": \"string\",\n  \"traceId\": \"string\",\n  \"error\": \"string\",\n  \"errorCode\": 4428\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "44f8d33f-1ed1-4cf5-88f4-25fa2568b763",
+    "name": "Interhyp Submission commands protocol API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

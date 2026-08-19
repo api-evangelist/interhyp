@@ -1,0 +1,987 @@
+{
+  "item": [
+    {
+      "id": "9372130b-8494-48d4-811a-a488a5e801df",
+      "name": "pre-submission-checks",
+      "description": {
+        "content": "provides endpoints for pre-submission resources associated with a specific financing partner",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f75c8b8-afdb-4065-b93d-c14ddffa5a1f",
+          "name": "Get a collection of pre submission checks for intent ID and loan partner ID",
+          "request": {
+            "name": "Get a collection of pre submission checks for intent ID and loan partner ID",
+            "description": {
+              "content": "This endpoint gives a possibility to retrieve collection of pre-submission checks using intent ID and loan partner ID.\nA pre-submission check provided a way of pre-scoring to allows financial advisors to get an early indication whether a submission can be created",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pre-submission-checks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "intentId",
+                  "value": "<string>",
+                  "description": "(Required) Intent ID of the requested pre-submission check"
+                },
+                {
+                  "disabled": false,
+                  "key": "loanPartnerId",
+                  "value": "<string>",
+                  "description": "(Required) Loan partner ID of the requested pre-submission check"
+                },
+                {
+                  "disabled": false,
+                  "key": "preSubmissionCheckStatus",
+                  "value": "ANSWERED",
+                  "description": "Status of the PSCs to be returned"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92bcad54-3ca9-48c2-a90d-c737839b24ea",
+              "name": "Requested pre submission check is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "intentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loanPartnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preSubmissionCheckStatus",
+                      "value": "ANSWERED"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"preSubmissionCheckId\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"financingApplication\": {\n        \"financingApplicationRef\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"overview\": {\n        \"timeline\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"loanPartnerDetails\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"originInfo\": {\n        \"client\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"externalId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intentId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"preSubmissionCheckId\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"financingApplication\": {\n        \"financingApplicationRef\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"embedded\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"overview\": {\n        \"timeline\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"loanPartnerDetails\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"originInfo\": {\n        \"client\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"externalId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"intentId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30758e69-f45d-4d1a-b166-e700559d5666",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "intentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loanPartnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preSubmissionCheckStatus",
+                      "value": "ANSWERED"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39291622-e92a-4906-bcee-239b1e383154",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "intentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loanPartnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preSubmissionCheckStatus",
+                      "value": "ANSWERED"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "594ebcca-1d5a-4453-9888-ac327943e7b5",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "intentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loanPartnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preSubmissionCheckStatus",
+                      "value": "ANSWERED"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d60c8b7f-1dff-4691-8a7a-0fa2c2e4e3fd",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "intentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loanPartnerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preSubmissionCheckStatus",
+                      "value": "ANSWERED"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4773305d-2afc-40a2-b048-c1159b3c4141",
+          "name": "Get a specific pre submission check",
+          "request": {
+            "name": "Get a specific pre submission check",
+            "description": {
+              "content": "This endpoint gives a possibility to retrieve information about a specific pre-submission check using it's id.\nA pre-submission check provided a way of pre-scoring to allows financial advisors to get an early indication whether a submission can be created",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pre-submission-checks",
+                ":preSubmissionCheckId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "preSubmissionCheckId",
+                  "description": "(Required) Id for the requested pre submission check id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b376fc84-7d3d-4dbc-b8af-080bff741798",
+              "name": "Requested pre submission check is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"preSubmissionCheckId\": {\n    \"value\": \"string\"\n  },\n  \"financingApplication\": {\n    \"financingApplicationRef\": {\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"_href\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"embedded\": {\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"applicants\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"venture\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"financialStanding\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"estates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"status\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"subType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"applicantRelationships\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"households\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"consultation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"consultationInfo\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"offer\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"overview\": {\n    \"timeline\": {\n      \"createdAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"answeredAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"loanPartnerDetails\": {\n      \"loanPartner\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  },\n  \"originInfo\": {\n    \"client\": {\n      \"key\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"externalId\": {\n      \"value\": \"string\"\n    },\n    \"intentId\": {\n      \"value\": \"string\"\n    }\n  },\n  \"status\": {\n    \"remarks\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"score\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"externalIdentifier\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"rateCorrection\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"considerForCount\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5443afa9-d1c8-4186-bfbd-dd4356667e92",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1731f6e6-7aeb-447b-ab26-beb5803a78fc",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cb8b55b-2ddd-42cd-bae2-cf51cd5bfd4d",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "795d0cdf-cf0d-4ad2-aec1-2fb92d673863",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1252df45-1aaa-4b83-acfc-f057ca20e816",
+          "name": "Modify an existing pre submission check.",
+          "request": {
+            "name": "Modify an existing pre submission check.",
+            "description": {
+              "content": "This endpoint gives a possibility to modify an existing pre-submission check asynchronously by creating a command to perform this operation, as a result a *command id* shall be returned.\n\nIn order to follow up the command execution result, a call to `/v2/commands` endpoint could be made providing the *command id*\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pre-submission-checks",
+                ":preSubmissionCheckId",
+                "commands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "preSubmissionCheckId",
+                  "description": "(Required) Id for the requested pre submission check id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operation\": \"<string>\",\n  \"remarks\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ],\n  \"score\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"externalIdentifier\": \"<string>\",\n  \"rateCorrection\": {\n    \"value\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"considerForCount\": \"<boolean>\",\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "331958dc-882e-4225-9159-fafd0e98a56a",
+              "name": "Reference to the created resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"remarks\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ],\n  \"score\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"externalIdentifier\": \"<string>\",\n  \"rateCorrection\": {\n    \"value\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"considerForCount\": \"<boolean>\",\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "http://some-domain/some/link/to/somewhere",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4aa4ad4c-0196-488d-b949-988aecedfe6c",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"remarks\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ],\n  \"score\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"externalIdentifier\": \"<string>\",\n  \"rateCorrection\": {\n    \"value\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"considerForCount\": \"<boolean>\",\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c0dbd06-ce4f-4a47-8881-346f4190e30e",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"remarks\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ],\n  \"score\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"externalIdentifier\": \"<string>\",\n  \"rateCorrection\": {\n    \"value\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"considerForCount\": \"<boolean>\",\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a357b65a-74c1-403f-aadb-ce65762ae096",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pre-submission-checks",
+                    ":preSubmissionCheckId",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "preSubmissionCheckId",
+                      "description": "(Required) Id for the requested pre submission check id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"remarks\": [\n    {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  ],\n  \"score\": {\n    \"key\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"externalIdentifier\": \"<string>\",\n  \"rateCorrection\": {\n    \"value\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"considerForCount\": \"<boolean>\",\n  \"createdOn\": {\n    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c804acac-e38a-4dd7-b0e5-e5b695aa8748",
+    "name": "Interhyp Submission commands pre-submission-checks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

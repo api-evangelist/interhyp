@@ -1,0 +1,351 @@
+{
+  "item": [
+    {
+      "id": "3307b7aa-ff37-417c-a0a7-e62b2a0ce4e2",
+      "name": "logbook",
+      "description": {
+        "content": "provides endpoints to access submission logbook",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c5c7347-a080-4d03-868a-92e2667d990e",
+          "name": "Get submission logbook entries",
+          "request": {
+            "name": "Get submission logbook entries",
+            "description": {
+              "content": "Delivers detailed information about logbook entries associated with a specific submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "logbook"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) Id for the requested submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c92773b-0cb4-4385-91ca-0ea42f007b6c",
+              "name": "Submission logbook entries are returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "logbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"id\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"type\": \"UPLOADED_DOCUMENT\",\n      \"createdAt\": \"2019-12-29 10:22:50+00:00\",\n      \"createdBy\": {\n        \"userId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"jobTitle\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"remark\": \"string\"\n    },\n    {\n      \"id\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"type\": \"UPLOADED_DOCUMENT\",\n      \"createdAt\": \"2019-12-29 10:22:50+00:00\",\n      \"createdBy\": {\n        \"userId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"jobTitle\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"remark\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db2f6c1d-1d2c-4af7-b613-3a912b1f2e74",
+              "name": "Error indicates missing or wrong request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "logbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15b43ae0-751f-49a8-8a7b-880dcead0bb4",
+              "name": "Error indicates no access to the required resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "logbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_token\",\n  \"error_description\": \"Access token expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c485498-eeec-4832-9c2b-88776d3d0679",
+              "name": "Error indicates that a requested submission resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "logbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bce7a2f-e575-4bd1-8ea8-40184a56caa7",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "logbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) Id for the requested submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2024-06-29 19:22:50+00:00\",\n  \"traceId\": \"avx1234asd\",\n  \"instance\": \"http://localhost/resources/123\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"type\": \"about:blank\",\n  \"detail\": \"JSON parse error\",\n  \"violations\": [\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    },\n    {\n      \"field\": \"address.city.numberOfInhabitants\",\n      \"message\": \"Must be greater than or equal to 0.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-test.interhyp.de/submission",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4abaae05-6154-44cb-8690-4d935ee77c1e",
+    "name": "Interhyp Submission commands logbook API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ **Bank Partners**\n### API design Principles <p> During API design a set of principles were taken into consideration.\n+ **API First**\n+ **Mobile First**\n### API client <p> As an API client you should adhere to the following robustness principle\n+ **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests\n+ Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\nContact Support:\n Name: Interhyp AG (Team Provider Excellence)\n Email: support_submission_api@interhyp.de",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "commands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an existing command",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/commands/:commandId",
+            "params": [
+              {
+                "name": "commandId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the requested command"
+              }
+            ]
+          },
+          "docs": "Delivers information about an existing command\n\nA Command is a unit of execution which has been created to perform asynchronous operation.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

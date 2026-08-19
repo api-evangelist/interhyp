@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interhyp Submission commands info API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Submission API service status and info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-test.interhyp.de/submission/info"
+          },
+          "docs": "Delivers information about Submission API service status and basic information about the current version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
