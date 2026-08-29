@@ -1,36 +1,24 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Interhyp Submission commands API
-  version: 2.0.0
+  title: Interhyp Submission Commands API
+  version: 6.10.0
   contact:
     name: Interhyp AG (Team Provider Excellence)
     email: support_submission_api@interhyp.de
+    url: https://www.interhyp.de
   license:
     name: Interhyp AG
-  description: '### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>
-
-    ### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.
-
-    + **Bank Partners**
-
-    ### API design Principles <p> During API design a set of principles were taken into consideration.
-
-    + **API First**
-
-    + **Mobile First**
-
-    ### API client <p> As an API client you should adhere to the following robustness principle
-
-    + **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests
-
-    + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.'
+  description: "This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated with submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>\n## API Audience <br/>\nThe API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.\n+ Financing Partners\n## API design Principles <br/>\nDuring API design a set of principles were taken into consideration.\n+ API First\n+ Mobile First\n\n> API Endpoints provided by this RESTful API adhere to HTTP methods and hence are divided into two categories:\n+ Command Endpoints: represents HTTP methods *POST, PUT, PATCH and DELETE* where side effects are expected after calling such endpoints.\n+ Query Endpoints: represents HTTP method *GET* where no side effects could be expected.\n\n## Version and URI <br/>\nThis documentation is for **version 2** of submission API, which is currently the latest version.<p> The URIs for resources have the following structure: ``` https://<interhyp-url>/submission/v2/<resource-name> ``` <br/> For Example ``` https://api-test.interhyp.de/submission/v2/submissions/my-awesome-submission/financing-application ```\n## Security <br/>\n### Authentication <br/>\nIn order to grant access to the API resources, every client has to declare his identity using a `JWT` based Token. <br/> `OAuth 2.0` is used to secure all the API endpoints, See [Authentication Concept](docs/partners_authentication.pdf) for more details. <br/>\n### Authorization and Permissions <br/>\nAccess to the API resources is restricted to the target client, where a client may access only the resources that belong to him. Resources belong to a specific client are by no mean accessible by any other client with different identity. <br/>\n![API Authentication and Authorization](docs/sbm-api-security-diagram.png \"API Authentication and Authorization\")\n## Pagination, Expansion, and Deferred Processing <br/>\nPromoting Mobile First design principle requires employing a set of concepts as described below\n### Pagination\nThis API uses *Cursor-based* pagination to improve performance and minimize networks traffic, Pagination is enforced for operations that potentially could return a large collection of items. When a client makes a request to a paginated resource, the response wraps the returned array of values in a JSON object with paging metadata. For example: **<details>\n        <summary>Sample Response</summary>**\n  ```json\n  {\n    \"data\": [\n      \"_comment: here goes the actual resource collection ...\"\n    ],\n    \"paging\": {\n      \"cursor\": {\n        \"before\": \"string\",\n        \"after\": \"string\"\n      },\n      \"previous\": \"string\",\n      \"next\": \"string\"\n    }\n  }\n  ```\n</details>\n\nA cursor refers to a random string of characters which marks a specific item in a collection of data. <br/> The cursor will always point to the item, however it will be invalidated if the item is deleted or removed.\n> Therefore, as a client you shouldn't store cursors or assume that they will be valid in the future.\nA cursor-paginated resource supports the following parameters:\n* **_before_** : This is the cursor that points to the start of the page of data that has been returned.\n* **_after_** : This is the cursor that points to the end of the page of data that has been returned.\n* **_limit_** : This is the maximum number of objects that may be returned. A query may return fewer than the value of limit due to filtering. Do not depend on the number of results being fewer than the limit value to indicate that your query reached the end of the list of data, use the absence of `next` instead as described below.\n* **_previous_** : A Hyperlink that will return the previous page of data. If not included, this is the first page of data.\n* **_next_** : A Hyperlink that will return the next page of data. If not included, this is the last page of data.\n> The Absence of *next* hyperlink indicates that a query reached the end of the available result.\n### Expansion <br/>\nThis API uses *resource expansion*, which means that some parts of a resource are not returned unless specified in the request. This is useful for endpoints that return large resources in order to minimizes network traffic. <br/> The expansion is controlled as following:\n#### Query Parameter\n**_embed_** query parameter controllers which information the endpoint will deliver.\n> **By default:** *embed* query parameter is set to *False*, which means only basic information and a link for details and sub-resources will be returned.\nSetting *embed* query parameter to *True* guides the API to deliver all details and sub-resources associated with the requested resource.\n\n> **Tip:** Doing so will have a direct impact on the payload size and might affect response time as well.\nWe encourage following the provided links to access each specific resource, instead of providing all sub-resources for the returned collection.<br />\n\n**<details>\n        <summary>Sample Response</summary>**\n  ```json\n    {\n      \"data\": [\n        {\n          \"resource\": {\n            \"href\": \"http://some-domain/some/link/to/somewhere\",\n            \"embedded\": {\n              \"resource\": [\n                {\n                  \"detailed-attribute-1\": \"string\",\n                  \"detailed-attribute-2\": \"string\",\n                  \"detailed-attribute-3\": \"2019-11-29T18:24:49.777Z\",\n                  \"detailed-attribute-n\": \"string\"\n                }\n              ]\n            }\n          }\n        }\n      ]\n    }\n  ```\n</details>\n\n### Deferred Processing\nSome API endpoints may trigger long-running or computationally expensive tasks. In these cases, the endpoint will schedule an asynchronous command in order not to block the client for the whole processing time and as a result an appropriate *HTTP Status Code* indicates the asynchronous processing and a *commandId* will be returned.\n\nIn order to check for the status of the created command, section **_Commands_** provides *GET* endpoint to retrieve relevant information associated with the created command. For Example ``` GET https://api-test.interhyp.de/submission/v2/commands/my-awesome-command-id ```\n> **Tip:** More details will be provided in the respective endpoint.\n\n## Deprecation Policy <br/>\nAs the API evolves, fields may be replaced by other fields to better reflect the target structure or new requirements. We mark such fields as deprecated and document in the field's description the reason why it has been deprecated and provide information on the new field that should be used instead. We will communicate the planned end-of-life date for a deprecated field in its description once it is set.\nDuring the period when both fields are available, they will return the same result until the deprecated field reaches its end of life. However, to avoid any issues that may arise when the deprecated field is eventually removed from the API, we strongly recommend updating your code as soon as possible to use the new field.\n### Example\nPreviously, an applicant would have the fields `address` and `previousAddress`. Each would return a single address. We later introduced the field `livingAddresses` which returns an array of addresses and the date range in which they were used. The fields `address` and `previousAddress` were marked as deprecated, as the information could be obtained through the `livingAddresses` field. Still, we ensured that the `address` and `previousAddress` would return the correct data even for applicants which were created only with `livingAddresses`.\n\n## API client <br/>\nAs an API client you should adhere to the following robustness principle\n\n  + Tolerant Reader: Be tolerant with unknown fields in the payload. This is required to avoid new API versions if\n  new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed\n  for subsequent *PUT* requests.\n\n  + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.\n\n\n> **Tip:** In this API Open-Ended list of values (x-extensible-enum) instead of Enumerations are used\nEnumerations are per definition closed sets of values, that are assumed to be complete and not intended for extension. This closed principle of enumerations imposes compatibility issues when an enumeration must be extended.\n\nThis RESTful API has following sections, each interact with a specific part of the submission system.\n+ **_submissions_**: Provides endpoints for resources associated with a specific financing partner. For Example, accessing a specific submission resource, or searching all open submissions belong to a specific financing partner within a specific period of time.\n+ **_financing-application_**: Provides endpoints for resources not associate to a specific financing partner. Here all information collected from the Applicant during consultation phase could be delivered, such as Personal details, Credit Worthiness, desired Estate, etc ...\n+ **_logbook_**: Provides endpoints for submission logbook entries.\n+ **_commands_**: Provides endpoints for command resources, see *Deferred Processing*\n+ **_correspondence_**: Is currently still under design.\n\nThis RESTful API was created based on [OpenAPI 3.0 specification](http://spec.openapis.org/oas/v3.0.2)\nBy using the [OpenAPI-Spec generator](https://github.com/OpenAPITools/openapi-generator), you can easily generate an API client stub.\n> **Tip:** This API could be also viewed in [swagger editor](https://editor.swagger.io/) by copy/paste the content of this document in the editor."
 servers:
-- url: https://api-test.interhyp.de/submission
+- url: https://api-dev.ehyphome.de/submission/v2
   description: Test-Staging
-- url: https://api.interhyp.de/submission
+- url: https://api-acc.ehyphome.de/submission/v2
+  description: Acceptance-Staging
+- url: https://api.interhyp.de/submission/v2
   description: Production
 security:
-- BearerAuth: []
+- ApiKey: []
+  BearerAuth: []
 tags:
 - name: commands
   description: provides endpoints to access to commands sent to the submission API
@@ -81,7 +69,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/RFC7807Problem'
 components:
+  parameters:
+    command-id:
+      name: commandId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id of the requested command
   schemas:
+    OAuthProblem:
+      type: object
+      description: Error while Authentication
+      required:
+      - error
+      - error_description
+      properties:
+        error:
+          type: string
+          description: Summary of the error type
+          example: invalid_token
+        error_description:
+          type: string
+          description: Detailed information about the error
+          example: Access token expired
     CommandError:
       type: object
       required:
@@ -103,6 +114,50 @@ components:
           - PRE_INQUIRY_ALREADY_SUBMITTED
           - PRE_INQUIRY_NOT_ARCHIVABLE
           - PRE_INQUIRY_IS_ARCHIVED
+    Command:
+      type: object
+      required:
+      - commandId
+      - result
+      - traceId
+      - aggregateId
+      properties:
+        commandId:
+          type: string
+        result:
+          type: string
+          x-extensible-enum:
+          - SUCCESSFUL
+          - FAILED
+          - DLQ
+          - PARKING_LOT
+          - DLQ_PURGE
+          - UNPROCESSABLE
+        traceId:
+          type: string
+        aggregateId:
+          type: string
+        error:
+          $ref: '#/components/schemas/CommandError'
+    Violation:
+      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
+
+        '
+      type: object
+      title: Violation
+      properties:
+        field:
+          type: string
+          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+
+            '
+          example: address.city.numberOfInhabitants
+        message:
+          type: string
+          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
+
+            '
+          example: Must be greater than or equal to 0.
     RFC7807Problem:
       type: object
       title: RFC7807Problem
@@ -171,75 +226,19 @@ components:
             '
           items:
             $ref: '#/components/schemas/Violation'
-    OAuthProblem:
-      type: object
-      description: Error while Authentication
-      required:
-      - error
-      - error_description
-      properties:
-        error:
-          type: string
-          description: Summary of the error type
-          example: invalid_token
-        error_description:
-          type: string
-          description: Detailed information about the error
-          example: Access token expired
-    Violation:
-      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
-
-        '
-      type: object
-      title: Violation
-      properties:
-        field:
-          type: string
-          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
-
-            '
-          example: address.city.numberOfInhabitants
-        message:
-          type: string
-          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
-
-            '
-          example: Must be greater than or equal to 0.
-    Command:
-      type: object
-      required:
-      - commandId
-      - result
-      - traceId
-      - aggregateId
-      properties:
-        commandId:
-          type: string
-        result:
-          type: string
-          x-extensible-enum:
-          - SUCCESSFUL
-          - FAILED
-          - DLQ
-          - PARKING_LOT
-          - DLQ_PURGE
-          - UNPROCESSABLE
-        traceId:
-          type: string
-        aggregateId:
-          type: string
-        error:
-          $ref: '#/components/schemas/CommandError'
-  parameters:
-    command-id:
-      name: commandId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Id of the requested command
   securitySchemes:
     BearerAuth:
+      $ref: '#/components/securitySchemes/StandardBearerAuth'
+    ApiKey:
+      $ref: '#/components/securitySchemes/StandardApiKey'
+    StandardApiKey:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: API keys are unique codes issued by an API provider that allow partners to access specific API resources. By requiring an API key, the provider can ensure that only authorized clients are accessing the API and can prevent potential abuse or unauthorized access.
+    StandardBearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: JWT stands for JSON Web Token and is a type of bearer token that is commonly used for authentication and authorization purposes. Once retrieved, the token is sent with each request and grants access to the associated resource until it expires or is revoked. Thus, it is a compact, URL-safe means of representing a user's claims to access a resource without providing additional credentials.
+x-guideline-version: v1

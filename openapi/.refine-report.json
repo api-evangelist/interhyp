@@ -1,28 +1,35 @@
 {
   "provider": "interhyp",
   "sources": [
-    "interhyp-commands-api-openapi.yml",
-    "interhyp-documents-api-openapi.yml",
-    "interhyp-financing-application-api-openapi.yml",
-    "interhyp-info-api-openapi.yml",
-    "interhyp-logbook-api-openapi.yml",
-    "interhyp-pre-submission-checks-api-openapi.yml",
-    "interhyp-protocol-api-openapi.yml",
-    "interhyp-submissions-api-openapi.yml"
+    "_original/interhyp-submission-documents-openapi.yml",
+    "_original/interhyp-submission-openapi.yml"
   ],
   "outputs": [
-    "interhyp-commands-api-openapi.yml",
     "interhyp-documents-api-openapi.yml",
+    "interhyp-protocol-api-openapi.yml",
+    "interhyp-commands-api-openapi.yml",
     "interhyp-financing-application-api-openapi.yml",
     "interhyp-info-api-openapi.yml",
     "interhyp-logbook-api-openapi.yml",
     "interhyp-pre-submission-checks-api-openapi.yml",
-    "interhyp-protocol-api-openapi.yml",
     "interhyp-submissions-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "interhyp-submission-documents-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "interhyp-submission-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "interhyp-commands-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-financing-application-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-logbook-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-pre-submission-checks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-protocol-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "interhyp-submissions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

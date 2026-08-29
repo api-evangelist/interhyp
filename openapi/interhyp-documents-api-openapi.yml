@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Interhyp Submission commands documents API
+  title: Interhyp Submission Documents API
   version: 2.0.0
   contact:
     name: Interhyp AG (Team Provider Excellence)
@@ -153,17 +153,37 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    DocumentCategory:
+    ClientError:
       type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
+    DocumentItem:
+      type: object
+      required:
+      - id
+      - content
+      - category
       properties:
-        name:
+        id:
           type: string
-          example: KONTOAUSZUG
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentCategoryTag'
-    NotFound:
+        content:
+          $ref: '#/components/schemas/ResourceRef'
+        category:
+          $ref: '#/components/schemas/DocumentCategory'
+        reference:
+          type: string
+          description: holds information about who/what this document category references
+          example: Mustermann, Max
+        validity:
+          $ref: '#/components/schemas/DocumentValidity'
+    Conflict:
       allOf:
       - $ref: '#/components/schemas/ClientError'
     DocumentValidity:
@@ -207,6 +227,17 @@ components:
         errorCode:
           type: integer
           format: int32
+    ResourceRef:
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          description: Link to retrieve a specific resource
+          example: http://some-domain/some/link/to/somewhere
+    NotFound:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     Documents:
       type: object
       required:
@@ -216,77 +247,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentItem'
-    ClientError:
+    DocumentCategory:
       type: object
-      required:
-      - rootCause
-      allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
-    DocumentItem:
-      type: object
-      required:
-      - id
-      - content
-      - category
       properties:
-        id:
+        name:
           type: string
-        content:
-          $ref: '#/components/schemas/ResourceRef'
-        category:
-          $ref: '#/components/schemas/DocumentCategory'
-        reference:
-          type: string
-          description: holds information about who/what this document category references
-          example: Mustermann, Max
-        validity:
-          $ref: '#/components/schemas/DocumentValidity'
+          example: KONTOAUSZUG
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentCategoryTag'
     BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    ResourceRef:
-      required:
-      - href
-      properties:
-        href:
-          type: string
-          description: Link to retrieve a specific resource
-          example: http://some-domain/some/link/to/somewhere
-    Conflict:
       allOf:
       - $ref: '#/components/schemas/ClientError'
     Unauthorized:
       allOf:
       - $ref: '#/components/schemas/ClientError'
-    Binary:
-      type: string
-      format: binary
     DocumentCategoryTag:
       type: object
       properties:
         name:
           type: string
           example: MIETAUSGANG
+    Binary:
+      type: string
+      format: binary
   parameters:
-    document-id:
-      name: documentId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Id for the requested submission document.
-    submission-id:
-      name: submissionId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Id for the requested submission.
     embed:
       name: embed
       in: query
@@ -295,6 +281,13 @@ components:
       schema:
         type: boolean
       description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
+    submission-id:
+      name: submissionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission.
     startDate:
       name: startDate
       in: query
@@ -304,6 +297,13 @@ components:
         type: string
         format: date-time
         example: 2019-12-29 10:22:50+00:00
+    document-id:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission document.
   securitySchemes:
     BearerAuth:
       type: http

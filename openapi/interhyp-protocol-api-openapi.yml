@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Interhyp Submission commands protocol API
+  title: Interhyp Submission Protocol API
   version: 2.0.0
   contact:
     name: Interhyp AG (Team Provider Excellence)
@@ -78,20 +78,26 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    SubmissionProtocolRef:
+    ProtocolItemType:
+      type: string
+      description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
+      example: DOCUMENT
+      x-extensible-enum:
+      - DOCUMENT
+      - DATA
+      - STATUS
+      - NEW_SUBMISSION
+    ClientError:
       type: object
+      required:
+      - rootCause
       allOf:
-      - $ref: '#/components/schemas/ResourceRef'
+      - $ref: '#/components/schemas/UnexpectedError'
       - properties:
-          embedded:
-            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
-    SubmissionProtocolItem:
-      type: object
-      properties:
-        submission:
-          $ref: '#/components/schemas/SubmissionProtocolRefItem'
-        protocol:
-          $ref: '#/components/schemas/SubmissionProtocolRef'
+          message:
+            type: string
+          exception:
+            type: string
     EmbeddedSubmissionProtocol:
       type: object
       properties:
@@ -99,29 +105,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProtocolItem'
-    UnexpectedError:
-      required:
-      - status
-      - message
-      - timestamp
-      - path
-      - traceId
+    SubmissionProtocolItem:
+      type: object
       properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-          format: int32
-        error:
-          type: string
-        path:
-          type: string
-        traceId:
-          type: string
-        errorCode:
-          type: integer
-          format: int32
+        submission:
+          $ref: '#/components/schemas/SubmissionProtocolRefItem'
+        protocol:
+          $ref: '#/components/schemas/SubmissionProtocolRef'
     Paging:
       properties:
         cursor:
@@ -141,23 +131,6 @@ components:
         self:
           type: string
           format: uri
-    SubmissionProtocolRefItem:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/SubmissionRef'
-      - properties:
-          legacyId:
-            description: Legacy submission id
-            type: string
-    SubmissionProtocol:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionProtocolItem'
-        paging:
-          $ref: '#/components/schemas/Paging'
     SubmissionRef:
       type: object
       allOf:
@@ -185,35 +158,6 @@ components:
           DATA: '#/components/schemas/SubmissionDataUpdate'
           STATUS: '#/components/schemas/SubmissionStatusUpdate'
           NEW_SUBMISSION: '#/components/schemas/NewSubmission'
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    ClientError:
-      type: object
-      required:
-      - rootCause
-      allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
-    ProtocolItemType:
-      type: string
-      description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
-      example: DOCUMENT
-      x-extensible-enum:
-      - DOCUMENT
-      - DATA
-      - STATUS
-      - NEW_SUBMISSION
-    Cursor:
-      properties:
-        before:
-          type: string
-        after:
-          type: string
     ResourceRef:
       required:
       - href
@@ -222,17 +166,75 @@ components:
           type: string
           description: Link to retrieve a specific resource
           example: http://some-domain/some/link/to/somewhere
+    SubmissionProtocolRefItem:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/SubmissionRef'
+      - properties:
+          legacyId:
+            description: Legacy submission id
+            type: string
     Unauthorized:
       allOf:
       - $ref: '#/components/schemas/ClientError'
+    Cursor:
+      properties:
+        before:
+          type: string
+        after:
+          type: string
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    UnexpectedError:
+      required:
+      - status
+      - message
+      - timestamp
+      - path
+      - traceId
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+        path:
+          type: string
+        traceId:
+          type: string
+        errorCode:
+          type: integer
+          format: int32
+    SubmissionProtocol:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionProtocolItem'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    SubmissionProtocolRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          embedded:
+            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
   parameters:
-    cursor-before:
-      name: before
+    until:
+      name: until
       in: query
-      description: Cursor that points to the start of the page of data that has been returned.
+      description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
       required: false
       schema:
         type: string
+        format: date-time
+        example: 2019-12-29 10:22:50+00:00
     protocol-type-filter:
       name: protocolType
       in: query
@@ -245,6 +247,13 @@ components:
         - status
         - new_submission
       description: query parameter to restrict submissions associated to the provided protocol type.
+    cursor-after:
+      name: after
+      in: query
+      description: Cursor that points to the end of the page of data that has been returned.
+      required: false
+      schema:
+        type: string
     embed:
       name: embed
       in: query
@@ -253,22 +262,6 @@ components:
       schema:
         type: boolean
       description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
-    cursor-after:
-      name: after
-      in: query
-      description: Cursor that points to the end of the page of data that has been returned.
-      required: false
-      schema:
-        type: string
-    since:
-      name: since
-      in: query
-      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-      required: true
-      schema:
-        type: string
-        format: date-time
-        example: 2019-12-29 10:22:50+00:00
     sbms-protocol-limit:
       name: limit
       in: query
@@ -280,15 +273,22 @@ components:
         minimum: 1
         maximum: 40
         default: 20
-    until:
-      name: until
+    since:
+      name: since
       in: query
-      description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-      required: false
+      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: true
       schema:
         type: string
         format: date-time
         example: 2019-12-29 10:22:50+00:00
+    cursor-before:
+      name: before
+      in: query
+      description: Cursor that points to the start of the page of data that has been returned.
+      required: false
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http
