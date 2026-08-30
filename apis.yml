@@ -55,7 +55,7 @@ tags:
 - Real-Estate
 - Banking
 - Germany
-- API-First
+- API First
 tags_raw:
 - Company
 - Fintech
@@ -79,7 +79,7 @@ apis:
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
   tags:
-  - Commands
+  - commands
   tags_raw:
   - commands
   properties:
@@ -147,7 +147,7 @@ apis:
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
   tags:
-  - Protocol
+  - protocol
   tags_raw:
   - protocol
   properties:
@@ -159,7 +159,7 @@ apis:
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
   tags:
-  - Submissions
+  - submissions
   tags_raw:
   - submissions
   properties:
