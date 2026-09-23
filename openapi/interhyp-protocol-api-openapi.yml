@@ -7,23 +7,7 @@ info:
     email: support_submission_api@interhyp.de
   license:
     name: Interhyp AG
-  description: '### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>
-
-    ### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.
-
-    + **Bank Partners**
-
-    ### API design Principles <p> During API design a set of principles were taken into consideration.
-
-    + **API First**
-
-    + **Mobile First**
-
-    ### API client <p> As an API client you should adhere to the following robustness principle
-
-    + **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests
-
-    + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.'
+  description: '### This document describes the RESTful API and resources provided by Interhyp AG.'
 servers:
 - url: https://api-test.interhyp.de/submission
   description: Test-Staging
@@ -32,17 +16,23 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: protocol
+- name: Protocol
   description: access to submission protocol
 paths:
   /v2/submissions/protocol:
     get:
       deprecated: true
       summary: Delivers all submissions protocol for a provider
-      description: Delivers a collection of submission protocol for a specific provider filtered by the date of protocol.<p> *By Default*, we will return the first *20* matching records. However, this is not a hard limitation! a parameter called `limit` can be used to tell the API how many records you want to return all at once *(max 40)*.<p> To get further matching records, a parameter called `after` or `before` can be used to tell the API the start of each page using specified cursor.<p> To navigate through the query result, a reference to the following navigations are included in the response *(next, prev, first, last, self)*.
+      description: 'Delivers a collection of submission protocol for a specific provider filtered by the date of protocol.
+
+        *By Default*, we will return the first *20* matching records. However, this is not a hard limitation! a parameter called `limit` can be used to tell the API how many records you want to return all at once *(max 40)*.
+
+        To get further matching records, a parameter called `after` or `before` can be used to tell the API the start of each page using specified cursor.
+
+        To navigate through the query result, a reference to the following navigations are included in the response *(next, prev, first, last, self)*.'
       operationId: getSubmissionsProtocol
       tags:
-      - protocol
+      - Protocol
       parameters:
       - $ref: '#/components/parameters/since'
       - $ref: '#/components/parameters/until'
@@ -78,26 +68,6 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    ProtocolItemType:
-      type: string
-      description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
-      example: DOCUMENT
-      x-extensible-enum:
-      - DOCUMENT
-      - DATA
-      - STATUS
-      - NEW_SUBMISSION
-    ClientError:
-      type: object
-      required:
-      - rootCause
-      allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
     EmbeddedSubmissionProtocol:
       type: object
       properties:
@@ -105,40 +75,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProtocolItem'
-    SubmissionProtocolItem:
-      type: object
-      properties:
-        submission:
-          $ref: '#/components/schemas/SubmissionProtocolRefItem'
-        protocol:
-          $ref: '#/components/schemas/SubmissionProtocolRef'
-    Paging:
-      properties:
-        cursor:
-          $ref: '#/components/schemas/Cursor'
-        previous:
-          type: string
-          format: uri
-        next:
-          type: string
-          format: uri
-        first:
-          type: string
-          format: uri
-        last:
-          type: string
-          format: uri
-        self:
-          type: string
-          format: uri
-    SubmissionRef:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ResourceRef'
-      - properties:
-          id:
-            type: string
-            description: Submission id
     ProtocolItem:
       type: object
       properties:
@@ -158,6 +94,15 @@ components:
           DATA: '#/components/schemas/SubmissionDataUpdate'
           STATUS: '#/components/schemas/SubmissionStatusUpdate'
           NEW_SUBMISSION: '#/components/schemas/NewSubmission'
+    ProtocolItemType:
+      type: string
+      description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
+      example: DOCUMENT
+      x-extensible-enum:
+      - DOCUMENT
+      - DATA
+      - STATUS
+      - NEW_SUBMISSION
     ResourceRef:
       required:
       - href
@@ -166,6 +111,73 @@ components:
           type: string
           description: Link to retrieve a specific resource
           example: http://some-domain/some/link/to/somewhere
+    SubmissionProtocolRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          embedded:
+            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
+    SubmissionProtocol:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionProtocolItem'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    SubmissionProtocolItem:
+      type: object
+      properties:
+        submission:
+          $ref: '#/components/schemas/SubmissionProtocolRefItem'
+        protocol:
+          $ref: '#/components/schemas/SubmissionProtocolRef'
+    SubmissionRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          id:
+            type: string
+            description: Submission id
+    Unauthorized:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    ClientError:
+      type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    Paging:
+      properties:
+        cursor:
+          $ref: '#/components/schemas/Cursor'
+        previous:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        first:
+          type: string
+          format: uri
+        last:
+          type: string
+          format: uri
+        self:
+          type: string
+          format: uri
     SubmissionProtocolRefItem:
       type: object
       allOf:
@@ -174,18 +186,12 @@ components:
           legacyId:
             description: Legacy submission id
             type: string
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
     Cursor:
       properties:
         before:
           type: string
         after:
           type: string
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
     UnexpectedError:
       required:
       - status
@@ -209,28 +215,27 @@ components:
         errorCode:
           type: integer
           format: int32
-    SubmissionProtocol:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionProtocolItem'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    SubmissionProtocolRef:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ResourceRef'
-      - properties:
-          embedded:
-            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
   parameters:
-    until:
-      name: until
+    embed:
+      name: embed
       in: query
-      description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      style: form
       required: false
+      schema:
+        type: boolean
+      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
+    cursor-after:
+      name: after
+      in: query
+      description: Cursor that points to the end of the page of data that has been returned.
+      required: false
+      schema:
+        type: string
+    since:
+      name: since
+      in: query
+      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: true
       schema:
         type: string
         format: date-time
@@ -247,21 +252,6 @@ components:
         - status
         - new_submission
       description: query parameter to restrict submissions associated to the provided protocol type.
-    cursor-after:
-      name: after
-      in: query
-      description: Cursor that points to the end of the page of data that has been returned.
-      required: false
-      schema:
-        type: string
-    embed:
-      name: embed
-      in: query
-      style: form
-      required: false
-      schema:
-        type: boolean
-      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
     sbms-protocol-limit:
       name: limit
       in: query
@@ -273,15 +263,6 @@ components:
         minimum: 1
         maximum: 40
         default: 20
-    since:
-      name: since
-      in: query
-      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-      required: true
-      schema:
-        type: string
-        format: date-time
-        example: 2019-12-29 10:22:50+00:00
     cursor-before:
       name: before
       in: query
@@ -289,6 +270,15 @@ components:
       required: false
       schema:
         type: string
+    until:
+      name: until
+      in: query
+      description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: 2019-12-29 10:22:50+00:00
   securitySchemes:
     BearerAuth:
       type: http

@@ -7,23 +7,7 @@ info:
     email: support_submission_api@interhyp.de
   license:
     name: Interhyp AG
-  description: '### This document describes the RESTful API and resources provided by Interhyp AG.<p> The RESTful API provides access to resources associated to submission process via *URI* paths, a client application will make an HTTP request using standard HTTP methods like *GET, PUT, POST and DELETE* and parse the response in *JSON* format.<p>
-
-    ### API Audience<p> The API is intended to be consumed by clients who want to integrate Interhyp submission process in their own workflow.
-
-    + **Bank Partners**
-
-    ### API design Principles <p> During API design a set of principles were taken into consideration.
-
-    + **API First**
-
-    + **Mobile First**
-
-    ### API client <p> As an API client you should adhere to the following robustness principle
-
-    + **Tolerant Reader** Be tolerant with unknown fields in the payload. This is required to avoid new API versions if new fields were added, i.e. ignore new fields but do not eliminate them from payload if needed for subsequent *PUT* requests
-
-    + Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions.'
+  description: '### This document describes the RESTful API and resources provided by Interhyp AG.'
 servers:
 - url: https://api-test.interhyp.de/submission
   description: Test-Staging
@@ -32,17 +16,17 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: documents
+- name: Documents
   description: access to submission documents
 paths:
   /v2/submissions/{submissionId}/documents/metadata:
     get:
       deprecated: true
       tags:
-      - documents
+      - Documents
       summary: Delievers all submission relevant documents metadata
       operationId: getDocumentsMetadata
-      description: Retrieve all submission relevant documents in the requested format. <p>
+      description: Retrieve all submission relevant documents in the requested format.
       parameters:
       - $ref: '#/components/parameters/submission-id'
       - $ref: '#/components/parameters/startDate'
@@ -89,10 +73,12 @@ paths:
     get:
       deprecated: true
       tags:
-      - documents
+      - Documents
       summary: Delievers specific submission document in `pdf` format
       operationId: getDocumentBinary
-      description: 'Retrieve specific submission document based on an identifier in `pdf` format<p /> Note: retries following a 202 *must* provide the If-Match header.'
+      description: 'Retrieve specific submission document based on an identifier in `pdf` format
+
+        Note: retries following a 202 *must* provide the If-Match header.'
       parameters:
       - in: header
         name: If-Match
@@ -153,17 +139,46 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    ClientError:
+    DocumentValidity:
       type: object
       required:
-      - rootCause
+      - value
+      - resolution
+      properties:
+        resolution:
+          type: string
+          description: open ended enum contains type of resolutions, possible values are (MONTH, YEAR)
+          example: MONTH
+          x-extensible-enum:
+          - MONTH
+          - YEAR
+      discriminator:
+        propertyName: resolution
+        mapping:
+          MONTH: '#/components/schemas/MonthlyResolution'
+          YEAR: '#/components/schemas/YearlyResolution'
+    Documents:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+    NotFound:
       allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
+      - $ref: '#/components/schemas/ClientError'
+    DocumentCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: KONTOAUSZUG
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentCategoryTag'
     DocumentItem:
       type: object
       required:
@@ -186,24 +201,15 @@ components:
     Conflict:
       allOf:
       - $ref: '#/components/schemas/ClientError'
-    DocumentValidity:
+    Unauthorized:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    DocumentCategoryTag:
       type: object
-      required:
-      - value
-      - resolution
       properties:
-        resolution:
+        name:
           type: string
-          description: open ended enum contains type of resolutions, possible values are (MONTH, YEAR)
-          example: MONTH
-          x-extensible-enum:
-          - MONTH
-          - YEAR
-      discriminator:
-        propertyName: resolution
-        mapping:
-          MONTH: '#/components/schemas/MonthlyResolution'
-          YEAR: '#/components/schemas/YearlyResolution'
+          example: MIETAUSGANG
     UnexpectedError:
       required:
       - status
@@ -227,6 +233,20 @@ components:
         errorCode:
           type: integer
           format: int32
+    ClientError:
+      type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     ResourceRef:
       required:
       - href
@@ -235,40 +255,6 @@ components:
           type: string
           description: Link to retrieve a specific resource
           example: http://some-domain/some/link/to/somewhere
-    NotFound:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Documents:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentItem'
-    DocumentCategory:
-      type: object
-      properties:
-        name:
-          type: string
-          example: KONTOAUSZUG
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentCategoryTag'
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    DocumentCategoryTag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: MIETAUSGANG
     Binary:
       type: string
       format: binary
@@ -288,6 +274,13 @@ components:
       schema:
         type: string
       description: Id for the requested submission.
+    document-id:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission document.
     startDate:
       name: startDate
       in: query
@@ -297,13 +290,6 @@ components:
         type: string
         format: date-time
         example: 2019-12-29 10:22:50+00:00
-    document-id:
-      name: documentId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Id for the requested submission document.
   securitySchemes:
     BearerAuth:
       type: http
