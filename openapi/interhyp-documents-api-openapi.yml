@@ -139,6 +139,9 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     DocumentValidity:
       type: object
       required:
@@ -157,6 +160,60 @@ components:
         mapping:
           MONTH: '#/components/schemas/MonthlyResolution'
           YEAR: '#/components/schemas/YearlyResolution'
+    NotFound:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    UnexpectedError:
+      required:
+      - status
+      - message
+      - timestamp
+      - path
+      - traceId
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+        path:
+          type: string
+        traceId:
+          type: string
+        errorCode:
+          type: integer
+          format: int32
+    ResourceRef:
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          description: Link to retrieve a specific resource
+          example: http://some-domain/some/link/to/somewhere
+    DocumentCategoryTag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: MIETAUSGANG
+    ClientError:
+      type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
+    Unauthorized:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     Documents:
       type: object
       required:
@@ -166,9 +223,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentItem'
-    NotFound:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
     DocumentCategory:
       type: object
       properties:
@@ -198,82 +252,13 @@ components:
           example: Mustermann, Max
         validity:
           $ref: '#/components/schemas/DocumentValidity'
-    Conflict:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    DocumentCategoryTag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: MIETAUSGANG
-    UnexpectedError:
-      required:
-      - status
-      - message
-      - timestamp
-      - path
-      - traceId
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-          format: int32
-        error:
-          type: string
-        path:
-          type: string
-        traceId:
-          type: string
-        errorCode:
-          type: integer
-          format: int32
-    ClientError:
-      type: object
-      required:
-      - rootCause
-      allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    ResourceRef:
-      required:
-      - href
-      properties:
-        href:
-          type: string
-          description: Link to retrieve a specific resource
-          example: http://some-domain/some/link/to/somewhere
     Binary:
       type: string
       format: binary
+    Conflict:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
   parameters:
-    embed:
-      name: embed
-      in: query
-      style: form
-      required: false
-      schema:
-        type: boolean
-      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
-    submission-id:
-      name: submissionId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Id for the requested submission.
     document-id:
       name: documentId
       in: path
@@ -281,6 +266,13 @@ components:
       schema:
         type: string
       description: Id for the requested submission document.
+    submission-id:
+      name: submissionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission.
     startDate:
       name: startDate
       in: query
@@ -290,6 +282,14 @@ components:
         type: string
         format: date-time
         example: 2019-12-29 10:22:50+00:00
+    embed:
+      name: embed
+      in: query
+      style: form
+      required: false
+      schema:
+        type: boolean
+      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
   securitySchemes:
     BearerAuth:
       type: http

@@ -68,41 +68,9 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    EmbeddedSubmissionProtocol:
-      type: object
-      properties:
-        protocol:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtocolItem'
-    ProtocolItem:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ProtocolItemType'
-        id:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        author:
-          type: string
-      discriminator:
-        propertyName: type
-        mapping:
-          DOCUMENT: '#/components/schemas/SubmissionDocumentUpdate'
-          DATA: '#/components/schemas/SubmissionDataUpdate'
-          STATUS: '#/components/schemas/SubmissionStatusUpdate'
-          NEW_SUBMISSION: '#/components/schemas/NewSubmission'
-    ProtocolItemType:
-      type: string
-      description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
-      example: DOCUMENT
-      x-extensible-enum:
-      - DOCUMENT
-      - DATA
-      - STATUS
-      - NEW_SUBMISSION
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     ResourceRef:
       required:
       - href
@@ -111,40 +79,6 @@ components:
           type: string
           description: Link to retrieve a specific resource
           example: http://some-domain/some/link/to/somewhere
-    SubmissionProtocolRef:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ResourceRef'
-      - properties:
-          embedded:
-            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
-    SubmissionProtocol:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionProtocolItem'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    SubmissionProtocolItem:
-      type: object
-      properties:
-        submission:
-          $ref: '#/components/schemas/SubmissionProtocolRefItem'
-        protocol:
-          $ref: '#/components/schemas/SubmissionProtocolRef'
-    SubmissionRef:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ResourceRef'
-      - properties:
-          id:
-            type: string
-            description: Submission id
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
     ClientError:
       type: object
       required:
@@ -156,42 +90,19 @@ components:
             type: string
           exception:
             type: string
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Paging:
-      properties:
-        cursor:
-          $ref: '#/components/schemas/Cursor'
-        previous:
-          type: string
-          format: uri
-        next:
-          type: string
-          format: uri
-        first:
-          type: string
-          format: uri
-        last:
-          type: string
-          format: uri
-        self:
-          type: string
-          format: uri
-    SubmissionProtocolRefItem:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/SubmissionRef'
-      - properties:
-          legacyId:
-            description: Legacy submission id
-            type: string
     Cursor:
       properties:
         before:
           type: string
         after:
           type: string
+    SubmissionProtocolRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          embedded:
+            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
     UnexpectedError:
       required:
       - status
@@ -215,7 +126,103 @@ components:
         errorCode:
           type: integer
           format: int32
+    SubmissionProtocolItem:
+      type: object
+      properties:
+        submission:
+          $ref: '#/components/schemas/SubmissionProtocolRefItem'
+        protocol:
+          $ref: '#/components/schemas/SubmissionProtocolRef'
+    EmbeddedSubmissionProtocol:
+      type: object
+      properties:
+        protocol:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolItem'
+    SubmissionProtocolRefItem:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/SubmissionRef'
+      - properties:
+          legacyId:
+            description: Legacy submission id
+            type: string
+    ProtocolItem:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ProtocolItemType'
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        author:
+          type: string
+      discriminator:
+        propertyName: type
+        mapping:
+          DOCUMENT: '#/components/schemas/SubmissionDocumentUpdate'
+          DATA: '#/components/schemas/SubmissionDataUpdate'
+          STATUS: '#/components/schemas/SubmissionStatusUpdate'
+          NEW_SUBMISSION: '#/components/schemas/NewSubmission'
+    Paging:
+      properties:
+        cursor:
+          $ref: '#/components/schemas/Cursor'
+        previous:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        first:
+          type: string
+          format: uri
+        last:
+          type: string
+          format: uri
+        self:
+          type: string
+          format: uri
+    ProtocolItemType:
+      type: string
+      description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
+      example: DOCUMENT
+      x-extensible-enum:
+      - DOCUMENT
+      - DATA
+      - STATUS
+      - NEW_SUBMISSION
+    SubmissionProtocol:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionProtocolItem'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Unauthorized:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    SubmissionRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          id:
+            type: string
+            description: Submission id
   parameters:
+    cursor-after:
+      name: after
+      in: query
+      description: Cursor that points to the end of the page of data that has been returned.
+      required: false
+      schema:
+        type: string
     embed:
       name: embed
       in: query
@@ -224,34 +231,6 @@ components:
       schema:
         type: boolean
       description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
-    cursor-after:
-      name: after
-      in: query
-      description: Cursor that points to the end of the page of data that has been returned.
-      required: false
-      schema:
-        type: string
-    since:
-      name: since
-      in: query
-      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-      required: true
-      schema:
-        type: string
-        format: date-time
-        example: 2019-12-29 10:22:50+00:00
-    protocol-type-filter:
-      name: protocolType
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - document
-        - data
-        - status
-        - new_submission
-      description: query parameter to restrict submissions associated to the provided protocol type.
     sbms-protocol-limit:
       name: limit
       in: query
@@ -275,6 +254,27 @@ components:
       in: query
       description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
       required: false
+      schema:
+        type: string
+        format: date-time
+        example: 2019-12-29 10:22:50+00:00
+    protocol-type-filter:
+      name: protocolType
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - document
+        - data
+        - status
+        - new_submission
+      description: query parameter to restrict submissions associated to the provided protocol type.
+    since:
+      name: since
+      in: query
+      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: true
       schema:
         type: string
         format: date-time

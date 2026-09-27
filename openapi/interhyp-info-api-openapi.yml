@@ -69,25 +69,6 @@ components:
           type: string
           description: Detailed information about the error
           example: Access token expired
-    Violation:
-      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
-
-        '
-      type: object
-      title: Violation
-      properties:
-        field:
-          type: string
-          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
-
-            '
-          example: address.city.numberOfInhabitants
-        message:
-          type: string
-          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
-
-            '
-          example: Must be greater than or equal to 0.
     RFC7807Problem:
       type: object
       title: RFC7807Problem
@@ -165,6 +146,25 @@ components:
         apiSpecificationVersion:
           type: string
           description: Currently used version of the Submission API specification
+    Violation:
+      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
+
+        '
+      type: object
+      title: Violation
+      properties:
+        field:
+          type: string
+          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+
+            '
+          example: address.city.numberOfInhabitants
+        message:
+          type: string
+          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
+
+            '
+          example: Must be greater than or equal to 0.
   securitySchemes:
     BearerAuth:
       $ref: '#/components/securitySchemes/StandardBearerAuth'

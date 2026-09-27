@@ -54,7 +54,7 @@ tags:
 - Mortgage
 - Lending
 - Baufinanzierung
-- Real-Estate
+- Real Estate
 - Banking
 - Germany
 - API-First
@@ -68,6 +68,7 @@ tags_raw:
 - Banking
 - Germany
 - API First
+- Real-Estate
 image: https://developer.ehyphome.de/favicon.ico
 maintainers:
 - FN: Kin Lane
@@ -76,7 +77,7 @@ maintainers:
   email: info@apis.io
 apis:
 - aid: interhyp:interhyp-commands-api
-  name: Interhyp commands API
+  name: Interhyp Commands API
   description: provides endpoints to access to commands sent to the submission API
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
@@ -88,7 +89,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-commands-api-openapi.yml
 - aid: interhyp:interhyp-documents-api
-  name: Interhyp documents API
+  name: Interhyp Documents API
   description: access to submission documents
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
@@ -100,7 +101,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-documents-api-openapi.yml
 - aid: interhyp:interhyp-financing-application-api
-  name: Interhyp financing-application API
+  name: Interhyp Financing Application API
   description: >-
     provides endpoints for financing application resources not associate to a specific financing partner
   humanURL: https://developer.ehyphome.de/products
@@ -111,7 +112,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-financing-application-api-openapi.yml
 - aid: interhyp:interhyp-info-api
-  name: Interhyp info API
+  name: Interhyp Info API
   description: provides basic info about service status and version of the submission API specs used
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
@@ -123,7 +124,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-info-api-openapi.yml
 - aid: interhyp:interhyp-logbook-api
-  name: Interhyp logbook API
+  name: Interhyp Logbook API
   description: provides endpoints to access submission logbook
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
@@ -133,7 +134,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-logbook-api-openapi.yml
 - aid: interhyp:interhyp-pre-submission-checks-api
-  name: Interhyp pre-submission-checks API
+  name: Interhyp Pre Submission Checks API
   description: >-
     provides endpoints for pre-submission resources associated with a specific financing partner
   humanURL: https://developer.ehyphome.de/products
@@ -144,7 +145,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-pre-submission-checks-api-openapi.yml
 - aid: interhyp:interhyp-protocol-api
-  name: Interhyp protocol API
+  name: Interhyp Protocol API
   description: access to submission protocol
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
@@ -156,7 +157,7 @@ apis:
   - type: OpenAPI
     url: openapi/interhyp-protocol-api-openapi.yml
 - aid: interhyp:interhyp-submissions-api
-  name: Interhyp submissions API
+  name: Interhyp Submissions API
   description: provides endpoints for submission resources associated with a specific financing partner
   humanURL: https://developer.ehyphome.de/products
   baseURL: https://api.interhyp.de/submission/v2
