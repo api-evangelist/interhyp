@@ -54,6 +54,15 @@ paths:
               example: '{ "timestamp": "2023-03-14T10:00:00.995Z", "title": "Internal Server Error", "status": 500, "traceId": "64077933c36912de13fb3cd7ae0c00c8", "instance": "/v2/info" }'
 components:
   schemas:
+    ServiceInfo:
+      type: object
+      description: 'DE: Informationen zum Dienst Submission API <br/> EN: Information about Submission API service
+
+        '
+      properties:
+        apiSpecificationVersion:
+          type: string
+          description: Currently used version of the Submission API specification
     OAuthProblem:
       type: object
       description: Error while Authentication
@@ -69,6 +78,25 @@ components:
           type: string
           description: Detailed information about the error
           example: Access token expired
+    Violation:
+      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
+
+        '
+      type: object
+      title: Violation
+      properties:
+        field:
+          type: string
+          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+
+            '
+          example: address.city.numberOfInhabitants
+        message:
+          type: string
+          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
+
+            '
+          example: Must be greater than or equal to 0.
     RFC7807Problem:
       type: object
       title: RFC7807Problem
@@ -137,34 +165,6 @@ components:
             '
           items:
             $ref: '#/components/schemas/Violation'
-    ServiceInfo:
-      type: object
-      description: 'DE: Informationen zum Dienst Submission API <br/> EN: Information about Submission API service
-
-        '
-      properties:
-        apiSpecificationVersion:
-          type: string
-          description: Currently used version of the Submission API specification
-    Violation:
-      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
-
-        '
-      type: object
-      title: Violation
-      properties:
-        field:
-          type: string
-          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
-
-            '
-          example: address.city.numberOfInhabitants
-        message:
-          type: string
-          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
-
-            '
-          example: Must be greater than or equal to 0.
   securitySchemes:
     BearerAuth:
       $ref: '#/components/securitySchemes/StandardBearerAuth'

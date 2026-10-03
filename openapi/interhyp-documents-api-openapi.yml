@@ -139,9 +139,6 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
     DocumentValidity:
       type: object
       required:
@@ -160,9 +157,53 @@ components:
         mapping:
           MONTH: '#/components/schemas/MonthlyResolution'
           YEAR: '#/components/schemas/YearlyResolution'
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    ClientError:
+      type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
     NotFound:
       allOf:
       - $ref: '#/components/schemas/ClientError'
+    ResourceRef:
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          description: Link to retrieve a specific resource
+          example: http://some-domain/some/link/to/somewhere
+    DocumentCategoryTag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: MIETAUSGANG
+    Binary:
+      type: string
+      format: binary
+    Conflict:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    DocumentCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: KONTOAUSZUG
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentCategoryTag'
     UnexpectedError:
       required:
       - status
@@ -186,53 +227,6 @@ components:
         errorCode:
           type: integer
           format: int32
-    ResourceRef:
-      required:
-      - href
-      properties:
-        href:
-          type: string
-          description: Link to retrieve a specific resource
-          example: http://some-domain/some/link/to/somewhere
-    DocumentCategoryTag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: MIETAUSGANG
-    ClientError:
-      type: object
-      required:
-      - rootCause
-      allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Documents:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentItem'
-    DocumentCategory:
-      type: object
-      properties:
-        name:
-          type: string
-          example: KONTOAUSZUG
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentCategoryTag'
     DocumentItem:
       type: object
       required:
@@ -252,10 +246,16 @@ components:
           example: Mustermann, Max
         validity:
           $ref: '#/components/schemas/DocumentValidity'
-    Binary:
-      type: string
-      format: binary
-    Conflict:
+    Documents:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+    Unauthorized:
       allOf:
       - $ref: '#/components/schemas/ClientError'
   parameters:
