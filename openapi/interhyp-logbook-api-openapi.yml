@@ -65,197 +65,308 @@ paths:
                 $ref: '#/components/schemas/RFC7807Problem'
 components:
   schemas:
-    PhoneReachability:
+    UserId:
+      type: object
+      required:
+      - value
+      description: 'DE: ID des Users. <br/> EN: ID of a user.
+
+        '
+      properties:
+        value:
+          type: string
+    RevokedSubmissionLogbookEntry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        details:
+          $ref: '#/components/schemas/RevokedSubmissionLogbookEntryDetails'
+    RejectReasonKey:
+      type: string
+      x-extensible-enum:
+      - OBJ_CRAFT
+      - GRND_PRICE
+      - BAD_UTILIZE
+      - BAD_STATE
+      - LUX_HOBBY
+      - CREDIT_NEG
+      - REL_DEBIT
+      - HH_INC_TO_VOL
+      - HH_CREDITS
+      - HH_NO_DEDUCT
+      - HH_HI_INCOME
+      - HH_EXPENSES
+      - HH_NEG_BAL
+      - SCHUFA_NEG
+      - SCHUFA_SCOR
+      - INTERN_RED
+      - FRAME
+      - LOW_EQUITY
+      - DEBT_RATIO
+      - JOB_AMOUNT
+      - RENT_RISK
+      - PROBATION
+      - SHORT_SE
+      - SECTION2
+      - SECTION3
+      - EXIST_CUST
+      - MANIPULATE
+      - EVIDENCE
+      - UNKNOWN
+      - CONTRACT
+      - OVERALL_CONSTELLATION
+      - NEGATIVE_HOUSEHOLD_CALCULATION
+      - PROPERTY_VALUATION_LOAN_QUOTA
+      - OTHER
+    RevokeSubmissionCounterOfferReason:
       type: object
       required:
       - key
       properties:
         key:
-          $ref: '#/components/schemas/PhoneReachabilityKey'
-    CancelContractReasonKey:
-      type: string
-      description: 'DE: Grund für die Vertragskündigung, mögliche Werte sind NOTARY_APPOINTMENT_UNAVAILABLE=Notartermin kann nicht rechtzeitig stattfinden, OBJECT_UNAVAILABLE=Objekt hat sich zerschlagen, VENTURE_UNAVAILABLE=Vorhaben hat sich zerschlagen, CUSTOMER_DECIDED_DIFFERENT_PROVIDER=Kunde hat sich für einen anderen Finanzierungspartner entschieden, NO_CUSTOMER_INTEREST=Kunde hat sich nicht mehr gemeldet, OTHER=Nicht aufgeführter Grund EN: Reason for canceling contract, possible values are NOTARY_APPOINTMENT_UNAVAILABLE, OBJECT_UNAVAILABLE, VENTURE_UNAVAILABLE, CUSTOMER_DECIDED_DIFFERENT_PROVIDER, NO_CUSTOMER_INTEREST, OTHER
-
-        '
-      x-extensible-enum:
-      - NOTARY_APPOINTMENT_UNAVAILABLE
-      - OBJECT_UNAVAILABLE
-      - VENTURE_UNAVAILABLE
-      - CUSTOMER_DECIDED_DIFFERENT_PROVIDER
-      - NO_CUSTOMER_INTEREST
-      - OTHER
-    ExternalProcessingAwaitedLogbookEntryDetails:
+          $ref: '#/components/schemas/RevokeSubmissionCounterOfferReasonKey'
+    AnnuityInterestRateUpdate:
+      description: details of annuity interest rate update
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseInterestRateUpdate'
+      properties:
+        baseInterestRate:
+          $ref: '#/components/schemas/InterestRate'
+        amortizationRate:
+          $ref: '#/components/schemas/PeriodicalPercentage'
+    SubmissionProcessingResumedStatusLogbookEntryDetails:
       type: object
       allOf:
       - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
       properties:
-        externalProcessing:
-          $ref: '#/components/schemas/ExternalProcessing'
-    ResourceRef:
-      required:
-      - href
-      properties:
-        href:
-          type: string
-          description: 'DE: Link zu einer spezifischen Ressource. <br/> EN: Link to retrieve a specific resource.
-
-            '
-          example: http://some-domain/some/link/to/somewhere
-      x-skip-camel-case-check: true
-    PaymentTimeKey:
-      type: string
-      description: 'DE: Mögliche Zahlungszeit-Arten (nicht abschließende Aufzählung), z.B. ADVANCE=Vorschüssig, ARREARS=Nachschüssig. <br/> EN: Open ended enum contains possible payment time types, possible values are ADVANCE, ARREARS.
-
-        '
-      example: ADVANCE
-      x-extensible-enum:
-      - ADVANCE
-      - ARREARS
-    RFC7807Problem:
-      type: object
-      title: RFC7807Problem
-      description: 'DE: Angaben zum zurueckgegebenen Fehler. EN: Holds information on the returned error.
-
-        '
-      required:
-      - timestamp
-      - traceId
-      - instance
-      - title
-      - status
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          description: 'DE: Ein UTC-Zeitstempel, der den Fehlerzeitpunkt angibt (https://de.wikipedia.org/wiki/Koordinierte_Weltzeit). EN: A UTC date-time indicating the error timestamp (https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
-
-            '
-          example: 2024-06-29 19:22:50+00:00
-        type:
-          type: string
-          format: uri
-          description: 'DE: Verknuepfung zum Abruf von mehr Informationen zu dem Fehler. EN: URL referring to more information about the error.
-
-            '
-          default: about:blank
-        title:
-          type: string
-          description: 'DE: Kurzbeschreibung des Fehlers. EN: Error short description.
-
-            '
-          example: Bad Request
         status:
-          type: integer
-          format: int32
-          description: 'DE: HTTP-Status-Code gemaess Konvention (https://tools.ietf.org/html/rfc2616#section-10). EN: HTTP status code following standared error codes (https://tools.ietf.org/html/rfc2616#section-10).
-
-            '
-          example: 400
-          minimum: 100
-          maximum: 599
-        detail:
           type: string
-          description: 'DE: Detaillierte Beschreibung des Fehlers. EN: Detailed description for the returned error.
+    AcceptedCounterOfferLogbookEntryDetails:
+      type: object
+      description: Accepted counter offer submission logbook entry details
+      required:
+      - id
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      properties:
+        id:
+          $ref: '#/components/schemas/SubmissionCounterOfferId'
+    PeriodicalEuroAmount:
+      description: 'DE: Euro Betrag in einem bestimmten Zeitraum. <br/> EN: Euro amount for a specific period.
 
-            '
-          example: JSON parse error
-        traceId:
-          type: string
-          description: 'DE: Eindeutige Kennung zur Verfolgung der Anfrage. EN: Unique trace id for problematic request.
-
-            '
-          example: avx1234asd
-        instance:
-          type: string
-          format: uri
-          description: 'DE: Pfad zur betreffenden Resource. EN: Path of requested resource.
-
-            '
-          example: http://localhost/resources/123
-        violations:
+        '
+      type: object
+      required:
+      - amount
+      - cycle
+      properties:
+        amount:
+          $ref: '#/components/schemas/EuroAmount'
+        cycle:
+          $ref: '#/components/schemas/Cycle'
+    SubmissionCounterOffer:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/SubmissionCounterOfferId'
+        offeredLoans:
           type: array
-          description: 'DE: Abfolge der Verstoesse in der Anfrage. EN: Collection of the invalid content of the request.
+          items:
+            $ref: '#/components/schemas/CreditLoan'
+        validUntil:
+          $ref: '#/components/schemas/ISODate'
+        offerDate:
+          $ref: '#/components/schemas/ISODate'
+    TextSpecialRepayment:
+      description: 'DE: Sondertilgung in Textform. <br/>
+
+        EN: Special repayment presented as text.
+
+        '
+      type: object
+      required:
+      - text
+      allOf:
+      - $ref: '#/components/schemas/BaseSpecialRepayment'
+      properties:
+        text:
+          description: 'DE: Sondertilgung in Textform. <br/> EN: Special repayment in text format.
 
             '
+          type: string
+    UserData:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserId'
+        name:
+          $ref: '#/components/schemas/PersonName'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        jobTitle:
+          type: string
+    RateDetails:
+      oneOf:
+      - $ref: '#/components/schemas/AnnuityDetails'
+      - $ref: '#/components/schemas/SuspendedAmortizationDetails'
+      discriminator:
+        propertyName: rateType
+        mapping:
+          ANNUITY: '#/components/schemas/AnnuityDetails'
+          SUSPENDED_AMORTIZATION: '#/components/schemas/SuspendedAmortizationDetails'
+    DocumentLogbookEntry:
+      type: object
+      description: 'DE: Ein Logbucheintrag mit Informationen zu einem hochgeladenen Einreichungsdokument. <br/> EN: A logbook entry holds information about uploading submission document.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        documentName:
+          type: string
+    SubmissionDataViolationSeverity:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/SubmissionDataViolationSeverityKey'
+    CreditPhaseTimeline:
+      type: object
+      properties:
+        amortisationStartDate:
+          description: 'DE: Tilgungsbeginn. <br/> EN: The date on which the amortisation starts.
+
+            '
+          $ref: '#/components/schemas/ISODate'
+        amortisationEndDate:
+          description: 'DE: Tilgungsende. <br/> EN: The date on which the amortisation end.
+
+            '
+          $ref: '#/components/schemas/ISODate'
+        duration:
+          description: 'DE: Voraussichtliche Kreditsdaur. <br/>
+
+            EN: credit phase duration.
+
+            '
+          $ref: '#/components/schemas/Duration'
+    RefuseSignContractReason:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/RefuseSignContractReasonKey'
+    MainProduct:
+      oneOf:
+      - $ref: '#/components/schemas/RegularMainProduct'
+      - $ref: '#/components/schemas/BridgingFinancingMainProduct'
+      discriminator:
+        propertyName: product
+        mapping:
+          ANNUITAET: '#/components/schemas/RegularMainProduct'
+          W_RIESTER: '#/components/schemas/RegularMainProduct'
+          ZWIFI: '#/components/schemas/BridgingFinancingMainProduct'
+          FLEX_PLUS: '#/components/schemas/RegularMainProduct'
+          FLEX: '#/components/schemas/RegularMainProduct'
+          FORWARD: '#/components/schemas/RegularMainProduct'
+          KOMBI: '#/components/schemas/RegularMainProduct'
+          KONSTANT: '#/components/schemas/RegularMainProduct'
+          KONST_KOMBI: '#/components/schemas/RegularMainProduct'
+          VERSICHER: '#/components/schemas/RegularMainProduct'
+          VOLLTILGER: '#/components/schemas/RegularMainProduct'
+          OTHER: '#/components/schemas/RegularMainProduct'
+    AssignProcessorLogbookEntry:
+      type: object
+      description: 'DE: Ein Logbucheintrag mit Informationen zu dem neu zugewiesenen Bearbeiter. <br/> EN: A logbook entry holds information about assigning a loan partner processor to the submission.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        assignedTo:
+          $ref: '#/components/schemas/UserData'
+    SubmissionRevokedReason:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/SubmissionRevokedReasonKey'
+    LoanContractNumberUpdatedLogbookEntry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        contracts:
+          type: array
           items:
-            $ref: '#/components/schemas/Violation'
-    Company:
-      description: 'DE: Informationen zu einem Unternehmen. EN: Information of a company.
+            $ref: '#/components/schemas/ContractInfo'
+    ExternalProcessing:
+      type: object
+      description: 'EN: Information regarding the external processing
 
         '
       required:
-      - companyId
+      - details
       properties:
-        companyId:
-          $ref: '#/components/schemas/CompanyId'
-        name:
-          readOnly: true
-          $ref: '#/components/schemas/CompanyName'
-    ApplicantId:
+        details:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ExternalProcessingDetail'
+        estimatedConclusion:
+          $ref: '#/components/schemas/ISODate'
+        remark:
+          type: string
+    BaseSubmissionStatusChangedLogbookEntryDetails:
+      type: object
+      description: Change submission logbook entry details
+      required:
+      - type
+      properties:
+        type:
+          $ref: '#/components/schemas/SubmissionStatusChangedLogbookEntryDetailsType'
+      discriminator:
+        propertyName: type
+    KfwProgramKey:
+      type: string
+      description: 'DE: KFW-Förderprogramm (nicht abschließende Aufzählung), z.B. Wohneigen, Wohn159, Energie153-40, Energie151, Energie152, Energie167. <br/> EN: Open ended enum contains possible programs for Kfw, i.e. Wohneigen, Wohn159, Energie153-40, Energie151, Energie152, Energie167.
+
+        '
+      example: Wohneigen
+      x-extensible-enum:
+      - Wohneigen
+      - Wohn159
+      - Energie153-40
+      - Energie151
+      - Energie152
+      - Energie167
+      - Eff261
+      - Einzel262
+      - KFNWohnselbst297
+      - KFNWohnselbstQNG297
+      - KFNWohnkapital298
+      - KFNWohnkapitalQNG298
+      - WEPFamilien300
+      - WEPFamilienQNG300
+      - WEPFamilienJKA308
+      - EMKreditPlus
+      - EMKredit
+      - KNN296WOHN
+    LoanPartnerQueueId:
       type: object
       required:
       - value
+      description: 'DE: ID der loan parnter queue. <br/> EN: Loan partner queue id.
+
+        '
       properties:
         value:
-          description: 'DE: Id des Antragstellers. <br/> EN: Id of the applicant.
-
-            '
           type: string
-          example: '1'
-    SubmissionRevokedReasonKey:
-      type: string
-      description: 'DE: open ended enum enthält mögliche Gründe für den Widerruf der Anmeldung <br/> EN: open ended enum contains possible submission revocation reasons
-
-        '
-      example: TIME
-      x-extensible-enum:
-      - TIME
-      - COND
-      - DOCS
-      - NO_OBJECT
-      - MAIN
-      - AUX
-      - WRONG_BID
-      - ERROR_USE
-      - ERROR_TEC
-      - TERMINATION
-      - REALLOCATION
-      - OTHER
-    EstateRef:
-      type: object
-      required:
-      - estateId
-      description: 'DE: Id und Referenz zu der Immobilie. <br/> EN: Id and Reference to the estate.
-
-        '
-      properties:
-        _href:
-          x-skip-camel-case-check: true
-          $ref: '#/components/schemas/ResourceRef'
-        estateId:
-          $ref: '#/components/schemas/EstateId'
-    CommissionInfo:
-      type: object
-      required:
-      - percent
-      description: 'DE: Abschließende Information zur Provision. <br/> EN: Complete information about commissions.
-
-        '
-      properties:
-        percent:
-          description: 'DE: Provision in Prozent. <br/>
-
-            EN: Commision in percent.
-
-            '
-          $ref: '#/components/schemas/Percentage'
-        amount:
-          description: 'DE: Provisionsbetrag. <br/>
-
-            EN: Provision amount.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
     PersonName:
       type: object
       required:
@@ -290,637 +401,73 @@ components:
           description: 'DE: Geburtsname der Person. <br/> EN: Maiden name of the person.
 
             '
-    SuspendedAmortizationBuildingSavingProduct:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSuspendedAmortizationCombinedProduct'
-      properties:
-        productDetails:
-          description: 'EN: details to the building saving plan being created. Only relevant when the building saving plan will be created during the credit decision process.
-
-            '
-          $ref: '#/components/schemas/BuildingSavingPlan'
-        productIdentifier:
-          type: string
-    KfwLoanAdditionalInfo:
-      type: object
-      description: 'DE: Zustzäliche Information zum KFW Darlehen. <br/> EN: Additional informations for kfw loan.
-
-        '
-      properties:
-        provisionDetails:
-          type: array
-          description: 'DE: Zusätzliche Provisionsdetails für das KFW Darlehen (Schlüssel-Werte Paar). <br/> EN: Additional commission (provision) details for the kfw loan (key-value pairs).
-
-            '
-          items:
-            $ref: '#/components/schemas/AdditionalInfo'
-    UploadedDocumentTypeKey:
-      type: string
-      example: CONTRACT
-      x-extensible-enum:
-      - CONTRACT
-      - CONTRACT_ADDENDA
-      - LAND_REGISTER_EXTRACT
-      - PAYOUT_REQUIREMENT
-      - OTHER
-    Contact:
-      type: object
-      properties:
-        phoneNumbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Phone'
-        email:
-          type: string
-          description: 'DE: E-Mail des Antragstellers <br/> EN: E-Mail of the customer
-
-            '
-          example: primary@example.com
-    CreditLoanId:
-      type: object
-      description: 'DE: Id der Finanzierungsstruktur. <br/> EN: Credit Loan identifier.
-
-        '
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    AuxiliaryLoan:
-      description: 'DE: Information zum Nachrangdarlehen. <br/>
-
-        EN: Information about the auxiliary loan.
-
-        '
-      type: object
-      required:
-      - product
-      allOf:
-      - $ref: '#/components/schemas/BaseLoan'
-      properties:
-        annuityDetails:
-          $ref: '#/components/schemas/AnnuityDetails'
-        product:
-          $ref: '#/components/schemas/AuxProductType'
-    CreditPhaseInterest:
-      type: object
-      properties:
-        interestRate:
-          $ref: '#/components/schemas/InterestRate'
-        interestPayed:
-          description: 'DE: Sollzinsen insgesamt. <br/> EN: Total of credit interest payed.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-    UpcomingPayments:
-      type: object
-      description: 'DE: Kosten für das Tilgungssurrogat in den Folgeperioden. <br/> EN: Upcoming payments for repayment surrogate product.
-
-        '
-      properties:
-        upcomingFees:
-          deprecated: true
-          description: '@deprecated: Upcoming fees are inadmissible. This was decided by the Federal Court of Justice in its ruling of November 15, 2022.
-
-            DE: Höhe der wiederkehrenden Kosten. <br/>
-
-            EN: Upcoming costs.
-
-            '
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-        closingFee:
-          description: 'DE: Abschlussgebühr für das Tilgungssurrogat. <br/> EN: Acquisition fee for the repayment surrogate product.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        paymentDuration:
-          description: 'DE: Laufzeit des Tilgungssurrogats. <br/>
-
-            EN: Duration of the repayment surrogate product.
-
-            '
-          $ref: '#/components/schemas/Duration'
-    SuspendedAmortizationDetails:
-      type: object
-      required:
-      - rateType
-      description: 'DE: Information zum Tilgungssurrogat. <br/> EN: Information about the repayment surrogate.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/BaseRateDetails'
-      properties:
-        type:
-          $ref: '#/components/schemas/SuspendedRepaymentProductType'
-        sum:
-          description: 'DE: Tilgungsbetrag. <br/>
-
-            EN: Amortisation sum.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        contractSignedWith:
-          description: 'DE: Referenz zu den Antragsteller der den Vetrag unterschrieben hat. <br/>
-
-            EN: Reference to the applicant who signed the contract.
-
-            '
-          $ref: '#/components/schemas/ApplicantIdRef'
-        contractDuration:
-          description: 'DE: Vertragsdauer. <br/>
-
-            EN: Contract duration.
-
-            '
-          $ref: '#/components/schemas/Duration'
-        upcomingPayments:
-          $ref: '#/components/schemas/UpcomingPayments'
-        savingBurden:
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-        depositValue:
-          $ref: '#/components/schemas/EuroAmount'
-        contractNumber:
-          description: 'DE: Vertragsnummer. <br/> EN: Contract number.
-
-            '
-          type: string
-        combinedProduct:
-          $ref: '#/components/schemas/SuspendedAmortizationCombinedProduct'
-        debtId:
-          description: Id of an existing mortgage saving plan
-          $ref: '#/components/schemas/DebtId'
-        amortizationProvider:
-          description: Amortization product in case of mortgage saving plan or company providing life insurance in case of life insurance
-          type: string
-        homePurchaseSavingProvider:
-          $ref: '#/components/schemas/HomePurchaseSavingProvider'
-        externalId:
-          description: id (projection id) used to identify the product used as a suspended amortization in the bank external system
-          type: string
-    ContractSignedStatusLogbookEntryDetails:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        contractSignDate:
-          $ref: '#/components/schemas/ISODate'
-        contracts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExtendedContractInfo'
-    CreditLoan:
-      type: object
-      description: 'DE: Informationen zur Finanzierungsstruktur. <br/>
-
-        EN: A Credit Loan represents specific financing structure component.
-
-        '
-      properties:
-        id:
-          $ref: '#/components/schemas/CreditLoanId'
-        financingLoans:
-          type: array
-          items:
-            $ref: '#/components/schemas/Loan'
-          minItems: 1
-        handover:
-          $ref: '#/components/schemas/Handover'
-    SubmissionStatusChangedLogbookEntryDetailsType:
-      type: string
-      description: 'DE: offenes Enum enthält mögliche Details zum Status der Einreichung von Logbucheinträgen geändert <br/> EN: open ended enum contains possible logbook entry submission status changed details
-
-        '
-      example: PROCESSING_PAUSED
-      x-extensible-enum:
-      - CONTRACT_DELIVERED
-      - CONTRACT_SIGNED
-      - CONTRACT_CANCELED
-      - AWAIT_EXTERNAL_PROCESSING
-      - PROCESSING_PAUSED
-      - PROCESSING_RESUMED
-      - REJECTED
-      - CANCELED
-      - REJECTION_REVOKED
-      - INWORK
-      - APPROVED
-      - CONFIRMED
-      - COUNTER_OFFER_CREATED
-      - COUNTER_OFFER_ACCEPTED
-      - COUNTER_OFFER_REJECTED
-    UploadedDocumentType:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/UploadedDocumentTypeKey'
-    SubmissionProcessingResumedStatusLogbookEntryDetails:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        status:
-          type: string
-    TextSpecialRepayment:
-      description: 'DE: Sondertilgung in Textform. <br/>
-
-        EN: Special repayment presented as text.
-
-        '
-      type: object
-      required:
-      - text
-      allOf:
-      - $ref: '#/components/schemas/BaseSpecialRepayment'
-      properties:
-        text:
-          description: 'DE: Sondertilgung in Textform. <br/> EN: Special repayment in text format.
-
-            '
-          type: string
-    AcceptedCounterOfferLogbookEntryDetails:
-      type: object
-      description: Accepted counter offer submission logbook entry details
-      required:
-      - id
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        id:
-          $ref: '#/components/schemas/SubmissionCounterOfferId'
-    KfwProgramType:
-      type: string
-      description: 'DE: KFW-Förderprogramm (nicht abschließende Aufzählung), z.B. KFW_124, KFW_151, KFW_152, KFW_153, KFW_159, KFW_167. <br/> EN: Open ended enum contains possible programs for Kfw, i.e. KFW_124, KFW_151, KFW_152, KFW_153, KFW_159, KFW_167.
-
-        '
-      example: KFW_124
-      x-extensible-enum:
-      - KFW_124
-      - KFW_151
-      - KFW_152
-      - KFW_153
-      - KFW_159
-      - KFW_167
-      - KFW_261
-      - KFW_262
-      - KFN_297
-      - KFN_QNG_297
-      - KFN_298
-      - KFN_QNG_298
-      - WEP_300
-      - WEP_QNG_300
-      - WEP_JKA_308
-      - KFW_358
-      - KFW_359
-      - KNN_296
-      - UNKNOWN
-    SubmissionDataViolationSeverityKey:
-      type: string
-      x-extensible-enum:
-      - INFO
-      - WARN
-      - ERROR
-    PeriodicalEuroAmount:
-      description: 'DE: Euro Betrag in einem bestimmten Zeitraum. <br/> EN: Euro amount for a specific period.
-
-        '
-      type: object
-      required:
-      - amount
-      - cycle
-      properties:
-        amount:
-          $ref: '#/components/schemas/EuroAmount'
-        cycle:
-          $ref: '#/components/schemas/Cycle'
-    SavingPlanTariff:
-      type: object
-      required:
-      - id
-      - name
-      - loanPartner
-      properties:
-        id:
-          description: 'DE: ID der gewählter Bauspartarif. <br/>
-
-            EN: ID of the chosen savings plan tariff.
-
-            '
-          example: KF.195
-          type: string
-        name:
-          description: 'DE: Name der gewählter Bauspartarif. <br/>
-
-            EN: Name of the chosen savings plan tariff.
-
-            '
-          example: D/Komfort 1,95%
-          type: string
-        loanPartner:
-          deprecated: true
-          description: Can be removed after the changes to the loan partner structure have been released
-          $ref: '#/components/schemas/LoanPartnerProcessingUnit'
-        loanPartnerId:
-          $ref: '#/components/schemas/CompanyId'
-        variantPrice:
-          description: 'DE: einmalig Variantepreis. <br/> EN: costs for variant.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        magazineCosts:
-          description: 'DE: !!!. <br/> EN: The potential costs of the saving plan magazines.
-
-            '
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-    InterestMaturity:
-      oneOf:
-      - $ref: '#/components/schemas/VariableInterestMaturity'
-      - $ref: '#/components/schemas/FixedInterestMaturity'
-      discriminator:
-        propertyName: type
-        mapping:
-          VARIABLE: '#/components/schemas/VariableInterestMaturity'
-          FIXED_PERIOD: '#/components/schemas/FixedInterestMaturity'
-    BaseSpecialRepayment:
-      type: object
-      required:
-      - type
-      description: 'DE: Information zur Sondertilgung. <br/> EN: Special repayment information.
-
-        '
-      properties:
-        type:
-          $ref: '#/components/schemas/SpecialRepaymentType'
-      discriminator:
-        propertyName: type
-    ContractSignRefusedStatusLogbookEntryDetails:
-      type: object
-      required:
-      - reason
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        reason:
-          $ref: '#/components/schemas/RefuseSignContractReason'
-        remark:
-          type: string
-    RejectSubmissionCounterOfferReason:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/RejectSubmissionCounterOfferReasonKey'
-    SubmissionStatusChangedLogbookEntryDetails:
-      oneOf:
-      - $ref: '#/components/schemas/ContractDeliveredStatusLogbookEntryDetails'
-      - $ref: '#/components/schemas/ContractSignedStatusLogbookEntryDetails'
-      - $ref: '#/components/schemas/ContractCanceledStatusLogbookEntryDetails'
-      - $ref: '#/components/schemas/ExternalProcessingAwaitedLogbookEntryDetails'
-      - $ref: '#/components/schemas/SubmissionProcessingPausedStatusLogbookEntryDetails'
-      - $ref: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-      - $ref: '#/components/schemas/SubmissionProcessingResumedStatusLogbookEntryDetails'
-      - $ref: '#/components/schemas/RejectSubmissionStatusChangedLogbookEntryDetails'
-      - $ref: '#/components/schemas/CreatedCounterOfferLogbookEntryDetails'
-      - $ref: '#/components/schemas/AcceptedCounterOfferLogbookEntryDetails'
-      - $ref: '#/components/schemas/RejectedCounterOfferLogbookEntryDetails'
-      - $ref: '#/components/schemas/ContractSignRefusedStatusLogbookEntryDetails'
-      discriminator:
-        propertyName: type
-        mapping:
-          CONTRACT_DELIVERED: '#/components/schemas/ContractDeliveredStatusLogbookEntryDetails'
-          CONTRACT_SIGNED: '#/components/schemas/ContractSignedStatusLogbookEntryDetails'
-          CONTRACT_CANCELED: '#/components/schemas/ContractCanceledStatusLogbookEntryDetails'
-          AWAIT_EXTERNAL_PROCESSING: '#/components/schemas/ExternalProcessingAwaitedLogbookEntryDetails'
-          PROCESSING_PAUSED: '#/components/schemas/SubmissionProcessingPausedStatusLogbookEntryDetails'
-          INWORK: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-          APPROVED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-          REJECTED_AND_CLOSED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-          PROCESSING_RESUMED: '#/components/schemas/SubmissionProcessingResumedStatusLogbookEntryDetails'
-          CANCELED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-          CONFIRMED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-          REJECTION_REVOKED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
-          REJECTED: '#/components/schemas/RejectSubmissionStatusChangedLogbookEntryDetails'
-          COUNTER_OFFER_CREATED: '#/components/schemas/CreatedCounterOfferLogbookEntryDetails'
-          COUNTER_OFFER_ACCEPTED: '#/components/schemas/AcceptedCounterOfferLogbookEntryDetails'
-          COUNTER_OFFER_REJECTED: '#/components/schemas/RejectedCounterOfferLogbookEntryDetails'
-          CONTRACT_SIGN_REFUSED: '#/components/schemas/ContractSignRefusedStatusLogbookEntryDetails'
-    ContractDeliveredStatusLogbookEntryDetails:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        contractDeliverDate:
-          $ref: '#/components/schemas/ISODate'
-        contracts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExtendedContractInfo'
-    AuxProductTypeKey:
-      type: string
-      description: 'DE: Typ des Nachrangdarlehens (nicht abschließende Aufzählung), z.B. DSL_PRIVAT, OYAK_ANKER, HANSEATIC_ALL. <br/> EN: Open ended enum contains auxiliary loan product types, possible values are DSL_PRIVAT, OYAK_ANKER, HANSEATIC_ALL.
-
-        '
-      example: HANSEATIC_ALL
-      x-extensible-enum:
-      - DSL_PRIVAT
-      - HANSEATIC_ALL
-      - OYAK_ANKER
-      - OTHER
-    ISODateTime:
-      description: 'DE: Datum, Syntax nach <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a><br/> EN: Date according to <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a>
-
-        '
-      type:
-      - string
-      - 'null'
-      format: date-time
-      example: 2019-12-29 10:22:50+00:00
-    BaseBridgingLoanDetails:
-      type: object
-      required:
-      - neededAmount
-      - reason
-      description: 'DE: Information zur Zwischenfinanzierung. <br/> EN: Details about bridging loan.
-
-        '
-      properties:
-        reason:
-          type: string
-          description: 'DE: Grund für die Zwischenfinanzierung (nicht abschließende Aufzaehlung), z.B. OPEN_PROPERTY_SALE, CLOSED_PROPERTY_SALE, UNAVAILABLE, PUBLIC_PRE_FINANCE, EXISTING_BUILDING_SAVING_PLAN. <br/> EN: Open ended enum contains bridging loan debt reason, possible values are OPEN_PROPERTY_SALE, CLOSED_PROPERTY_SALE, UNAVAILABLE, PUBLIC_PRE_FINANCE, EXISTING_BUILDING_SAVING_PLAN.
-
-            '
-          example: OPEN_PROPERTY_SALE
-          x-extensible-enum:
-          - OPEN_PROPERTY_SALE
-          - CLOSED_PROPERTY_SALE
-          - UNAVAILABLE
-          - PUBLIC_PRE_FINANCE
-          - EXISTING_BUILDING_SAVING_PLAN
-        neededAmount:
-          description: 'DE: Zwischenfinanzierungsbetrag. <br/>
-
-            EN: Bridging loan amount.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        equityAvailabilityDate:
-          description: 'DE: Verfügbarkeit des Kapitals. <br/>
-
-            EN: Bridging loan availability date.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-      discriminator:
-        propertyName: reason
-    SubmissionDataViolationSeverity:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/SubmissionDataViolationSeverityKey'
-    BaseLogbookEntry:
-      type: object
-      required:
-      - id
-      - type
-      description: 'DE: Informationen zu einem Logbucheintrag. <br/>
-
-        EN: Holds information about a logbook entry.
-
-        '
-      properties:
-        id:
-          $ref: '#/components/schemas/LogbookEntryId'
-        type:
-          $ref: '#/components/schemas/LogbookEntryType'
-        createdAt:
-          description: 'DE: Ein UTC Zeitstempel wann die mit dem Logbucheintrag verknüpfte Aktion ausgelöst wurde. <br/> EN: A UTC date-time indicates when the event associated to the logbook entry took place.
-
-            '
-          $ref: '#/components/schemas/ISODateTime'
-        createdBy:
-          description: 'DE: Der Nutzer, welcher die Aktion ausgelöst hat, die zu dem Logbucheintrag führt. <br/> EN: User who triggered the event associated to the logbook entry.
-
-            '
-          $ref: '#/components/schemas/UserData'
-        remark:
-          type: string
-      discriminator:
-        propertyName: type
-    SavingsPlanTimeline:
-      type: object
-      properties:
-        startDate:
-          description: 'DE: Sparbeginn. <br/> EN: Saving start date.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        endDate:
-          description: 'DE: Datum letzter Sparbeitrag. <br/> EN: The end date of the savings phase.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        duration:
-          description: 'DE: Voraussichtliche Anspardauer. <br/>
-
-            EN: Expected saving duration.
-
-            '
-          $ref: '#/components/schemas/Duration'
-    BaseSuspendedAmortizationCombinedProduct:
-      type: object
-      required:
-      - product
-      properties:
-        product:
-          $ref: '#/components/schemas/SuspendedRepaymentProductTypeKey'
-      discriminator:
-        propertyName: product
-    CompanyId:
+    EstateId:
       type: object
       required:
       - value
-      description: 'DE: ID des Unternehmes. EN: ID of the company.
+      description: 'DE: ID der Immobilie. <br/> EN: ID of the estate.
 
         '
       properties:
         value:
           type: string
-    ContractInfo:
+    SavingsPhase:
       type: object
-      description: 'DE: Vertragsnummer mit Referenznummer ID.<br/> EN: Contract number and reference id pair.
-
-        '
-      required:
-      - contractNumber
-      - loanType
-      - referenceId
+      description: Sparphase
       properties:
-        contractNumber:
-          type: string
-          description: 'DE: Darlehensnummer / Vertragsnummer. <br/> EN: Loan number / contract number.
+        timeline:
+          $ref: '#/components/schemas/SavingsPlanTimeline'
+        savings:
+          $ref: '#/components/schemas/SavingsPlanBurden'
+        interest:
+          $ref: '#/components/schemas/SavingsPlanInterest'
+        contractFees:
+          $ref: '#/components/schemas/SavingsPlanFees'
+        accountBalanceAtAllocation:
+          description: 'DE: Bausparguthaben bei Zuteilung. <br/> EN: The account balance at the moment of allocation.
 
             '
-        referenceId:
-          $ref: '#/components/schemas/ContractInfoReferenceId'
-        loanType:
-          $ref: '#/components/schemas/ContractInfoLoanType'
-    CompanyName:
-      type: object
-      properties:
-        name:
-          type: string
-    VariableInterestMaturity:
-      description: 'DE: Information über die variable Sollzinsbindung. <br/>
-
-        EN: Information about variable interest rate maturity.
-
-        '
-      type: object
-      required:
-      - type
-      allOf:
-      - $ref: '#/components/schemas/BaseInterestMaturity'
-    LoanPartnerProcessingUnit:
-      type: object
-      description: 'DE: Informationen zur Einheit des Kreditgebers, welche den Kreditantrag bearbeitet. <br/> EN: Information about the processing unit of the financing partner.
-
-        '
-      required:
-      - id
-      deprecated: true
-      properties:
-        id:
-          $ref: '#/components/schemas/LoanPartnerProcessingUnitId'
-        name:
-          $ref: '#/components/schemas/LoanPartnerProcessingUnitName'
-        parentUnit:
-          description: 'DE: Zeigt die übergeordnete Orginazitioneinheit von der für den Kreditantrag zuständigen Einheit an. <br/>
-
-
-            > z.B. Hauptsitz und Filiale einer Bank.
-
-
-
-            EN: Information about the processing unit hierarchy by establishing a reference to the parent processing unit.
-
-
-            > i.e. Branch as a processing unit can have Bank as a parent processing unit, etc ...
+          $ref: '#/components/schemas/EuroAmount'
+        currentBalance:
+          description: 'DE: Aktuelles Bausparguthaben.
 
             '
-          $ref: '#/components/schemas/LoanPartnerProcessingUnit'
-    SubmissionDataViolationsLogbookEntry:
+          allOf:
+          - $ref: '#/components/schemas/EuroAmount'
+    OpenPropertySale:
       type: object
+      description: 'DE: Information zur Zwischenfinanzierung in Zusammenhang mit einem Immobilienverkauf. <br/> EN: Information about bridging debt associated with property sale.
+
+        '
       allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
+      - $ref: '#/components/schemas/BaseBridgingLoanDetails'
       properties:
-        submissionDataViolations:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionDataViolation'
+        debtAmount:
+          description: 'DE: Aktuelle Grundschuldhöhe. <br/>
+
+            EN: Current debt amount.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        residualDebt:
+          description: 'DE: Aktuelle Restschuld. <br/>
+
+            EN: Current remaining debt.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+    HomePurchaseSavingProviderKey:
+      type: string
+      example: OTHER
+      description: Home purchase saving plan provider (BHWDISPO - BHW, DEUTDEFF - Deutsche Bank, ALTEDEFA - Alte Leipziger, LBS - LBS, BSWLDE - Wüstenrot, STARTBS - start:bausparkasse)
+      x-extensible-enum:
+      - BHWDISPO
+      - ALTEDEFA
+      - DEUTDEFF
+      - LBS
+      - BSWLDE
+      - STARTBS
+      - OTHER
     MainLoanAdditionalInfo:
       type: object
       description: 'DE: Zustzäliche Information zum Hauptdarlehen. <br/> EN: Additional informations for main loan.
@@ -941,73 +488,18 @@ components:
             '
           items:
             $ref: '#/components/schemas/AdditionalInfo'
-    Violation:
-      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
-
-        '
+    DebtId:
       type: object
-      title: Violation
-      properties:
-        field:
-          type: string
-          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+      description: 'DE: ID der Verbindlichkeit. <br/>
 
-            '
-          example: address.city.numberOfInhabitants
-        message:
-          type: string
-          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
-
-            '
-          example: Must be greater than or equal to 0.
-    SubmissionLogbookEntry:
-      oneOf:
-      - $ref: '#/components/schemas/DefaultLogbookEntry'
-      - $ref: '#/components/schemas/AssignProcessorLogbookEntry'
-      - $ref: '#/components/schemas/DocumentLogbookEntry'
-      - $ref: '#/components/schemas/DecisionDateLogbookEntry'
-      - $ref: '#/components/schemas/CounterOfferRevokedLogbookEntry'
-      - $ref: '#/components/schemas/SubmissionStatusChangedLogbookEntry'
-      - $ref: '#/components/schemas/ContactAdvisorUpdatedLogbookEntry'
-      - $ref: '#/components/schemas/LoanContractNumberUpdatedLogbookEntry'
-      - $ref: '#/components/schemas/SubmissionDataViolationsLogbookEntry'
-      - $ref: '#/components/schemas/RevokedSubmissionLogbookEntry'
-      - $ref: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
-      - $ref: '#/components/schemas/LoanPartnerProcessingUnitChangedLogbookEntry'
-      - $ref: '#/components/schemas/SubmissionAdditionalProductsUpdatedLogbookEntry'
-      discriminator:
-        propertyName: type
-        mapping:
-          SUBMISSION_CREATED: '#/components/schemas/DefaultLogbookEntry'
-          SUBMISSION_EDITED: '#/components/schemas/DefaultLogbookEntry'
-          SUBMISSION_NOTE_ADDED: '#/components/schemas/DefaultLogbookEntry'
-          SUBMISSION_CREDIT_LOANS_UPDATED: '#/components/schemas/DefaultLogbookEntry'
-          SUBMISSION_MIGRATED: '#/components/schemas/DefaultLogbookEntry'
-          LOAN_PARTNER_PROCESSOR_ASSIGNED: '#/components/schemas/AssignProcessorLogbookEntry'
-          UPLOADED_DOCUMENT: '#/components/schemas/DocumentLogbookEntry'
-          DECISION_DATE_UPDATED: '#/components/schemas/DecisionDateLogbookEntry'
-          SUBMISSION_COUNTER_OFFER_REVOKED: '#/components/schemas/CounterOfferRevokedLogbookEntry'
-          SUBMISSION_STATUS_CHANGED: '#/components/schemas/SubmissionStatusChangedLogbookEntry'
-          CONTACT_ADVISOR_UPDATED: '#/components/schemas/ContactAdvisorUpdatedLogbookEntry'
-          LOAN_CONTRACT_NUMBER_UPDATED: '#/components/schemas/LoanContractNumberUpdatedLogbookEntry'
-          SUBMISSION_DATA_VIOLATIONS_SET: '#/components/schemas/SubmissionDataViolationsLogbookEntry'
-          SUBMISSION_REVOKED: '#/components/schemas/RevokedSubmissionLogbookEntry'
-          SUBMISSION_LOAN_PARTNER_DOCUMENT_CREATED: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
-          SUBMISSION_LOAN_PARTNER_DOCUMENT_UPDATED: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
-          SUBMISSION_LOAN_PARTNER_DOCUMENT_DELETED: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
-          LOAN_PARTNER_PROCESSING_UNIT_CHANGED: '#/components/schemas/LoanPartnerProcessingUnitChangedLogbookEntry'
-          ADDITIONAL_PRODUCTS_UPDATED: '#/components/schemas/SubmissionAdditionalProductsUpdatedLogbookEntry'
-    LoanType:
-      type: string
-      description: 'DE: Art des Darlehens (nicht abschließende Aufzählung), z.B. MAIN_LOAN, AUXILIARY_LOAN, KFW_PROMOTION_LOAN. <br/> EN: Open ended enum contains possible loan types, possible values are MAIN_LOAN, AUXILIARY_LOAN, KFW_PROMOTION_LOAN.
+        EN: ID of the associated Debt.
 
         '
-      example: MAIN_LOAN
-      x-extensible-enum:
-      - MAIN_LOAN
-      - AUXILIARY_LOAN
-      - KFW_PROMOTION_LOAN
-      - OTHER
+      required:
+      - value
+      properties:
+        value:
+          type: string
     PublicPreFinancing:
       type: object
       required:
@@ -1036,147 +528,51 @@ components:
 
             '
           $ref: '#/components/schemas/EuroAmount'
-    SavingsPlanInterest:
-      type: object
-      properties:
-        interestRate:
-          description: 'DE: Guthabenzinssatz. <br/> EN: interest rate.
-
-            '
-          $ref: '#/components/schemas/PeriodicalPercentage'
-        interestAccumulated:
-          description: 'DE: Guthabenzinsen insgesamt. <br/> EN: The savings interest accumulated.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-    SubmissionAdditionalProductsUpdatedLogbookEntry:
+    ContractCanceledStatusLogbookEntryDetails:
       type: object
       allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
       properties:
-        details:
-          $ref: '#/components/schemas/SubmissionAdditionalProductsUpdatedLogbookEntryDetails'
-    RejectReason:
+        reason:
+          $ref: '#/components/schemas/CancelContractReason'
+        cancellationDate:
+          $ref: '#/components/schemas/ISODate'
+    CompanyName:
+      type: object
+      properties:
+        name:
+          type: string
+    Cycle:
+      description: 'DE: Wrapper für Zykluswerte <br/> EN: Wrapper for cycle values.
+
+        '
       type: object
       required:
       - key
       properties:
         key:
-          $ref: '#/components/schemas/RejectReasonKey'
-    SubmissionLoanPartnerDocumentLogbookEntry:
-      type: object
+          $ref: '#/components/schemas/CycleKey'
+    ResourceRef:
       required:
-      - documentId
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
+      - href
       properties:
-        documentId:
-          $ref: '#/components/schemas/DocumentId'
-        documentType:
-          $ref: '#/components/schemas/UploadedDocumentType'
-        filename:
+        href:
           type: string
-    ContractInfoLoanType:
-      description: 'DE: Type des Loans dessen Vertragsnummer aktualisiert werden soll. <br/>
+          description: 'DE: Link zu einer spezifischen Ressource. <br/> EN: Link to retrieve a specific resource.
 
-        EN: Type of loan where the contract number should be updated.
-
-        '
-      type: string
-      x-extensible-enum:
-      - LOAN
-      - SUSPENDED_AMORTIZATION_COMBINED_BUILDING_LOAN
-      - RESIDUAL_DEBT_PROTECTION_BUILDING_SAVING_PLAN
-    KfwCallTypeKey:
-      type: string
-      description: 'DE: Art der KFW-Reservierung (nicht abschließende Aufzählung), z.B. LIGHT, PLUS. <br/> EN: Open ended enum contains Kfw reservation process call type, possible values are LIGHT, PLUS.
-
-        '
-      example: PLUS
-      x-extensible-enum:
-      - LIGHT
-      - PLUS
-      - OTHER
-    DefaultSubmissionStatusChangedLogbookEntryDetails:
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-    BaseSubmissionStatusChangedLogbookEntryDetails:
+            '
+          example: http://some-domain/some/link/to/somewhere
+      x-skip-camel-case-check: true
+    CompanyId:
       type: object
-      description: Change submission logbook entry details
-      required:
-      - type
-      properties:
-        type:
-          $ref: '#/components/schemas/SubmissionStatusChangedLogbookEntryDetailsType'
-      discriminator:
-        propertyName: type
-    Duration:
-      type: object
-      title: Duration
-      description: 'DE: Gibt einen Zeitraum an. </br> EN: Specifies a duration.
-
-        '
       required:
       - value
-      - unit
+      description: 'DE: ID des Unternehmes. EN: ID of the company.
+
+        '
       properties:
         value:
-          type: integer
-          format: int32
-          description: 'DE: Die Menge der gewaehlten Zeiteinheit. </br> EN: The amount of the selected temporal unit.
-
-            '
-        unit:
           type: string
-          enum:
-          - YEARS
-          - MONTHS
-          - DAYS
-          description: 'DE: Die Zeiteinheit. </br> EN: The temporal unit.
-
-            '
-    CreditPhaseTimeline:
-      type: object
-      properties:
-        amortisationStartDate:
-          description: 'DE: Tilgungsbeginn. <br/> EN: The date on which the amortisation starts.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        amortisationEndDate:
-          description: 'DE: Tilgungsende. <br/> EN: The date on which the amortisation end.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        duration:
-          description: 'DE: Voraussichtliche Kreditsdaur. <br/>
-
-            EN: credit phase duration.
-
-            '
-          $ref: '#/components/schemas/Duration'
-    SavingsPlanBurdenSpecialPayment:
-      type: object
-      required:
-      - period
-      - amount
-      properties:
-        period:
-          $ref: '#/components/schemas/SavingsPlanBurdenSpecialPaymentPeriod'
-        amount:
-          $ref: '#/components/schemas/EuroAmount'
-        frequency:
-          description: 'DE: Häufigkeit der Zahlungen. <br/> EN: Frequency of payments
-
-            '
-          $ref: '#/components/schemas/Cycle'
-    SubmissionStatusChangedLogbookEntry:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        details:
-          $ref: '#/components/schemas/SubmissionStatusChangedLogbookEntryDetails'
     SpecialRepaymentType:
       type: string
       description: 'DE: Typ der speziellen Rückzahlung (nicht abschließende Aufzählung), z.B. PERCENTAGE, TEXT. <br/>
@@ -1188,128 +584,47 @@ components:
       x-extensible-enum:
       - PERCENTAGE
       - TEXT
-    ClosedPropertySale:
-      description: 'DE: Information zur Zwischenfinanzierung in Zusammenhang mit einem abgeschlossenen Immobilienverkauf. <br/> EN: Bridging debt associated with a closed property sale.
+    FixedInterestMaturity:
+      description: 'DE: Information über die Sollzinsbindung mit dem festen Dauer. <br/>
+
+        EN: Information about fixed interest rate maturity.
 
         '
+      type: object
+      required:
+      - type
+      - period
       allOf:
-      - $ref: '#/components/schemas/BaseBridgingLoanDetails'
-    RevokedSubmissionLogbookEntryDetails:
-      type: object
+      - $ref: '#/components/schemas/BaseInterestMaturity'
       properties:
-        revokeReason:
-          $ref: '#/components/schemas/SubmissionRevokedReason'
-        reasonDescription:
-          type: string
-    RefuseSignContractReasonKey:
-      type: string
-      description: 'DE: Grund für die Ablehnung des Vertrags, mögliche Werte sind NOTARY_APPOINTMENT_UNAVAILABLE=Notartermin kann nicht rechtzeitig stattfinden, OBJECT_UNAVAILABLE=Objekt hat sich zerschlagen, VENTURE_UNAVAILABLE=Vorhaben hat sich zerschlagen, CUSTOMER_DECIDED_DIFFERENT_PROVIDER=Kunde hat sich für einen anderen Finanzierungspartner entschieden, NO_CUSTOMER_INTEREST=Kunde hat sich nicht mehr gemeldet, OTHER=Nicht aufgeführter Grund EN: Reason for refusing contract, possible values are NOTARY_APPOINTMENT_UNAVAILABLE, OBJECT_UNAVAILABLE, VENTURE_UNAVAILABLE, CUSTOMER_DECIDED_DIFFERENT_PROVIDER, NO_CUSTOMER_INTEREST, OTHER
+        period:
+          description: 'DE: Dauer der Sollzinsbindung. <br/>
 
-        '
-      x-extensible-enum:
-      - NOTARY_APPOINTMENT_UNAVAILABLE
-      - OBJECT_UNAVAILABLE
-      - VENTURE_UNAVAILABLE
-      - CUSTOMER_DECIDED_DIFFERENT_PROVIDER
-      - NO_CUSTOMER_INTEREST
-      - OTHER
-    BaseMainProduct:
-      type: object
-      description: 'DE: Information zum Hauptdarlehensprodukt. <br/> EN: Main loan product information.
-
-        '
-      required:
-      - product
-      properties:
-        product:
-          description: 'DE: Typ des Hauptdarlehensproduktes. <br/>
-
-            EN: Main loan product type.
+            EN: Fixed interest rate duration.
 
             '
-          $ref: '#/components/schemas/MainProductType'
-        productName:
-          description: 'DE: Name des Hauptdarlehensproduktes. <br/>
+          $ref: '#/components/schemas/Duration'
+        fixedUntil:
+          description: 'DE: Enddatum der Sollzinsbindung. <br/>
 
-            EN: Main loan product name.
+            EN: End date of the fixed interest rate.
 
             '
-          type: string
-      discriminator:
-        propertyName: product
-    SuspendedRepaymentProductTypeKey:
-      type: string
-      description: 'DE: Art des Tilgungssurrogats (nicht abschließende Aufzählung), z.B. DT_KAP_LV, DT_KAP_RV, BRIT_KAP_LV, BRIT_KAP_RV, FONDS_LV, FONDS_RV, FONDS_SPAR, BAU_SPAR, OTHER. <br/> EN: Open ended enum contains type of repayment surrogate, possible values are DT_KAP_LV, DT_KAP_RV, BRIT_KAP_LV, BRIT_KAP_RV, FONDS_LV, FONDS_RV, FONDS_SPAR, BAU_SPAR, OTHER.
-
-        '
-      example: DT_KAP_LV
-      x-extensible-enum:
-      - DT_KAP_LV
-      - DT_KAP_RV
-      - BRIT_KAP_LV
-      - BRIT_KAP_RV
-      - FONDS_LV
-      - FONDS_RV
-      - FONDS_SPAR
-      - BAU_SPAR
-      - OTHER
-    ExternalProcessing:
-      type: object
-      description: 'EN: Information regarding the external processing
-
-        '
-      required:
-      - details
-      properties:
-        details:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ExternalProcessingDetail'
-        estimatedConclusion:
           $ref: '#/components/schemas/ISODate'
-        remark:
-          type: string
-    PaymentTime:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/PaymentTimeKey'
-    KfwCallType:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/KfwCallTypeKey'
-    Percentage:
-      description: 'DE: Prozentsatz als double. <br/> EN: Percentage as double.
+        bulletLoan:
+          type: boolean
+          description: 'DE: Endfällig. <br/>
 
-        '
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: 'DE: Prozentsatz. <br/> EN: Percentage.
+            EN: Bullet loan.
 
             '
-          type: number
-          format: double
-    CycleKey:
-      type: string
-      description: 'DE: Mögliche Zykluswerte (nicht abschließende Aufzählung), z.B. MONTHLY, QUARTERLY, HALF_YEARLY, ANNUAL, ONE_TIME. <br/> EN: Open ended enum contains possible cycle values, possible values are MONTHLY, QUARTERLY, HALF_YEARLY, ANNUAL, ONE_TIME.
-
-        '
-      example: ANNUAL
-      x-extensible-enum:
-      - MONTHLY
-      - QUARTERLY
-      - HALF_YEARLY
-      - ANNUAL
-      - ONE_TIME
+    PhoneType:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/PhoneTypeKey'
     ProductTypeKey:
       type: string
       description: 'DE: Art des Zusatzprodukten. <br/> EN: Enum contains type of the  additional product.
@@ -1355,119 +670,177 @@ components:
       - PREPAY_RELO
       - PREPAY_DIV
       - OTHER
-    RejectSubmissionCounterOfferReasonKey:
+    SuspendedRepaymentProductTypeKey:
       type: string
-      description: 'DE: offenes Enum enthält mögliche Gründe für die Ablehnung eines Gegenangebots, mögliche Werte sind (CONDITION_NOT_ATTRACTIVE_FOR_CUSTOMER = Konditionen waren für den Kunden nicht attraktiv, CUSTOMER_DECIDED_DIFFERENT_PROVIDER=Kunden hat sich für einen anderen Finanzierungspartner (besseres Angebot) entschieden, CONDITION_NOT_FEASIBLE_FOR_CUSTOMER=Bedingung der Bank für den Kunden nicht darstellbar, OTHER=Nicht aufgeführter Grund). EN: open ended enum contains possible counter offer rejection reasons, possible values are (CONDITION_NOT_ATTRACTIVE_FOR_CUSTOMER, CUSTOMER_DECIDED_DIFFERENT_PROVIDER, CONDITION_NOT_FEASIBLE_FOR_CUSTOMER, OTHER).
+      description: 'DE: Art des Tilgungssurrogats (nicht abschließende Aufzählung), z.B. DT_KAP_LV, DT_KAP_RV, BRIT_KAP_LV, BRIT_KAP_RV, FONDS_LV, FONDS_RV, FONDS_SPAR, BAU_SPAR, OTHER. <br/> EN: Open ended enum contains type of repayment surrogate, possible values are DT_KAP_LV, DT_KAP_RV, BRIT_KAP_LV, BRIT_KAP_RV, FONDS_LV, FONDS_RV, FONDS_SPAR, BAU_SPAR, OTHER.
 
         '
-      example: OTHER
+      example: DT_KAP_LV
       x-extensible-enum:
-      - CONDITION_NOT_ATTRACTIVE_FOR_CUSTOMER
-      - CUSTOMER_DECIDED_DIFFERENT_PROVIDER
-      - CONDITION_NOT_FEASIBLE_FOR_CUSTOMER
+      - DT_KAP_LV
+      - DT_KAP_RV
+      - BRIT_KAP_LV
+      - BRIT_KAP_RV
+      - FONDS_LV
+      - FONDS_RV
+      - FONDS_SPAR
+      - BAU_SPAR
       - OTHER
-    OpenPropertySale:
-      type: object
-      description: 'DE: Information zur Zwischenfinanzierung in Zusammenhang mit einem Immobilienverkauf. <br/> EN: Information about bridging debt associated with property sale.
+    PeriodicalPercentage:
+      description: 'DE: Periodischer Prozentsatz als double. <br/> EN: Periodical percentage as double.
 
         '
-      allOf:
-      - $ref: '#/components/schemas/BaseBridgingLoanDetails'
-      properties:
-        debtAmount:
-          description: 'DE: Aktuelle Grundschuldhöhe. <br/>
-
-            EN: Current debt amount.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        residualDebt:
-          description: 'DE: Aktuelle Restschuld. <br/>
-
-            EN: Current remaining debt.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-    RejectedCounterOfferLogbookEntryDetails:
       type: object
       required:
-      - id
+      - percentage
+      - cycle
+      properties:
+        percentage:
+          $ref: '#/components/schemas/Percentage'
+        cycle:
+          $ref: '#/components/schemas/Cycle'
+    BaseInterestMaturity:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          $ref: '#/components/schemas/InterestMaturityType'
+      discriminator:
+        propertyName: type
+    SubmissionProcessingPausedStatusLogbookEntryDetails:
+      type: object
       allOf:
       - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
       properties:
-        id:
-          $ref: '#/components/schemas/SubmissionCounterOfferId'
         reason:
-          $ref: '#/components/schemas/RejectSubmissionCounterOfferReason'
-    ApplicantIdRef:
+          $ref: '#/components/schemas/PauseReason'
+        dueDate:
+          $ref: '#/components/schemas/ISODate'
+    PauseReason:
       type: object
-      description: 'DE: Id und Referenz des Antragstellers. <br/> EN: Id and reference of the applicant.
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/PauseReasonKey'
+    PaymentTime:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/PaymentTimeKey'
+    BaseInterestRateUpdate:
+      type: object
+      required:
+      - rateUpdateType
+      properties:
+        rateUpdateType:
+          type: string
+          x-extensible-enum:
+          - ANNUITY
+          - BUILDING_SAVING_PLAN
+      discriminator:
+        propertyName: rateUpdateType
+    SuspendedRepaymentProductType:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/SuspendedRepaymentProductTypeKey'
+    KfwCallTypeKey:
+      type: string
+      description: 'DE: Art der KFW-Reservierung (nicht abschließende Aufzählung), z.B. LIGHT, PLUS. <br/> EN: Open ended enum contains Kfw reservation process call type, possible values are LIGHT, PLUS.
+
+        '
+      example: PLUS
+      x-extensible-enum:
+      - LIGHT
+      - PLUS
+      - OTHER
+    CycleKey:
+      type: string
+      description: 'DE: Mögliche Zykluswerte (nicht abschließende Aufzählung), z.B. MONTHLY, QUARTERLY, HALF_YEARLY, ANNUAL, ONE_TIME. <br/> EN: Open ended enum contains possible cycle values, possible values are MONTHLY, QUARTERLY, HALF_YEARLY, ANNUAL, ONE_TIME.
+
+        '
+      example: ANNUAL
+      x-extensible-enum:
+      - MONTHLY
+      - QUARTERLY
+      - HALF_YEARLY
+      - ANNUAL
+      - ONE_TIME
+    SubmissionLoanPartnerDocumentLogbookEntry:
+      type: object
+      required:
+      - documentId
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        documentId:
+          $ref: '#/components/schemas/DocumentId'
+        documentType:
+          $ref: '#/components/schemas/UploadedDocumentType'
+        filename:
+          type: string
+    CreditLoanId:
+      type: object
+      description: 'DE: Id der Finanzierungsstruktur. <br/> EN: Credit Loan identifier.
+
+        '
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    EstateRef:
+      type: object
+      required:
+      - estateId
+      description: 'DE: Id und Referenz zu der Immobilie. <br/> EN: Id and Reference to the estate.
 
         '
       properties:
         _href:
           x-skip-camel-case-check: true
           $ref: '#/components/schemas/ResourceRef'
-        applicantId:
-          $ref: '#/components/schemas/ApplicantId'
-    OAuthProblem:
+        estateId:
+          $ref: '#/components/schemas/EstateId'
+    PayoutInfo:
       type: object
-      description: Error while Authentication
-      required:
-      - error
-      - error_description
-      properties:
-        error:
-          type: string
-          description: Summary of the error type
-          example: invalid_token
-        error_description:
-          type: string
-          description: Detailed information about the error
-          example: Access token expired
-    LoanPartnerQueue:
-      type: object
-      required:
-      - id
-      description: 'DE: Informationen zur Kredigeber Warteschlange. EN: Information about loan partner queue.
+      description: 'DE: Information zur Auszahlung des Darlehens. <br/> EN: Loan payout information.
 
         '
       properties:
-        id:
-          description: 'DE: ID der Kredigeber Warteschlange. <br/> EN: Loan partner queue id.
+        firstPayout:
+          description: 'DE: Datum der ersten Teilauszahlung. <br/>
+
+            EN: First payout date.
 
             '
-          $ref: '#/components/schemas/LoanPartnerQueueId'
-        name:
-          description: 'DE: Name der Kredigeber Warteschlange. EN: Name of the loan partner queue.
+          $ref: '#/components/schemas/ISODate'
+        freeAllocationPeriod:
+          description: 'DE: Bereitstellungszinsfreie Zeit. <br/>
+
+            EN: Interest free period.
 
             '
-          type: string
-        description:
-          description: 'DE: Beschreibung der Kreditgeber Warteschlange: EN: Description of the loan partner queue.
+          $ref: '#/components/schemas/Duration'
+        payoutRate:
+          description: 'DE: Auszahlungskurs. <br/>
+
+            EN: Payout rate.
 
             '
-          type: string
-    DocumentLogbookEntry:
-      type: object
-      description: 'DE: Ein Logbucheintrag mit Informationen zu einem hochgeladenen Einreichungsdokument. <br/> EN: A logbook entry holds information about uploading submission document.
+          $ref: '#/components/schemas/Percentage'
+    ClosedPropertySale:
+      description: 'DE: Information zur Zwischenfinanzierung in Zusammenhang mit einem abgeschlossenen Immobilienverkauf. <br/> EN: Bridging debt associated with a closed property sale.
 
         '
       allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        documentName:
-          type: string
-    AssignProcessorLogbookEntry:
-      type: object
-      description: 'DE: Ein Logbucheintrag mit Informationen zu dem neu zugewiesenen Bearbeiter. <br/> EN: A logbook entry holds information about assigning a loan partner processor to the submission.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        assignedTo:
-          $ref: '#/components/schemas/UserData'
+      - $ref: '#/components/schemas/BaseBridgingLoanDetails'
     HandoverReport:
       type: object
       description: "DE: Metadaten zur den Einreichungsunterlagen. <br/>\nEN: Metadata regarding the system generated reports for a specific submission.\nHandover reports including but not limited to:\n  - Übergabeprotokoll\n\n  - Provideranschreiben\n\n  - Überarbeiteter Antrag\n\n  - Kalkulation\n\n  - HH-Rechnung\n"
@@ -1509,298 +882,65 @@ components:
 
             '
           $ref: '#/components/schemas/ResourceRef'
-    PauseReasonKey:
-      type: string
-      x-extensible-enum:
-      - DOCUMENTS
-      - INFOS
-      - BY_CUSTOMER
-      - ONHOLD
-      - EXPERTISE
-      - ORIG_CONTR
-      - REJ_SOON
-      - FIN_APPROV
-      - MIN_DOCS
-      - OTHER
-    SavingsPlanBurden:
-      type: object
-      properties:
-        savingsBurden:
-          description: 'DE: Sparrate. <br/> EN: Periodical saving rate.
-
-            '
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-        additionalSavings:
-          description: 'DE: Zusätzlicher Sparbeitrag. <br/> EN: Additional savings.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        numberOfSavingsBurdens:
-          description: 'DE: Anzahl zu zahlender Sparraten. <br/> EN: Number of to be paid saving rates.
-
-            '
-          type: integer
-          format: int32
-        payedRates:
-          description: 'DE: Sparbeiträge insgesamt. <br/> EN: The sum of the rates payed in the savings phase.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        specialPayments:
-          type: array
-          description: 'DE: Sonderzahlungen. <br/> EN: Special payments.
-
-            '
-          items:
-            $ref: '#/components/schemas/SavingsPlanBurdenSpecialPayment'
-    ExistingBuildingSavingPlan:
+    LoanPartnerProcessingUnitChangedLogbookEntry:
       type: object
       required:
-      - reason
-      - contractNumber
-      description: 'DE: Information zur Zwischenfinanzierung in Zusammenhang mit einem bald fälligen Bestandsbausparers. <br/> EN: Information about bridging debt associated with a building saving plan that is due soon.
+      - updatedProcessingUnit
+      - previousProcessingUnit
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        updatedProcessingUnit:
+          $ref: '#/components/schemas/ProcessingUnit'
+        previousProcessingUnit:
+          $ref: '#/components/schemas/ProcessingUnit'
+    Handover:
+      type: object
+      description: 'DE: Beratunsprotokoll und Empfehlung des Beraters. <br/> EN: Advisor Handover notes and recommendations.
 
         '
-      allOf:
-      - $ref: '#/components/schemas/BaseBridgingLoanDetails'
       properties:
-        contractNumber:
+        hints:
           type: string
-          readOnly: true
-          description: 'DE: Vertragsnummer eines bald fälligen Bestandsbausparers Bausparvertrags (components.schemas.BuildingSavingPlanEquity.properties.contractNumber). <br/> EN: Contract number referring to a soon due building saving plan (components.schemas.BuildingSavingPlanEquity.properties.contractNumber).
+          description: 'DE: Hinweise des Beraters. <br/> EN: Hints provided by the financing advisor.
 
             '
-    SuspendedRepaymentProductType:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/SuspendedRepaymentProductTypeKey'
-    InterestRateUpdate:
-      oneOf:
-      - $ref: '#/components/schemas/AnnuityInterestRateUpdate'
-      - $ref: '#/components/schemas/BuildingSavingPlanInterestRateUpdate'
-      discriminator:
-        propertyName: rateUpdateType
-        mapping:
-          ANNUITY: '#/components/schemas/AnnuityInterestRateUpdate'
-          BUILDING_SAVING_PLAN: '#/components/schemas/BuildingSavingPlanInterestRateUpdate'
-    BaseInterestMaturity:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          $ref: '#/components/schemas/InterestMaturityType'
-      discriminator:
-        propertyName: type
-    SubmissionProcessingPausedStatusLogbookEntryDetails:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        reason:
-          $ref: '#/components/schemas/PauseReason'
-        dueDate:
-          $ref: '#/components/schemas/ISODate'
-    PhoneType:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/PhoneTypeKey'
-    SuspendedAmortizationOtherProduct:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSuspendedAmortizationCombinedProduct'
-    SubmissionAdditionalProductsUpdatedLogbookEntryDetails:
-      type: object
-      properties:
-        updatedProducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionAdditionalProduct'
-          minItems: 0
-        originalProducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionAdditionalProduct'
-          minItems: 0
-    LogbookEntryType:
-      type: string
-      description: 'DE: Art des Logbookentry (nicht abschließende Aufzählung), z.B. (SUBMISSION_CREATED, SUBMISSION_EDITED, DECISION_DATE_UPDATED, UPLOADED_DOCUMENT, STATUS). <br/> EN: open ended enum contains possible logbook entry types, possible values are (SUBMISSION_CREATED, SUBMISSION_EDITED, DECISION_DATE_UPDATED, UPLOADED_DOCUMENT, STATUS).
-
-        '
-      example: UPLOADED_DOCUMENT
-      x-extensible-enum:
-      - SUBMISSION_CREATED
-      - SUBMISSION_EDITED
-      - SUBMISSION_MIGRATED
-      - SUBMISSION_CREDIT_LOANS_UPDATED
-      - LOAN_PARTNER_PROCESSOR_ASSIGNED
-      - UPLOADED_DOCUMENT
-      - DECISION_DATE_UPDATED
-      - STATUS
-      - SUBMISSION_COUNTER_OFFER_REVOKED
-      - SUBMISSION_STATUS_CHANGED
-      - CONTACT_ADVISOR_UPDATED
-      - LOAN_CONTRACT_NUMBER_UPDATED
-      - SUBMISSION_DATA_VIOLATIONS_SET
-      - SUBMISSION_REVOKED
-      - SUBMISSION_LOAN_PARTNER_DOCUMENT_CREATED
-      - SUBMISSION_LOAN_PARTNER_DOCUMENT_UPDATED
-      - SUBMISSION_LOAN_PARTNER_DOCUMENT_DELETED
-      - LOAN_PARTNER_PROCESSING_UNIT_CHANGED
-      - SUBMISSION_NOTE_ADDED
-    KfwProgram:
-      type: object
-      properties:
-        key:
+        documents:
+          description: Link to retrieve list of handover documents
+          $ref: '#/components/schemas/ResourceRef'
+          example: https://api.interhyp.de/submission/v2/submissions/de-20230424-krczwx6-5sves/handover-documents
+        handoverReports:
           deprecated: true
-          description: '@deprecated: Use field type for the program instead.
+          description: '@deprecated: Please use field documents to get list of handover documents
 
             '
-          $ref: '#/components/schemas/KfwProgramKey'
-        type:
-          $ref: '#/components/schemas/KfwProgramType'
-    SubmissionRevokedReason:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/SubmissionRevokedReasonKey'
-    LoanId:
-      type: object
-      description: 'DE: ID des Darlehens. <br/> EN: Loan identifier.
-
-        '
-      properties:
-        value:
-          type: string
-    MainProduct:
-      oneOf:
-      - $ref: '#/components/schemas/RegularMainProduct'
-      - $ref: '#/components/schemas/BridgingFinancingMainProduct'
-      discriminator:
-        propertyName: product
-        mapping:
-          ANNUITAET: '#/components/schemas/RegularMainProduct'
-          W_RIESTER: '#/components/schemas/RegularMainProduct'
-          ZWIFI: '#/components/schemas/BridgingFinancingMainProduct'
-          FLEX_PLUS: '#/components/schemas/RegularMainProduct'
-          FLEX: '#/components/schemas/RegularMainProduct'
-          FORWARD: '#/components/schemas/RegularMainProduct'
-          KOMBI: '#/components/schemas/RegularMainProduct'
-          KONSTANT: '#/components/schemas/RegularMainProduct'
-          KONST_KOMBI: '#/components/schemas/RegularMainProduct'
-          VERSICHER: '#/components/schemas/RegularMainProduct'
-          VOLLTILGER: '#/components/schemas/RegularMainProduct'
-          OTHER: '#/components/schemas/RegularMainProduct'
-    ProductType:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/ProductTypeKey'
-    SubmissionAdditionalProduct:
-      description: a specific submission additional product
-      type: object
-      required:
-      - provider
-      - product
-      - commissionBase
-      properties:
-        additionalProductId:
-          type: string
-        provider:
-          $ref: '#/components/schemas/CompanyId'
-        product:
-          $ref: '#/components/schemas/ProductType'
-        applicants:
           type: array
           items:
-            $ref: '#/components/schemas/ApplicantId'
-          minItems: 1
-        policyNumber:
-          type: string
-        netBurden:
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-        duration:
-          $ref: '#/components/schemas/Duration'
-        commissionBase:
-          $ref: '#/components/schemas/EuroAmount'
-        commission:
-          $ref: '#/components/schemas/Percentage'
-        approved:
-          description: a flag indicates whether the provided additional product has been approved and hence not changeable anymore.
-          type:
-          - boolean
-          - 'null'
-    Phone:
+            $ref: '#/components/schemas/HandoverReport'
+    PercentageSpecialRepayment:
+      description: 'DE: Sondertilgung in Prozent pro Periode. <br/>
+
+        EN: Special repayment presented as percent per period.
+
+        '
       type: object
       required:
-      - phoneNumber
-      - type
+      - percent
+      allOf:
+      - $ref: '#/components/schemas/BaseSpecialRepayment'
       properties:
-        phoneNumber:
-          type: string
-          description: 'DE: Mobil- oder Festnetztelefonnummer des Antragstellers. <br/> EN: Mobile or landline telephone number of the customer.
+        description:
+          description: 'DE: Beschreibung der Sondertilgung. <br/> EN: Special repayment description.
 
             '
-          example: +49 160 123456
-        type:
-          $ref: '#/components/schemas/PhoneType'
-        reachable:
-          $ref: '#/components/schemas/PhoneReachability'
-    EstateId:
-      type: object
-      required:
-      - value
-      description: 'DE: ID der Immobilie. <br/> EN: ID of the estate.
-
-        '
-      properties:
-        value:
           type: string
-    SuspendedAmortizationCombinedProduct:
-      oneOf:
-      - $ref: '#/components/schemas/SuspendedAmortizationOtherProduct'
-      - $ref: '#/components/schemas/SuspendedAmortizationBuildingSavingProduct'
-      discriminator:
-        propertyName: product
-        mapping:
-          OTHER: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          DT_KAP_LV: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          DT_KAP_RV: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          BRIT_KAP_LV: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          BRIT_KAP_RV: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          FONDS_LV: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          FONDS_RV: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          FONDS_SPAR: '#/components/schemas/SuspendedAmortizationOtherProduct'
-          BAU_SPAR: '#/components/schemas/SuspendedAmortizationBuildingSavingProduct'
-    DebtId:
-      type: object
-      description: 'DE: ID der Verbindlichkeit. <br/>
+        percent:
+          description: 'DE: Sondertilgung in Prozent. <br/>
 
-        EN: ID of the associated Debt.
+            EN: Payment percent per period.
 
-        '
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    AuxProductType:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/AuxProductTypeKey'
+            '
+          $ref: '#/components/schemas/PeriodicalPercentage'
     KfwReservationInfo:
       type: object
       description: 'DE: Zusätzliche Information zur KFW-Darlehensreservierung. <br/> EN: Additional Information about the Kfw Loan reservations
@@ -1828,186 +968,55 @@ components:
 
             '
           $ref: '#/components/schemas/ISODate'
-    SubmissionCounterOffer:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/SubmissionCounterOfferId'
-        offeredLoans:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditLoan'
-        validUntil:
-          $ref: '#/components/schemas/ISODate'
-        offerDate:
-          $ref: '#/components/schemas/ISODate'
-    ContactAdvisorUpdatedLogbookEntry:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        updatedUserContact:
-          $ref: '#/components/schemas/UserData'
-    CancelContractReason:
+    SavingsPlanBurdenSpecialPayment:
       type: object
       required:
-      - key
+      - period
+      - amount
       properties:
-        key:
-          $ref: '#/components/schemas/CancelContractReasonKey'
-    UserId:
-      type: object
-      required:
-      - value
-      description: 'DE: ID des Users. <br/> EN: ID of a user.
-
-        '
-      properties:
-        value:
-          type: string
-    AnnuityInterestRateUpdate:
-      description: details of annuity interest rate update
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseInterestRateUpdate'
-      properties:
-        baseInterestRate:
-          $ref: '#/components/schemas/InterestRate'
-        amortizationRate:
-          $ref: '#/components/schemas/PeriodicalPercentage'
-    RevokedCounterOfferLogbookEntryDetails:
-      type: object
-      required:
-      - type
-      - id
-      properties:
-        id:
-          $ref: '#/components/schemas/SubmissionCounterOfferId'
-        reason:
-          $ref: '#/components/schemas/RevokeSubmissionCounterOfferReason'
-    LoanPartnerProcessingUnitName:
-      description: 'DE: Bezeichnung / Name der Einheit des Kreditgebers, welche den Kreditantrag bearbeitet. <br/> EN: Name of the loan partner processing unit.
-
-        '
-      type: object
-      properties:
-        value:
-          type: string
-    MainLoan:
-      description: 'DE: Information zum Hauptdarlehen. <br/>
-
-        EN: Information about the main loan.
-
-        '
-      type: object
-      required:
-      - product
-      allOf:
-      - $ref: '#/components/schemas/BaseLoan'
-      properties:
-        product:
-          $ref: '#/components/schemas/MainProduct'
-        rateDetails:
-          description: 'DE: Detailinformation zu den Raten. <br/>
-
-            EN: Detailed information about the rates.
+        period:
+          $ref: '#/components/schemas/SavingsPlanBurdenSpecialPaymentPeriod'
+        amount:
+          $ref: '#/components/schemas/EuroAmount'
+        frequency:
+          description: 'DE: Häufigkeit der Zahlungen. <br/> EN: Frequency of payments
 
             '
-          $ref: '#/components/schemas/RateDetails'
-        additionalInfo:
-          $ref: '#/components/schemas/MainLoanAdditionalInfo'
-    LogbookEntryId:
-      type: object
-      properties:
-        value:
-          type: string
-    LoanPartnerProcessingUnitId:
-      description: 'DE: ID der Einheit des Kreditgebers, welche den Kreditantrag bearbeitet. <br/> EN: Id of the loan partner processing unit.
+          $ref: '#/components/schemas/Cycle'
+    PaymentTimeKey:
+      type: string
+      description: 'DE: Mögliche Zahlungszeit-Arten (nicht abschließende Aufzählung), z.B. ADVANCE=Vorschüssig, ARREARS=Nachschüssig. <br/> EN: Open ended enum contains possible payment time types, possible values are ADVANCE, ARREARS.
 
         '
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    CreditPhase:
-      type: object
-      description: The credit phase object (Darlehensphase).
+      example: ADVANCE
+      x-extensible-enum:
+      - ADVANCE
+      - ARREARS
+    CreditPhasePayout:
       properties:
         amount:
-          description: 'DE: Tilgungssumme <br/>
+          description: 'DE: Bauspardarlehenssumme. <br/>
 
-            EN: Loan amount to be amortized.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        timeline:
-          $ref: '#/components/schemas/CreditPhaseTimeline'
-        payout:
-          $ref: '#/components/schemas/CreditPhasePayout'
-        interest:
-          $ref: '#/components/schemas/CreditPhaseInterest'
-        burden:
-          $ref: '#/components/schemas/CreditPhaseBurden'
-        residualDebt:
-          description: 'DE: Restschuld am Sollzinsbindungsende. <br/>
-
-            EN: remaining debt by the end of the maturity.
+            EN: The loan amount in EUR that is provided by the Bausparkasse.
 
             '
           $ref: '#/components/schemas/EuroAmount'
-        premium:
-          description: 'DE: Agio/ Laufzeitabhängiger Zinsbestandteil, der dem Nennbetrag des Darlehens zugeschlagen wird und damit die Darlehensschuld erhöht. <br/>
+        payoutDate:
+          description: 'DE: Datum der Auszahlungsdatum. <br/>
 
-            EN: Agio/ term-dependent interest component that is added to the nominal amount of the loan and thus increases the loan debt.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        youthBonus:
-          description: 'DE: Jugendbonus wenn man bei Vertragsabschluss < 26 Jahre ist. <br/>
-
-            EN: youth bonus when one at the contract''s conclusion < 26 Years old.
+            EN: The date on which the credit is paid out.
 
             '
-          $ref: '#/components/schemas/EuroAmount'
-    LoanPartnerProcessingUnitChangedLogbookEntry:
-      type: object
-      required:
-      - updatedProcessingUnit
-      - previousProcessingUnit
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        updatedProcessingUnit:
-          $ref: '#/components/schemas/ProcessingUnit'
-        previousProcessingUnit:
-          $ref: '#/components/schemas/ProcessingUnit'
-    AnnuityDetails:
-      description: 'DE: Detaillierte Information über das Annuitätsdarlehen. <br/>
-
-        EN: Detailed information about periodic loan.
+          $ref: '#/components/schemas/ISODate'
+    ISODate:
+      description: 'DE: Datum, Syntax nach <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a><br/> EN: Date according to <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a>
 
         '
-      type: object
-      required:
-      - rateType
-      allOf:
-      - $ref: '#/components/schemas/BaseRateDetails'
-      properties:
-        amortisationRate:
-          description: 'DE: Tilgungsrate (Prozent pro Periode). <br/>
-
-            EN: Amortisation rate (percent per period).
-
-            '
-          $ref: '#/components/schemas/PeriodicalPercentage'
-        fullAmortizer:
-          type: boolean
-          description: 'DE: Volltilger. <br/>
-
-            EN: Full Amortizer.
-
-            '
+      type:
+      - string
+      - 'null'
+      format: date
+      example: '2019-12-29'
     SavingsPlanFees:
       type: object
       properties:
@@ -2028,442 +1037,104 @@ components:
 
             '
           $ref: '#/components/schemas/EuroAmount'
-    PhoneTypeKey:
-      type: string
-      description: 'DE: Art der Telefonnummer (nicht abschließende Aufzählung, zum Beispiel: MOBILE = Mobilfunknummer, LANDLINE = Festnetznummer, UNSPECIFIED = nicht angegeben, MOBILE_WORK= Firmenhandynummer). <br/> EN: Type of the phone number, possible values are MOBILE, LANDLINE, UNSPECIFIED, MOBILE_WORK.
+    ApplicantIdRef:
+      type: object
+      description: 'DE: Id und Referenz des Antragstellers. <br/> EN: Id and reference of the applicant.
 
         '
-      x-extensible-enum:
-      - MOBILE
-      - LANDLINE
-      - UNSPECIFIED
-      - MOBILE_WORK
-    Title:
+      properties:
+        _href:
+          x-skip-camel-case-check: true
+          $ref: '#/components/schemas/ResourceRef'
+        applicantId:
+          $ref: '#/components/schemas/ApplicantId'
+    ExistingBuildingSavingPlan:
       type: object
       required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/TitleKey'
-    InterestRate:
-      description: 'DE: Information über den Zins. <br/>
-
-        EN: Information about the interest rate.
-
-        '
-      type: object
-      properties:
-        nominal:
-          description: 'DE: Nominalzins (Sollzins) in Prozent <br/>
-
-            EN: Nominal interest rate percent per period.
-
-            '
-          $ref: '#/components/schemas/PeriodicalPercentage'
-        effective:
-          description: 'DE: Effektivzins in Prozent. <br/>
-
-            EN: Effective interest rate percent per period. <br/>
-
-            '
-          $ref: '#/components/schemas/PeriodicalPercentage'
-    Loan:
-      oneOf:
-      - $ref: '#/components/schemas/MainLoan'
-      - $ref: '#/components/schemas/KfwPromotionLoan'
-      - $ref: '#/components/schemas/AuxiliaryLoan'
-      discriminator:
-        propertyName: type
-        mapping:
-          MAIN_LOAN: '#/components/schemas/MainLoan'
-          KFW_PROMOTION_LOAN: '#/components/schemas/KfwPromotionLoan'
-          AUXILIARY_LOAN: '#/components/schemas/AuxiliaryLoan'
-    TitleKey:
-      type: string
-      description: 'DE: Akademischer Titel des Antragstellers (nicht abschließende Aufzählung, zum Beispiel: DR, PH_D, PD_DR, PROF, PROF_DR). <br/> EN: Open ended enum contains possible title values, possible values are DR, PH_D, PD_DR, PROF, PROF_DR.
-
-        '
-      example: PROF_DR
-      x-extensible-enum:
-      - DR
-      - PH_D
-      - PD_DR
-      - PROF
-      - PROF_DR
-      - OTHER
-    PayoutInfo:
-      type: object
-      description: 'DE: Information zur Auszahlung des Darlehens. <br/> EN: Loan payout information.
-
-        '
-      properties:
-        firstPayout:
-          description: 'DE: Datum der ersten Teilauszahlung. <br/>
-
-            EN: First payout date.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        freeAllocationPeriod:
-          description: 'DE: Bereitstellungszinsfreie Zeit. <br/>
-
-            EN: Interest free period.
-
-            '
-          $ref: '#/components/schemas/Duration'
-        payoutRate:
-          description: 'DE: Auszahlungskurs. <br/>
-
-            EN: Payout rate.
-
-            '
-          $ref: '#/components/schemas/Percentage'
-    DecisionDateLogbookEntry:
-      type: object
-      description: 'DE: Ein Logbucheintrag mit Informationen zu dem geänderten Entscheidungsdatum. <br/> EN: A logbook entry holds information about updating submission decision date.
+      - reason
+      - contractNumber
+      description: 'DE: Information zur Zwischenfinanzierung in Zusammenhang mit einem bald fälligen Bestandsbausparers. <br/> EN: Information about bridging debt associated with a building saving plan that is due soon.
 
         '
       allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        newDecisionDate:
-          $ref: '#/components/schemas/ISODate'
-    ProcessingUnit:
-      description: 'DE: Informationen zur Einheit des Kreditgebers, welche die Einreichung bearbeitet. EN: Id of the loan partner processing unit.
-
-        '
-      required:
-      - processingUnit
-      properties:
-        loanPartnerQueue:
-          $ref: '#/components/schemas/LoanPartnerQueue'
-        processingUnit:
-          description: The current processing unit of a submission. If the processing unit is not provided while creating, the loan partner will be used as processing unit.
-          $ref: '#/components/schemas/Company'
-    AdditionalInfo:
-      type: object
-      description: 'DE: Zusätzliche Information als Schlüssel-Wert Paar. <br/> EN: Additional Information as key-value pairs.
-
-        '
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    RegularPayment:
-      description: 'DE: Information über den regulären Zahlungen. <br/>
-
-        EN: Information about regular payment.
-
-        '
-      type: object
-      properties:
-        paymentTime:
-          $ref: '#/components/schemas/PaymentTime'
-        freePeriod:
-          description: 'DE: Tilgungsfreie Anlaufzeit. <br/>
-
-            EN: Amortisation-free period.
-
-            '
-          $ref: '#/components/schemas/Duration'
-        amount:
-          description: 'DE: Rate in der tilgungsfreien Anlaufzeit. <br/>
-
-            EN: Amortisation during amortisation-free period.
-
-            '
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-        amountAfterFreePeriod:
-          description: 'DE: Rate nach Ablauf der tilgungsfreien Anlaufzeit. <br/>
-
-            EN: Rate after amortisation-free period.
-
-            '
-          $ref: '#/components/schemas/PeriodicalEuroAmount'
-    KfwProgramKey:
-      type: string
-      description: 'DE: KFW-Förderprogramm (nicht abschließende Aufzählung), z.B. Wohneigen, Wohn159, Energie153-40, Energie151, Energie152, Energie167. <br/> EN: Open ended enum contains possible programs for Kfw, i.e. Wohneigen, Wohn159, Energie153-40, Energie151, Energie152, Energie167.
-
-        '
-      example: Wohneigen
-      x-extensible-enum:
-      - Wohneigen
-      - Wohn159
-      - Energie153-40
-      - Energie151
-      - Energie152
-      - Energie167
-      - Eff261
-      - Einzel262
-      - KFNWohnselbst297
-      - KFNWohnselbstQNG297
-      - KFNWohnkapital298
-      - KFNWohnkapitalQNG298
-      - WEPFamilien300
-      - WEPFamilienQNG300
-      - WEPFamilienJKA308
-      - EMKreditPlus
-      - EMKredit
-      - KNN296WOHN
-    Handover:
-      type: object
-      description: 'DE: Beratunsprotokoll und Empfehlung des Beraters. <br/> EN: Advisor Handover notes and recommendations.
-
-        '
-      properties:
-        hints:
-          type: string
-          description: 'DE: Hinweise des Beraters. <br/> EN: Hints provided by the financing advisor.
-
-            '
-        documents:
-          description: Link to retrieve list of handover documents
-          $ref: '#/components/schemas/ResourceRef'
-          example: https://api.interhyp.de/submission/v2/submissions/de-20230424-krczwx6-5sves/handover-documents
-        handoverReports:
-          deprecated: true
-          description: '@deprecated: Please use field documents to get list of handover documents
-
-            '
-          type: array
-          items:
-            $ref: '#/components/schemas/HandoverReport'
-    RevokeSubmissionCounterOfferReasonKey:
-      type: string
-      description: 'DE: Grund für den Entzug, mögliche Werte sind COUNTER_OFFER_EXPIRED=Gegenangebot kann nicht mehr aufrechterhalten werden, READJUST_COUNTER_OFFER=Gegenangebot soll nach Rücksprache nochmal angepasst werden, COUNTER_OFFER_NOT_ACCEPTED=Gegenangebot wird nicht angenommen, OTHER=Nicht aufgeführter Grund EN: Reason for revocation, possible values are COUNTER_OFFER_EXPIRED, READJUST_COUNTER_OFFER, COUNTER_OFFER_NOT_ACCEPTED, OTHER
-
-        '
-      example: OTHER
-      x-extensible-enum:
-      - COUNTER_OFFER_EXPIRED
-      - READJUST_COUNTER_OFFER
-      - COUNTER_OFFER_NOT_ACCEPTED
-      - OTHER
-    RefuseSignContractReason:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/RefuseSignContractReasonKey'
-    BaseRateDetails:
-      type: object
-      required:
-      - rateType
-      properties:
-        rateType:
-          $ref: '#/components/schemas/RateDetailsType'
-        interestRate:
-          $ref: '#/components/schemas/InterestRate'
-        payment:
-          $ref: '#/components/schemas/RegularPayment'
-        residualDebt:
-          description: 'DE: Restschuld nach Ablauf der Sollzinsbindung. <br/>
-
-            EN: Remaining debt at the end of fixed interest maturity.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-      discriminator:
-        propertyName: rateType
-    ExternalProcessingReason:
-      type: string
-      description: 'EN: Open ended enum contains possible reasons for external processing (EXTERNAL_EXPERT_ASSESSMENT, INTERNAL_EXPERT_ASSESSMENT, DECISION_INTERNAL_UNIT, CONTRACT_CREATION, FORWARD_FINAL_DECISION, REJECT_NOTICE, WAITING_FOR_ORIGINAL_CONTRACT, OTHER) DE: Mögliche Gruende fur das Warten auf externe Faktoren (EXTERNAL_EXPERT_ASSESSMENT=Externes Gutachten, INTERNAL_EXPERT_ASSESSMENT=Internes Gutachten,  DECISION_INTERNAL_UNIT=Entscheidung Marktfolge, CONTRACT_CREATION=Vertragserstellung,  FORWARD_FINAL_DECISION=Weitergabe finale Genehmigung, REJECT_NOTICE=Ablehnungsankündigung, WAITING_FOR_ORIGINAL_CONTRACT=Warten auf Vertragsoriginal,  OTHER=Nicht aufgeführter Grund)
-
-        '
-      example: OTHER
-      x-extensible-enum:
-      - EXTERNAL_EXPERT_ASSESSMENT
-      - INTERNAL_EXPERT_ASSESSMENT
-      - DECISION_INTERNAL_UNIT
-      - CONTRACT_CREATION
-      - FORWARD_FINAL_DECISION
-      - REJECT_NOTICE
-      - WAITING_FOR_ORIGINAL_CONTRACT
-      - OTHER
-    ExtendedContractInfo:
-      type: object
-      description: 'DE: Vertragsnummer mit Referenznummer ID.<br/> EN: Contract number and reference id pair with additional loan details.
-
-        '
-      required:
-      - contractNumber
-      - loanType
-      - referenceId
+      - $ref: '#/components/schemas/BaseBridgingLoanDetails'
       properties:
         contractNumber:
           type: string
-          description: 'DE: Darlehensnummer / Vertragsnummer. <br/> EN: Loan number / contract number.
+          readOnly: true
+          description: 'DE: Vertragsnummer eines bald fälligen Bestandsbausparers Bausparvertrags (components.schemas.BuildingSavingPlanEquity.properties.contractNumber). <br/> EN: Contract number referring to a soon due building saving plan (components.schemas.BuildingSavingPlanEquity.properties.contractNumber).
 
             '
-        referenceId:
-          $ref: '#/components/schemas/ContractInfoReferenceId'
-        loanType:
-          $ref: '#/components/schemas/ContractInfoLoanType'
-        loanDetails:
-          $ref: '#/components/schemas/LoanDetails'
-    LoanDetails:
-      description: details of the loan to be updated
-      type: object
-      required:
-      - amount
-      properties:
-        amount:
-          $ref: '#/components/schemas/EuroAmount'
-        maturity:
-          $ref: '#/components/schemas/InterestMaturity'
-        interestRateUpdate:
-          $ref: '#/components/schemas/InterestRateUpdate'
-        specialRepayment:
-          $ref: '#/components/schemas/SpecialRepayment'
-        commission:
-          $ref: '#/components/schemas/CommissionInfo'
-    RateDetails:
-      oneOf:
-      - $ref: '#/components/schemas/AnnuityDetails'
-      - $ref: '#/components/schemas/SuspendedAmortizationDetails'
-      discriminator:
-        propertyName: rateType
-        mapping:
-          ANNUITY: '#/components/schemas/AnnuityDetails'
-          SUSPENDED_AMORTIZATION: '#/components/schemas/SuspendedAmortizationDetails'
-    CounterOfferRevokedLogbookEntry:
+    SubmissionDataViolationsLogbookEntry:
       type: object
       allOf:
       - $ref: '#/components/schemas/BaseLogbookEntry'
       properties:
-        details:
-          $ref: '#/components/schemas/RevokedCounterOfferLogbookEntryDetails'
-    DefaultLogbookEntry:
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-    HomePurchaseSavingProviderKey:
-      type: string
-      example: OTHER
-      description: Home purchase saving plan provider (BHWDISPO - BHW, DEUTDEFF - Deutsche Bank, ALTEDEFA - Alte Leipziger, LBS - LBS, BSWLDE - Wüstenrot, STARTBS - start:bausparkasse)
-      x-extensible-enum:
-      - BHWDISPO
-      - ALTEDEFA
-      - DEUTDEFF
-      - LBS
-      - BSWLDE
-      - STARTBS
-      - OTHER
-    CreatedCounterOfferLogbookEntryDetails:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
-      properties:
-        originalComponents:
+        submissionDataViolations:
           type: array
           items:
-            $ref: '#/components/schemas/CreditLoan'
-        offer:
-          $ref: '#/components/schemas/SubmissionCounterOffer'
-    MainProductType:
-      type: string
-      description: 'DE: Produkttyp des Darlehens (nicht abschließende Aufzählung), z.B. (ANNUITAET=Annuitätendarlehen, W_RIESTER=Wohnriesterdarlehen, ZWIFI=Zwischenfinanzierung, FLEX_PLUS, FLEX, FORWARD, KOMBI, KONSTANT, KONST_KOMBI, VERSICHER, VOLLTILGER, OTHER) EN: open ended enum contains loan product type, possible values are (ANNUITAET, W_RIESTER, ZWIFI, FLEX_PLUS, FLEX, FORWARD, KOMBI, KONSTANT, KONST_KOMBI, VERSICHER, VOLLTILGER, OTHER)
+            $ref: '#/components/schemas/SubmissionDataViolation'
+    KfwPromotionLoan:
+      description: 'DE: Information zum Kfw-Darlehen. <br/>
+
+        EN: Information about the KFW promotion loan.
 
         '
-      example: ANNUITAET
-      x-extensible-enum:
-      - ANNUITAET
-      - W_RIESTER
-      - ZWIFI
-      - FLEX_PLUS
-      - FLEX
-      - FORWARD
-      - KOMBI
-      - KONSTANT
-      - KONST_KOMBI
-      - VERSICHER
-      - VOLLTILGER
-      - OTHER
-    BaseInterestRateUpdate:
-      type: object
-      required:
-      - rateUpdateType
-      properties:
-        rateUpdateType:
-          type: string
-          x-extensible-enum:
-          - ANNUITY
-          - BUILDING_SAVING_PLAN
-      discriminator:
-        propertyName: rateUpdateType
-    RejectReasonKey:
-      type: string
-      x-extensible-enum:
-      - OBJ_CRAFT
-      - GRND_PRICE
-      - BAD_UTILIZE
-      - BAD_STATE
-      - LUX_HOBBY
-      - CREDIT_NEG
-      - REL_DEBIT
-      - HH_INC_TO_VOL
-      - HH_CREDITS
-      - HH_NO_DEDUCT
-      - HH_HI_INCOME
-      - HH_EXPENSES
-      - HH_NEG_BAL
-      - SCHUFA_NEG
-      - SCHUFA_SCOR
-      - INTERN_RED
-      - FRAME
-      - LOW_EQUITY
-      - DEBT_RATIO
-      - JOB_AMOUNT
-      - RENT_RISK
-      - PROBATION
-      - SHORT_SE
-      - SECTION2
-      - SECTION3
-      - EXIST_CUST
-      - MANIPULATE
-      - EVIDENCE
-      - UNKNOWN
-      - CONTRACT
-      - OVERALL_CONSTELLATION
-      - NEGATIVE_HOUSEHOLD_CALCULATION
-      - PROPERTY_VALUATION_LOAN_QUOTA
-      - OTHER
-    ContractCanceledStatusLogbookEntryDetails:
       type: object
       allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      - $ref: '#/components/schemas/BaseLoan'
       properties:
-        reason:
-          $ref: '#/components/schemas/CancelContractReason'
-        cancellationDate:
-          $ref: '#/components/schemas/ISODate'
-    UserData:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserId'
-        name:
-          $ref: '#/components/schemas/PersonName'
-        contact:
-          $ref: '#/components/schemas/Contact'
-        jobTitle:
-          type: string
-    ContractInfoReferenceId:
-      type: object
-      description: 'DE: Referenz zu einem Baustein, dessen Vertragsnummer aktualisiert werden soll. EN: Reference to a component whose contract number should be updated.
+        program:
+          $ref: '#/components/schemas/KfwProgram'
+        annuityDetails:
+          $ref: '#/components/schemas/AnnuityDetails'
+        reservations:
+          description: "DE: Sammlung von KFW-Darlehensreservierungen. <br/>\n    EN: Collection of KFW loan reservations.\n"
+          type: array
+          items:
+            $ref: '#/components/schemas/KfwReservationInfo'
+        additionalInfo:
+          $ref: '#/components/schemas/KfwLoanAdditionalInfo'
+    RateDetailsType:
+      type: string
+      description: 'DE: Mögliche Darlehensart (nicht abschließende Aufzählung), z.B. ANNUITY=Annuitätsdarlehen, SUSPENDED_AMORTIZATION=Tilgungsaussetzungsdarlehen. <br/>
+
+        EN: Open ended enum contains possible rates type, possible values are ANNUITY, SUSPENDED_AMORTIZATION.
+
+        example: ANNUITY
 
         '
-      properties:
-        value:
-          type: string
-    HomePurchaseSavingProvider:
+      x-extensible-enum:
+      - ANNUITY
+      - SUSPENDED_AMORTIZATION
+    LoanPartnerProcessingUnit:
       type: object
+      description: 'DE: Informationen zur Einheit des Kreditgebers, welche den Kreditantrag bearbeitet. <br/> EN: Information about the processing unit of the financing partner.
+
+        '
       required:
-      - key
+      - id
+      deprecated: true
       properties:
-        key:
-          $ref: '#/components/schemas/HomePurchaseSavingProviderKey'
+        id:
+          $ref: '#/components/schemas/LoanPartnerProcessingUnitId'
+        name:
+          $ref: '#/components/schemas/LoanPartnerProcessingUnitName'
+        parentUnit:
+          description: 'DE: Zeigt die übergeordnete Orginazitioneinheit von der für den Kreditantrag zuständigen Einheit an. <br/>
+
+
+            > z.B. Hauptsitz und Filiale einer Bank.
+
+
+
+            EN: Information about the processing unit hierarchy by establishing a reference to the parent processing unit.
+
+
+            > i.e. Branch as a processing unit can have Bank as a parent processing unit, etc ...
+
+            '
+          $ref: '#/components/schemas/LoanPartnerProcessingUnit'
     UnavailableEquity:
       type: object
       required:
@@ -2492,16 +1163,516 @@ components:
 
             '
           $ref: '#/components/schemas/EuroAmount'
-    BuildingSavingPlanInterestRateUpdate:
-      description: details of building saving plan interest rate update
+    InterestMaturity:
+      oneOf:
+      - $ref: '#/components/schemas/VariableInterestMaturity'
+      - $ref: '#/components/schemas/FixedInterestMaturity'
+      discriminator:
+        propertyName: type
+        mapping:
+          VARIABLE: '#/components/schemas/VariableInterestMaturity'
+          FIXED_PERIOD: '#/components/schemas/FixedInterestMaturity'
+    BuildingSavingPlan:
+      description: 'DE: Information zum Bauspardarlehen. <br/>
+
+        EN: Information about the building saving loan.
+
+        '
+      type: object
+      properties:
+        tariff:
+          $ref: '#/components/schemas/SavingPlanTariff'
+        amount:
+          description: 'DE: Bausparsumme. <br/>
+
+            EN: Saving plan amount.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        contractingDate:
+          description: 'DE: Vertragsbeginn. <br/>
+
+            EN: Contract start date.
+
+            '
+          $ref: '#/components/schemas/ISODate'
+        duration:
+          description: 'DE: Darlehensdauer/Gesamtlaufzeit. <br/>
+
+            EN: Loan duration.
+
+            '
+          $ref: '#/components/schemas/Duration'
+        allocationDate:
+          $ref: '#/components/schemas/ISODate'
+        savingsPhase:
+          $ref: '#/components/schemas/SavingsPhase'
+        creditPhase:
+          $ref: '#/components/schemas/CreditPhase'
+        contractSignedWith:
+          description: 'DE: Referenz zu den Antragsteller der den Vetrag unterschrieben hat. <br/>
+
+            EN: Reference to the applicant who signed the contract.
+
+            '
+          $ref: '#/components/schemas/ApplicantIdRef'
+        remark:
+          type: string
+        contractNumber:
+          type: string
+          readOnly: true
+          description: 'DE: Vertragsnummer. <br/> EN: Contract number.
+
+            '
+        commission:
+          $ref: '#/components/schemas/CommissionInfo'
+    RevokedCounterOfferLogbookEntryDetails:
+      type: object
+      required:
+      - type
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/SubmissionCounterOfferId'
+        reason:
+          $ref: '#/components/schemas/RevokeSubmissionCounterOfferReason'
+    LoanPartnerProcessingUnitName:
+      description: 'DE: Bezeichnung / Name der Einheit des Kreditgebers, welche den Kreditantrag bearbeitet. <br/> EN: Name of the loan partner processing unit.
+
+        '
+      type: object
+      properties:
+        value:
+          type: string
+    UploadedDocumentType:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/UploadedDocumentTypeKey'
+    RejectSubmissionStatusChangedLogbookEntryDetails:
       type: object
       allOf:
-      - $ref: '#/components/schemas/BaseInterestRateUpdate'
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
       properties:
-        savingPhaseInterestRate:
-          $ref: '#/components/schemas/SavingsPlanInterest'
-        creditPhaseInterestRate:
+        reason:
+          $ref: '#/components/schemas/RejectReason'
+        solution:
+          type: string
+    KfwProgramType:
+      type: string
+      description: 'DE: KFW-Förderprogramm (nicht abschließende Aufzählung), z.B. KFW_124, KFW_151, KFW_152, KFW_153, KFW_159, KFW_167. <br/> EN: Open ended enum contains possible programs for Kfw, i.e. KFW_124, KFW_151, KFW_152, KFW_153, KFW_159, KFW_167.
+
+        '
+      example: KFW_124
+      x-extensible-enum:
+      - KFW_124
+      - KFW_151
+      - KFW_152
+      - KFW_153
+      - KFW_159
+      - KFW_167
+      - KFW_261
+      - KFW_262
+      - KFN_297
+      - KFN_QNG_297
+      - KFN_298
+      - KFN_QNG_298
+      - WEP_300
+      - WEP_QNG_300
+      - WEP_JKA_308
+      - KFW_358
+      - KFW_359
+      - KNN_296
+      - UNKNOWN
+    InterestRate:
+      description: 'DE: Information über den Zins. <br/>
+
+        EN: Information about the interest rate.
+
+        '
+      type: object
+      properties:
+        nominal:
+          description: 'DE: Nominalzins (Sollzins) in Prozent <br/>
+
+            EN: Nominal interest rate percent per period.
+
+            '
+          $ref: '#/components/schemas/PeriodicalPercentage'
+        effective:
+          description: 'DE: Effektivzins in Prozent. <br/>
+
+            EN: Effective interest rate percent per period. <br/>
+
+            '
+          $ref: '#/components/schemas/PeriodicalPercentage'
+    RevokedSubmissionLogbookEntryDetails:
+      type: object
+      properties:
+        revokeReason:
+          $ref: '#/components/schemas/SubmissionRevokedReason'
+        reasonDescription:
+          type: string
+    VariableInterestMaturity:
+      description: 'DE: Information über die variable Sollzinsbindung. <br/>
+
+        EN: Information about variable interest rate maturity.
+
+        '
+      type: object
+      required:
+      - type
+      allOf:
+      - $ref: '#/components/schemas/BaseInterestMaturity'
+    ContractInfo:
+      type: object
+      description: 'DE: Vertragsnummer mit Referenznummer ID.<br/> EN: Contract number and reference id pair.
+
+        '
+      required:
+      - contractNumber
+      - loanType
+      - referenceId
+      properties:
+        contractNumber:
+          type: string
+          description: 'DE: Darlehensnummer / Vertragsnummer. <br/> EN: Loan number / contract number.
+
+            '
+        referenceId:
+          $ref: '#/components/schemas/ContractInfoReferenceId'
+        loanType:
+          $ref: '#/components/schemas/ContractInfoLoanType'
+    RevokeSubmissionCounterOfferReasonKey:
+      type: string
+      description: 'DE: Grund für den Entzug, mögliche Werte sind COUNTER_OFFER_EXPIRED=Gegenangebot kann nicht mehr aufrechterhalten werden, READJUST_COUNTER_OFFER=Gegenangebot soll nach Rücksprache nochmal angepasst werden, COUNTER_OFFER_NOT_ACCEPTED=Gegenangebot wird nicht angenommen, OTHER=Nicht aufgeführter Grund EN: Reason for revocation, possible values are COUNTER_OFFER_EXPIRED, READJUST_COUNTER_OFFER, COUNTER_OFFER_NOT_ACCEPTED, OTHER
+
+        '
+      example: OTHER
+      x-extensible-enum:
+      - COUNTER_OFFER_EXPIRED
+      - READJUST_COUNTER_OFFER
+      - COUNTER_OFFER_NOT_ACCEPTED
+      - OTHER
+    SuspendedAmortizationBuildingSavingProduct:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseSuspendedAmortizationCombinedProduct'
+      properties:
+        productDetails:
+          description: 'EN: details to the building saving plan being created. Only relevant when the building saving plan will be created during the credit decision process.
+
+            '
+          $ref: '#/components/schemas/BuildingSavingPlan'
+        productIdentifier:
+          type: string
+    ContractSignRefusedStatusLogbookEntryDetails:
+      type: object
+      required:
+      - reason
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      properties:
+        reason:
+          $ref: '#/components/schemas/RefuseSignContractReason'
+        remark:
+          type: string
+    SpecialRepayment:
+      oneOf:
+      - $ref: '#/components/schemas/PercentageSpecialRepayment'
+      - $ref: '#/components/schemas/TextSpecialRepayment'
+      discriminator:
+        propertyName: type
+        mapping:
+          PERCENTAGE: '#/components/schemas/PercentageSpecialRepayment'
+          TEXT: '#/components/schemas/TextSpecialRepayment'
+    LoanId:
+      type: object
+      description: 'DE: ID des Darlehens. <br/> EN: Loan identifier.
+
+        '
+      properties:
+        value:
+          type: string
+    SuspendedAmortizationOtherProduct:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseSuspendedAmortizationCombinedProduct'
+    Company:
+      description: 'DE: Informationen zu einem Unternehmen. EN: Information of a company.
+
+        '
+      required:
+      - companyId
+      properties:
+        companyId:
+          $ref: '#/components/schemas/CompanyId'
+        name:
+          readOnly: true
+          $ref: '#/components/schemas/CompanyName'
+    Title:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/TitleKey'
+    SubmissionCounterOfferId:
+      type: object
+      required:
+      - value
+      description: 'DE: ID vom Gegenangebot. EN: Id of the counter offer.
+
+        '
+      properties:
+        value:
+          type: string
+    BaseRateDetails:
+      type: object
+      required:
+      - rateType
+      properties:
+        rateType:
+          $ref: '#/components/schemas/RateDetailsType'
+        interestRate:
           $ref: '#/components/schemas/InterestRate'
+        payment:
+          $ref: '#/components/schemas/RegularPayment'
+        residualDebt:
+          description: 'DE: Restschuld nach Ablauf der Sollzinsbindung. <br/>
+
+            EN: Remaining debt at the end of fixed interest maturity.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+      discriminator:
+        propertyName: rateType
+    SubmissionLogbookEntry:
+      oneOf:
+      - $ref: '#/components/schemas/DefaultLogbookEntry'
+      - $ref: '#/components/schemas/AssignProcessorLogbookEntry'
+      - $ref: '#/components/schemas/DocumentLogbookEntry'
+      - $ref: '#/components/schemas/DecisionDateLogbookEntry'
+      - $ref: '#/components/schemas/CounterOfferRevokedLogbookEntry'
+      - $ref: '#/components/schemas/SubmissionStatusChangedLogbookEntry'
+      - $ref: '#/components/schemas/ContactAdvisorUpdatedLogbookEntry'
+      - $ref: '#/components/schemas/LoanContractNumberUpdatedLogbookEntry'
+      - $ref: '#/components/schemas/SubmissionDataViolationsLogbookEntry'
+      - $ref: '#/components/schemas/RevokedSubmissionLogbookEntry'
+      - $ref: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
+      - $ref: '#/components/schemas/LoanPartnerProcessingUnitChangedLogbookEntry'
+      - $ref: '#/components/schemas/SubmissionAdditionalProductsUpdatedLogbookEntry'
+      discriminator:
+        propertyName: type
+        mapping:
+          SUBMISSION_CREATED: '#/components/schemas/DefaultLogbookEntry'
+          SUBMISSION_EDITED: '#/components/schemas/DefaultLogbookEntry'
+          SUBMISSION_NOTE_ADDED: '#/components/schemas/DefaultLogbookEntry'
+          SUBMISSION_CREDIT_LOANS_UPDATED: '#/components/schemas/DefaultLogbookEntry'
+          SUBMISSION_MIGRATED: '#/components/schemas/DefaultLogbookEntry'
+          LOAN_PARTNER_PROCESSOR_ASSIGNED: '#/components/schemas/AssignProcessorLogbookEntry'
+          UPLOADED_DOCUMENT: '#/components/schemas/DocumentLogbookEntry'
+          DECISION_DATE_UPDATED: '#/components/schemas/DecisionDateLogbookEntry'
+          SUBMISSION_COUNTER_OFFER_REVOKED: '#/components/schemas/CounterOfferRevokedLogbookEntry'
+          SUBMISSION_STATUS_CHANGED: '#/components/schemas/SubmissionStatusChangedLogbookEntry'
+          CONTACT_ADVISOR_UPDATED: '#/components/schemas/ContactAdvisorUpdatedLogbookEntry'
+          LOAN_CONTRACT_NUMBER_UPDATED: '#/components/schemas/LoanContractNumberUpdatedLogbookEntry'
+          SUBMISSION_DATA_VIOLATIONS_SET: '#/components/schemas/SubmissionDataViolationsLogbookEntry'
+          SUBMISSION_REVOKED: '#/components/schemas/RevokedSubmissionLogbookEntry'
+          SUBMISSION_LOAN_PARTNER_DOCUMENT_CREATED: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
+          SUBMISSION_LOAN_PARTNER_DOCUMENT_UPDATED: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
+          SUBMISSION_LOAN_PARTNER_DOCUMENT_DELETED: '#/components/schemas/SubmissionLoanPartnerDocumentLogbookEntry'
+          LOAN_PARTNER_PROCESSING_UNIT_CHANGED: '#/components/schemas/LoanPartnerProcessingUnitChangedLogbookEntry'
+          ADDITIONAL_PRODUCTS_UPDATED: '#/components/schemas/SubmissionAdditionalProductsUpdatedLogbookEntry'
+    Loan:
+      oneOf:
+      - $ref: '#/components/schemas/MainLoan'
+      - $ref: '#/components/schemas/KfwPromotionLoan'
+      - $ref: '#/components/schemas/AuxiliaryLoan'
+      discriminator:
+        propertyName: type
+        mapping:
+          MAIN_LOAN: '#/components/schemas/MainLoan'
+          KFW_PROMOTION_LOAN: '#/components/schemas/KfwPromotionLoan'
+          AUXILIARY_LOAN: '#/components/schemas/AuxiliaryLoan'
+    RejectSubmissionCounterOfferReason:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/RejectSubmissionCounterOfferReasonKey'
+    Duration:
+      type: object
+      title: Duration
+      description: 'DE: Gibt einen Zeitraum an. </br> EN: Specifies a duration.
+
+        '
+      required:
+      - value
+      - unit
+      properties:
+        value:
+          type: integer
+          format: int32
+          description: 'DE: Die Menge der gewaehlten Zeiteinheit. </br> EN: The amount of the selected temporal unit.
+
+            '
+        unit:
+          type: string
+          enum:
+          - YEARS
+          - MONTHS
+          - DAYS
+          description: 'DE: Die Zeiteinheit. </br> EN: The temporal unit.
+
+            '
+    DocumentId:
+      required:
+      - value
+      properties:
+        value:
+          type: string
+          description: 'An Id refers to a specific document resource.
+
+            '
+      type: object
+      description: 'DE: ID vom Dokument. EN: Id of the document.
+
+        '
+    LoanDetails:
+      description: details of the loan to be updated
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          $ref: '#/components/schemas/EuroAmount'
+        maturity:
+          $ref: '#/components/schemas/InterestMaturity'
+        interestRateUpdate:
+          $ref: '#/components/schemas/InterestRateUpdate'
+        specialRepayment:
+          $ref: '#/components/schemas/SpecialRepayment'
+        commission:
+          $ref: '#/components/schemas/CommissionInfo'
+    AdditionalInfo:
+      type: object
+      description: 'DE: Zusätzliche Information als Schlüssel-Wert Paar. <br/> EN: Additional Information as key-value pairs.
+
+        '
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    Violation:
+      description: 'DE: Ein Verstoss gegen die Schnittstellenspezifikation. EN: A violation against the API schema.
+
+        '
+      type: object
+      title: Violation
+      properties:
+        field:
+          type: string
+          description: 'DE: Bezeichner des problematischen Felds. EN: Name of the problematic field.
+
+            '
+          example: address.city.numberOfInhabitants
+        message:
+          type: string
+          description: 'DE: Beschreibung des Verstosses. EN: Description of the violation.
+
+            '
+          example: Must be greater than or equal to 0.
+    ContractSignedStatusLogbookEntryDetails:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      properties:
+        contractSignDate:
+          $ref: '#/components/schemas/ISODate'
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtendedContractInfo'
+    ProcessingUnit:
+      description: 'DE: Informationen zur Einheit des Kreditgebers, welche die Einreichung bearbeitet. EN: Id of the loan partner processing unit.
+
+        '
+      required:
+      - processingUnit
+      properties:
+        loanPartnerQueue:
+          $ref: '#/components/schemas/LoanPartnerQueue'
+        processingUnit:
+          description: The current processing unit of a submission. If the processing unit is not provided while creating, the loan partner will be used as processing unit.
+          $ref: '#/components/schemas/Company'
+    MainLoan:
+      description: 'DE: Information zum Hauptdarlehen. <br/>
+
+        EN: Information about the main loan.
+
+        '
+      type: object
+      required:
+      - product
+      allOf:
+      - $ref: '#/components/schemas/BaseLoan'
+      properties:
+        product:
+          $ref: '#/components/schemas/MainProduct'
+        rateDetails:
+          description: 'DE: Detailinformation zu den Raten. <br/>
+
+            EN: Detailed information about the rates.
+
+            '
+          $ref: '#/components/schemas/RateDetails'
+        additionalInfo:
+          $ref: '#/components/schemas/MainLoanAdditionalInfo'
+    LoanPartnerProcessingUnitId:
+      description: 'DE: ID der Einheit des Kreditgebers, welche den Kreditantrag bearbeitet. <br/> EN: Id of the loan partner processing unit.
+
+        '
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    RefuseSignContractReasonKey:
+      type: string
+      description: 'DE: Grund für die Ablehnung des Vertrags, mögliche Werte sind NOTARY_APPOINTMENT_UNAVAILABLE=Notartermin kann nicht rechtzeitig stattfinden, OBJECT_UNAVAILABLE=Objekt hat sich zerschlagen, VENTURE_UNAVAILABLE=Vorhaben hat sich zerschlagen, CUSTOMER_DECIDED_DIFFERENT_PROVIDER=Kunde hat sich für einen anderen Finanzierungspartner entschieden, NO_CUSTOMER_INTEREST=Kunde hat sich nicht mehr gemeldet, OTHER=Nicht aufgeführter Grund EN: Reason for refusing contract, possible values are NOTARY_APPOINTMENT_UNAVAILABLE, OBJECT_UNAVAILABLE, VENTURE_UNAVAILABLE, CUSTOMER_DECIDED_DIFFERENT_PROVIDER, NO_CUSTOMER_INTEREST, OTHER
+
+        '
+      x-extensible-enum:
+      - NOTARY_APPOINTMENT_UNAVAILABLE
+      - OBJECT_UNAVAILABLE
+      - VENTURE_UNAVAILABLE
+      - CUSTOMER_DECIDED_DIFFERENT_PROVIDER
+      - NO_CUSTOMER_INTEREST
+      - OTHER
+    SubmissionRevokedReasonKey:
+      type: string
+      description: 'DE: open ended enum enthält mögliche Gründe für den Widerruf der Anmeldung <br/> EN: open ended enum contains possible submission revocation reasons
+
+        '
+      example: TIME
+      x-extensible-enum:
+      - TIME
+      - COND
+      - DOCS
+      - NO_OBJECT
+      - MAIN
+      - AUX
+      - WRONG_BID
+      - ERROR_USE
+      - ERROR_TEC
+      - TERMINATION
+      - REALLOCATION
+      - OTHER
     BaseLoan:
       type: object
       description: 'DE: Information zum Darlehen(-objekt). <br/> EN: Information about the financial loan.
@@ -2590,256 +1761,79 @@ components:
           type: boolean
       discriminator:
         propertyName: type
-    SubmissionLogbook:
+    ExternalProcessingAwaitedLogbookEntryDetails:
       type: object
-      description: 'DE: Enthält alle Logbucheinträge. <br/>
-
-        EN: Holds submission logbook entries.
-
-        '
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
       properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionLogbookEntry'
-    LoanPartnerQueueId:
+        externalProcessing:
+          $ref: '#/components/schemas/ExternalProcessing'
+    CreditPhase:
       type: object
-      required:
-      - value
-      description: 'DE: ID der loan parnter queue. <br/> EN: Loan partner queue id.
-
-        '
-      properties:
-        value:
-          type: string
-    BridgingLoanDetails:
-      oneOf:
-      - $ref: '#/components/schemas/OpenPropertySale'
-      - $ref: '#/components/schemas/ClosedPropertySale'
-      - $ref: '#/components/schemas/UnavailableEquity'
-      - $ref: '#/components/schemas/PublicPreFinancing'
-      - $ref: '#/components/schemas/ExistingBuildingSavingPlan'
-      discriminator:
-        propertyName: reason
-        mapping:
-          OPEN_PROPERTY_SALE: '#/components/schemas/OpenPropertySale'
-          CLOSED_PROPERTY_SALE: '#/components/schemas/ClosedPropertySale'
-          UNAVAILABLE: '#/components/schemas/UnavailableEquity'
-          PUBLIC_PRE_FINANCE: '#/components/schemas/PublicPreFinancing'
-          EXISTING_BUILDING_SAVING_PLAN: '#/components/schemas/ExistingBuildingSavingPlan'
-    CreditPhasePayout:
+      description: The credit phase object (Darlehensphase).
       properties:
         amount:
-          description: 'DE: Bauspardarlehenssumme. <br/>
+          description: 'DE: Tilgungssumme <br/>
 
-            EN: The loan amount in EUR that is provided by the Bausparkasse.
+            EN: Loan amount to be amortized.
 
             '
           $ref: '#/components/schemas/EuroAmount'
-        payoutDate:
-          description: 'DE: Datum der Auszahlungsdatum. <br/>
-
-            EN: The date on which the credit is paid out.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-    LoanContractNumberUpdatedLogbookEntry:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        contracts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractInfo'
-    PercentageSpecialRepayment:
-      description: 'DE: Sondertilgung in Prozent pro Periode. <br/>
-
-        EN: Special repayment presented as percent per period.
-
-        '
-      type: object
-      required:
-      - percent
-      allOf:
-      - $ref: '#/components/schemas/BaseSpecialRepayment'
-      properties:
-        description:
-          description: 'DE: Beschreibung der Sondertilgung. <br/> EN: Special repayment description.
-
-            '
-          type: string
-        percent:
-          description: 'DE: Sondertilgung in Prozent. <br/>
-
-            EN: Payment percent per period.
-
-            '
-          $ref: '#/components/schemas/PeriodicalPercentage'
-    PeriodicalPercentage:
-      description: 'DE: Periodischer Prozentsatz als double. <br/> EN: Periodical percentage as double.
-
-        '
-      type: object
-      required:
-      - percentage
-      - cycle
-      properties:
-        percentage:
-          $ref: '#/components/schemas/Percentage'
-        cycle:
-          $ref: '#/components/schemas/Cycle'
-    BuildingSavingPlan:
-      description: 'DE: Information zum Bauspardarlehen. <br/>
-
-        EN: Information about the building saving loan.
-
-        '
-      type: object
-      properties:
-        tariff:
-          $ref: '#/components/schemas/SavingPlanTariff'
-        amount:
-          description: 'DE: Bausparsumme. <br/>
-
-            EN: Saving plan amount.
-
-            '
-          $ref: '#/components/schemas/EuroAmount'
-        contractingDate:
-          description: 'DE: Vertragsbeginn. <br/>
-
-            EN: Contract start date.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        duration:
-          description: 'DE: Darlehensdauer/Gesamtlaufzeit. <br/>
-
-            EN: Loan duration.
-
-            '
-          $ref: '#/components/schemas/Duration'
-        allocationDate:
-          $ref: '#/components/schemas/ISODate'
-        savingsPhase:
-          $ref: '#/components/schemas/SavingsPhase'
-        creditPhase:
-          $ref: '#/components/schemas/CreditPhase'
-        contractSignedWith:
-          description: 'DE: Referenz zu den Antragsteller der den Vetrag unterschrieben hat. <br/>
-
-            EN: Reference to the applicant who signed the contract.
-
-            '
-          $ref: '#/components/schemas/ApplicantIdRef'
-        remark:
-          type: string
-        contractNumber:
-          type: string
-          readOnly: true
-          description: 'DE: Vertragsnummer. <br/> EN: Contract number.
-
-            '
-        commission:
-          $ref: '#/components/schemas/CommissionInfo'
-    SavingsPhase:
-      type: object
-      description: Sparphase
-      properties:
         timeline:
-          $ref: '#/components/schemas/SavingsPlanTimeline'
-        savings:
-          $ref: '#/components/schemas/SavingsPlanBurden'
+          $ref: '#/components/schemas/CreditPhaseTimeline'
+        payout:
+          $ref: '#/components/schemas/CreditPhasePayout'
         interest:
-          $ref: '#/components/schemas/SavingsPlanInterest'
-        contractFees:
-          $ref: '#/components/schemas/SavingsPlanFees'
-        accountBalanceAtAllocation:
-          description: 'DE: Bausparguthaben bei Zuteilung. <br/> EN: The account balance at the moment of allocation.
+          $ref: '#/components/schemas/CreditPhaseInterest'
+        burden:
+          $ref: '#/components/schemas/CreditPhaseBurden'
+        residualDebt:
+          description: 'DE: Restschuld am Sollzinsbindungsende. <br/>
+
+            EN: remaining debt by the end of the maturity.
 
             '
           $ref: '#/components/schemas/EuroAmount'
-        currentBalance:
-          description: 'DE: Aktuelles Bausparguthaben.
+        premium:
+          description: 'DE: Agio/ Laufzeitabhängiger Zinsbestandteil, der dem Nennbetrag des Darlehens zugeschlagen wird und damit die Darlehensschuld erhöht. <br/>
+
+            EN: Agio/ term-dependent interest component that is added to the nominal amount of the loan and thus increases the loan debt.
 
             '
-          allOf:
-          - $ref: '#/components/schemas/EuroAmount'
-    SpecialRepayment:
-      oneOf:
-      - $ref: '#/components/schemas/PercentageSpecialRepayment'
-      - $ref: '#/components/schemas/TextSpecialRepayment'
-      discriminator:
-        propertyName: type
-        mapping:
-          PERCENTAGE: '#/components/schemas/PercentageSpecialRepayment'
-          TEXT: '#/components/schemas/TextSpecialRepayment'
-    RevokedSubmissionLogbookEntry:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseLogbookEntry'
-      properties:
-        details:
-          $ref: '#/components/schemas/RevokedSubmissionLogbookEntryDetails'
-    Cycle:
-      description: 'DE: Wrapper für Zykluswerte <br/> EN: Wrapper for cycle values.
+          $ref: '#/components/schemas/EuroAmount'
+        youthBonus:
+          description: 'DE: Jugendbonus wenn man bei Vertragsabschluss < 26 Jahre ist. <br/>
 
-        '
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/CycleKey'
-    SubmissionDataViolation:
-      description: a specific submission violation
-      type: object
-      required:
-      - description
-      properties:
-        code:
-          type: string
-        description:
-          type: string
-        proposedSolution:
-          type: string
-        severity:
-          $ref: '#/components/schemas/SubmissionDataViolationSeverity'
-    EuroAmount:
-      description: 'DE: Euro Betrag as double. <br/> EN: Euro amount as double
-
-        '
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          description: 'DE: Betrag. <br/> EN: Value.
+            EN: youth bonus when one at the contract''s conclusion < 26 Years old.
 
             '
-          type: number
-          format: double
-    PhoneReachabilityKey:
+          $ref: '#/components/schemas/EuroAmount'
+    ExternalProcessingReason:
       type: string
-      description: 'DE: Erreichbarkeit unter dieser Telefonnumer (nicht abschließende Aufzählung, zum Beispiel: DAYTIME = tagsüber, EVENING = abends). <br/> EN: Reachable by this phone number, possible values are DAYTIME, EVENING.
+      description: 'EN: Open ended enum contains possible reasons for external processing (EXTERNAL_EXPERT_ASSESSMENT, INTERNAL_EXPERT_ASSESSMENT, DECISION_INTERNAL_UNIT, CONTRACT_CREATION, FORWARD_FINAL_DECISION, REJECT_NOTICE, WAITING_FOR_ORIGINAL_CONTRACT, OTHER) DE: Mögliche Gruende fur das Warten auf externe Faktoren (EXTERNAL_EXPERT_ASSESSMENT=Externes Gutachten, INTERNAL_EXPERT_ASSESSMENT=Internes Gutachten,  DECISION_INTERNAL_UNIT=Entscheidung Marktfolge, CONTRACT_CREATION=Vertragserstellung,  FORWARD_FINAL_DECISION=Weitergabe finale Genehmigung, REJECT_NOTICE=Ablehnungsankündigung, WAITING_FOR_ORIGINAL_CONTRACT=Warten auf Vertragsoriginal,  OTHER=Nicht aufgeführter Grund)
 
         '
+      example: OTHER
       x-extensible-enum:
-      - DAYTIME
-      - EVENING
-    RateDetailsType:
+      - EXTERNAL_EXPERT_ASSESSMENT
+      - INTERNAL_EXPERT_ASSESSMENT
+      - DECISION_INTERNAL_UNIT
+      - CONTRACT_CREATION
+      - FORWARD_FINAL_DECISION
+      - REJECT_NOTICE
+      - WAITING_FOR_ORIGINAL_CONTRACT
+      - OTHER
+    AuxProductTypeKey:
       type: string
-      description: 'DE: Mögliche Darlehensart (nicht abschließende Aufzählung), z.B. ANNUITY=Annuitätsdarlehen, SUSPENDED_AMORTIZATION=Tilgungsaussetzungsdarlehen. <br/>
-
-        EN: Open ended enum contains possible rates type, possible values are ANNUITY, SUSPENDED_AMORTIZATION.
-
-        example: ANNUITY
+      description: 'DE: Typ des Nachrangdarlehens (nicht abschließende Aufzählung), z.B. DSL_PRIVAT, OYAK_ANKER, HANSEATIC_ALL. <br/> EN: Open ended enum contains auxiliary loan product types, possible values are DSL_PRIVAT, OYAK_ANKER, HANSEATIC_ALL.
 
         '
+      example: HANSEATIC_ALL
       x-extensible-enum:
-      - ANNUITY
-      - SUSPENDED_AMORTIZATION
+      - DSL_PRIVAT
+      - HANSEATIC_ALL
+      - OYAK_ANKER
+      - OTHER
     SavingsPlanBurdenSpecialPaymentPeriod:
       type: object
       required:
@@ -2850,96 +1844,105 @@ components:
           $ref: '#/components/schemas/ISODate'
         to:
           $ref: '#/components/schemas/ISODate'
-    FixedInterestMaturity:
-      description: 'DE: Information über die Sollzinsbindung mit dem festen Dauer. <br/>
-
-        EN: Information about fixed interest rate maturity.
-
-        '
+    InterestRateUpdate:
+      oneOf:
+      - $ref: '#/components/schemas/AnnuityInterestRateUpdate'
+      - $ref: '#/components/schemas/BuildingSavingPlanInterestRateUpdate'
+      discriminator:
+        propertyName: rateUpdateType
+        mapping:
+          ANNUITY: '#/components/schemas/AnnuityInterestRateUpdate'
+          BUILDING_SAVING_PLAN: '#/components/schemas/BuildingSavingPlanInterestRateUpdate'
+    BuildingSavingPlanInterestRateUpdate:
+      description: details of building saving plan interest rate update
       type: object
-      required:
-      - type
-      - period
       allOf:
-      - $ref: '#/components/schemas/BaseInterestMaturity'
+      - $ref: '#/components/schemas/BaseInterestRateUpdate'
       properties:
-        period:
-          description: 'DE: Dauer der Sollzinsbindung. <br/>
-
-            EN: Fixed interest rate duration.
-
-            '
-          $ref: '#/components/schemas/Duration'
-        fixedUntil:
-          description: 'DE: Enddatum der Sollzinsbindung. <br/>
-
-            EN: End date of the fixed interest rate.
-
-            '
-          $ref: '#/components/schemas/ISODate'
-        bulletLoan:
-          type: boolean
-          description: 'DE: Endfällig. <br/>
-
-            EN: Bullet loan.
-
-            '
-    InterestMaturityType:
+        savingPhaseInterestRate:
+          $ref: '#/components/schemas/SavingsPlanInterest'
+        creditPhaseInterestRate:
+          $ref: '#/components/schemas/InterestRate'
+    PhoneTypeKey:
       type: string
-      description: 'DE: Art der Sollzinsbindung(nicht abschließende Aufzählung), z.B. FIXED_PERIOD, VARIABLE. <br/> EN: Open ended enum contains types of the interest maturity, possible values are FIXED_PERIOD, VARIABLE.
+      description: 'DE: Art der Telefonnummer (nicht abschließende Aufzählung, zum Beispiel: MOBILE = Mobilfunknummer, LANDLINE = Festnetznummer, UNSPECIFIED = nicht angegeben, MOBILE_WORK= Firmenhandynummer). <br/> EN: Type of the phone number, possible values are MOBILE, LANDLINE, UNSPECIFIED, MOBILE_WORK.
 
         '
-      example: FIXED_PERIOD
       x-extensible-enum:
-      - FIXED_PERIOD
-      - VARIABLE
-      - OTHER
-    RegularMainProduct:
-      allOf:
-      - $ref: '#/components/schemas/BaseMainProduct'
-    RejectSubmissionStatusChangedLogbookEntryDetails:
+      - MOBILE
+      - LANDLINE
+      - UNSPECIFIED
+      - MOBILE_WORK
+    SavingsPlanBurden:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
       properties:
-        reason:
-          $ref: '#/components/schemas/RejectReason'
-        solution:
-          type: string
-    PauseReason:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/PauseReasonKey'
-    ExternalProcessingDetail:
-      type: object
-      required:
-      - reason
-      properties:
-        reason:
-          $ref: '#/components/schemas/ExternalProcessingReason'
-    RevokeSubmissionCounterOfferReason:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          $ref: '#/components/schemas/RevokeSubmissionCounterOfferReasonKey'
-    DocumentId:
-      required:
-      - value
-      properties:
-        value:
-          type: string
-          description: 'An Id refers to a specific document resource.
+        savingsBurden:
+          description: 'DE: Sparrate. <br/> EN: Periodical saving rate.
 
             '
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+        additionalSavings:
+          description: 'DE: Zusätzlicher Sparbeitrag. <br/> EN: Additional savings.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        numberOfSavingsBurdens:
+          description: 'DE: Anzahl zu zahlender Sparraten. <br/> EN: Number of to be paid saving rates.
+
+            '
+          type: integer
+          format: int32
+        payedRates:
+          description: 'DE: Sparbeiträge insgesamt. <br/> EN: The sum of the rates payed in the savings phase.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        specialPayments:
+          type: array
+          description: 'DE: Sonderzahlungen. <br/> EN: Special payments.
+
+            '
+          items:
+            $ref: '#/components/schemas/SavingsPlanBurdenSpecialPayment'
+    KfwProgram:
       type: object
-      description: 'DE: ID vom Dokument. EN: Id of the document.
+      properties:
+        key:
+          deprecated: true
+          description: '@deprecated: Use field type for the program instead.
+
+            '
+          $ref: '#/components/schemas/KfwProgramKey'
+        type:
+          $ref: '#/components/schemas/KfwProgramType'
+    AuxProductType:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/AuxProductTypeKey'
+    ExtendedContractInfo:
+      type: object
+      description: 'DE: Vertragsnummer mit Referenznummer ID.<br/> EN: Contract number and reference id pair with additional loan details.
 
         '
+      required:
+      - contractNumber
+      - loanType
+      - referenceId
+      properties:
+        contractNumber:
+          type: string
+          description: 'DE: Darlehensnummer / Vertragsnummer. <br/> EN: Loan number / contract number.
+
+            '
+        referenceId:
+          $ref: '#/components/schemas/ContractInfoReferenceId'
+        loanType:
+          $ref: '#/components/schemas/ContractInfoLoanType'
+        loanDetails:
+          $ref: '#/components/schemas/LoanDetails'
     CreditPhaseBurden:
       type: object
       properties:
@@ -2964,46 +1967,832 @@ components:
             '
           type: integer
           format: int32
-    KfwPromotionLoan:
-      description: 'DE: Information zum Kfw-Darlehen. <br/>
-
-        EN: Information about the KFW promotion loan.
-
-        '
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BaseLoan'
-      properties:
-        program:
-          $ref: '#/components/schemas/KfwProgram'
-        annuityDetails:
-          $ref: '#/components/schemas/AnnuityDetails'
-        reservations:
-          description: "DE: Sammlung von KFW-Darlehensreservierungen. <br/>\n    EN: Collection of KFW loan reservations.\n"
-          type: array
-          items:
-            $ref: '#/components/schemas/KfwReservationInfo'
-        additionalInfo:
-          $ref: '#/components/schemas/KfwLoanAdditionalInfo'
-    SubmissionCounterOfferId:
+    CommissionInfo:
       type: object
       required:
-      - value
-      description: 'DE: ID vom Gegenangebot. EN: Id of the counter offer.
+      - percent
+      description: 'DE: Abschließende Information zur Provision. <br/> EN: Complete information about commissions.
 
         '
       properties:
-        value:
-          type: string
-    ISODate:
+        percent:
+          description: 'DE: Provision in Prozent. <br/>
+
+            EN: Commision in percent.
+
+            '
+          $ref: '#/components/schemas/Percentage'
+        amount:
+          description: 'DE: Provisionsbetrag. <br/>
+
+            EN: Provision amount.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+    SubmissionAdditionalProductsUpdatedLogbookEntryDetails:
+      type: object
+      properties:
+        updatedProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionAdditionalProduct'
+          minItems: 0
+        originalProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionAdditionalProduct'
+          minItems: 0
+    SavingsPlanTimeline:
+      type: object
+      properties:
+        startDate:
+          description: 'DE: Sparbeginn. <br/> EN: Saving start date.
+
+            '
+          $ref: '#/components/schemas/ISODate'
+        endDate:
+          description: 'DE: Datum letzter Sparbeitrag. <br/> EN: The end date of the savings phase.
+
+            '
+          $ref: '#/components/schemas/ISODate'
+        duration:
+          description: 'DE: Voraussichtliche Anspardauer. <br/>
+
+            EN: Expected saving duration.
+
+            '
+          $ref: '#/components/schemas/Duration'
+    ISODateTime:
       description: 'DE: Datum, Syntax nach <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a><br/> EN: Date according to <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339</a>
 
         '
       type:
       - string
       - 'null'
-      format: date
-      example: '2019-12-29'
+      format: date-time
+      example: 2019-12-29 10:22:50+00:00
+    BaseSpecialRepayment:
+      type: object
+      required:
+      - type
+      description: 'DE: Information zur Sondertilgung. <br/> EN: Special repayment information.
+
+        '
+      properties:
+        type:
+          $ref: '#/components/schemas/SpecialRepaymentType'
+      discriminator:
+        propertyName: type
+    DefaultLogbookEntry:
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+    UploadedDocumentTypeKey:
+      type: string
+      example: CONTRACT
+      x-extensible-enum:
+      - CONTRACT
+      - CONTRACT_ADDENDA
+      - LAND_REGISTER_EXTRACT
+      - PAYOUT_REQUIREMENT
+      - OTHER
+    CancelContractReason:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/CancelContractReasonKey'
+    CancelContractReasonKey:
+      type: string
+      description: 'DE: Grund für die Vertragskündigung, mögliche Werte sind NOTARY_APPOINTMENT_UNAVAILABLE=Notartermin kann nicht rechtzeitig stattfinden, OBJECT_UNAVAILABLE=Objekt hat sich zerschlagen, VENTURE_UNAVAILABLE=Vorhaben hat sich zerschlagen, CUSTOMER_DECIDED_DIFFERENT_PROVIDER=Kunde hat sich für einen anderen Finanzierungspartner entschieden, NO_CUSTOMER_INTEREST=Kunde hat sich nicht mehr gemeldet, OTHER=Nicht aufgeführter Grund EN: Reason for canceling contract, possible values are NOTARY_APPOINTMENT_UNAVAILABLE, OBJECT_UNAVAILABLE, VENTURE_UNAVAILABLE, CUSTOMER_DECIDED_DIFFERENT_PROVIDER, NO_CUSTOMER_INTEREST, OTHER
+
+        '
+      x-extensible-enum:
+      - NOTARY_APPOINTMENT_UNAVAILABLE
+      - OBJECT_UNAVAILABLE
+      - VENTURE_UNAVAILABLE
+      - CUSTOMER_DECIDED_DIFFERENT_PROVIDER
+      - NO_CUSTOMER_INTEREST
+      - OTHER
+    EuroAmount:
+      description: 'DE: Euro Betrag as double. <br/> EN: Euro amount as double
+
+        '
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'DE: Betrag. <br/> EN: Value.
+
+            '
+          type: number
+          format: double
+    AuxiliaryLoan:
+      description: 'DE: Information zum Nachrangdarlehen. <br/>
+
+        EN: Information about the auxiliary loan.
+
+        '
+      type: object
+      required:
+      - product
+      allOf:
+      - $ref: '#/components/schemas/BaseLoan'
+      properties:
+        annuityDetails:
+          $ref: '#/components/schemas/AnnuityDetails'
+        product:
+          $ref: '#/components/schemas/AuxProductType'
+    PauseReasonKey:
+      type: string
+      x-extensible-enum:
+      - DOCUMENTS
+      - INFOS
+      - BY_CUSTOMER
+      - ONHOLD
+      - EXPERTISE
+      - ORIG_CONTR
+      - REJ_SOON
+      - FIN_APPROV
+      - MIN_DOCS
+      - OTHER
+    ExternalProcessingDetail:
+      type: object
+      required:
+      - reason
+      properties:
+        reason:
+          $ref: '#/components/schemas/ExternalProcessingReason'
+    SubmissionAdditionalProduct:
+      description: a specific submission additional product
+      type: object
+      required:
+      - provider
+      - product
+      - commissionBase
+      properties:
+        additionalProductId:
+          type: string
+        provider:
+          $ref: '#/components/schemas/CompanyId'
+        product:
+          $ref: '#/components/schemas/ProductType'
+        applicants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicantId'
+          minItems: 1
+        policyNumber:
+          type: string
+        netBurden:
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+        duration:
+          $ref: '#/components/schemas/Duration'
+        commissionBase:
+          $ref: '#/components/schemas/EuroAmount'
+        commission:
+          $ref: '#/components/schemas/Percentage'
+        approved:
+          description: a flag indicates whether the provided additional product has been approved and hence not changeable anymore.
+          type:
+          - boolean
+          - 'null'
+    RejectReason:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/RejectReasonKey'
+    SavingsPlanInterest:
+      type: object
+      properties:
+        interestRate:
+          description: 'DE: Guthabenzinssatz. <br/> EN: interest rate.
+
+            '
+          $ref: '#/components/schemas/PeriodicalPercentage'
+        interestAccumulated:
+          description: 'DE: Guthabenzinsen insgesamt. <br/> EN: The savings interest accumulated.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+    DecisionDateLogbookEntry:
+      type: object
+      description: 'DE: Ein Logbucheintrag mit Informationen zu dem geänderten Entscheidungsdatum. <br/> EN: A logbook entry holds information about updating submission decision date.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        newDecisionDate:
+          $ref: '#/components/schemas/ISODate'
+    SubmissionLogbook:
+      type: object
+      description: 'DE: Enthält alle Logbucheinträge. <br/>
+
+        EN: Holds submission logbook entries.
+
+        '
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionLogbookEntry'
+    LogbookEntryId:
+      type: object
+      properties:
+        value:
+          type: string
+    RejectedCounterOfferLogbookEntryDetails:
+      type: object
+      required:
+      - id
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      properties:
+        id:
+          $ref: '#/components/schemas/SubmissionCounterOfferId'
+        reason:
+          $ref: '#/components/schemas/RejectSubmissionCounterOfferReason'
+    MainProductType:
+      type: string
+      description: 'DE: Produkttyp des Darlehens (nicht abschließende Aufzählung), z.B. (ANNUITAET=Annuitätendarlehen, W_RIESTER=Wohnriesterdarlehen, ZWIFI=Zwischenfinanzierung, FLEX_PLUS, FLEX, FORWARD, KOMBI, KONSTANT, KONST_KOMBI, VERSICHER, VOLLTILGER, OTHER) EN: open ended enum contains loan product type, possible values are (ANNUITAET, W_RIESTER, ZWIFI, FLEX_PLUS, FLEX, FORWARD, KOMBI, KONSTANT, KONST_KOMBI, VERSICHER, VOLLTILGER, OTHER)
+
+        '
+      example: ANNUITAET
+      x-extensible-enum:
+      - ANNUITAET
+      - W_RIESTER
+      - ZWIFI
+      - FLEX_PLUS
+      - FLEX
+      - FORWARD
+      - KOMBI
+      - KONSTANT
+      - KONST_KOMBI
+      - VERSICHER
+      - VOLLTILGER
+      - OTHER
+    SubmissionAdditionalProductsUpdatedLogbookEntry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        details:
+          $ref: '#/components/schemas/SubmissionAdditionalProductsUpdatedLogbookEntryDetails'
+    LoanType:
+      type: string
+      description: 'DE: Art des Darlehens (nicht abschließende Aufzählung), z.B. MAIN_LOAN, AUXILIARY_LOAN, KFW_PROMOTION_LOAN. <br/> EN: Open ended enum contains possible loan types, possible values are MAIN_LOAN, AUXILIARY_LOAN, KFW_PROMOTION_LOAN.
+
+        '
+      example: MAIN_LOAN
+      x-extensible-enum:
+      - MAIN_LOAN
+      - AUXILIARY_LOAN
+      - KFW_PROMOTION_LOAN
+      - OTHER
+    LoanPartnerQueue:
+      type: object
+      required:
+      - id
+      description: 'DE: Informationen zur Kredigeber Warteschlange. EN: Information about loan partner queue.
+
+        '
+      properties:
+        id:
+          description: 'DE: ID der Kredigeber Warteschlange. <br/> EN: Loan partner queue id.
+
+            '
+          $ref: '#/components/schemas/LoanPartnerQueueId'
+        name:
+          description: 'DE: Name der Kredigeber Warteschlange. EN: Name of the loan partner queue.
+
+            '
+          type: string
+        description:
+          description: 'DE: Beschreibung der Kreditgeber Warteschlange: EN: Description of the loan partner queue.
+
+            '
+          type: string
+    Contact:
+      type: object
+      properties:
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+        email:
+          type: string
+          description: 'DE: E-Mail des Antragstellers <br/> EN: E-Mail of the customer
+
+            '
+          example: primary@example.com
+    BaseMainProduct:
+      type: object
+      description: 'DE: Information zum Hauptdarlehensprodukt. <br/> EN: Main loan product information.
+
+        '
+      required:
+      - product
+      properties:
+        product:
+          description: 'DE: Typ des Hauptdarlehensproduktes. <br/>
+
+            EN: Main loan product type.
+
+            '
+          $ref: '#/components/schemas/MainProductType'
+        productName:
+          description: 'DE: Name des Hauptdarlehensproduktes. <br/>
+
+            EN: Main loan product name.
+
+            '
+          type: string
+      discriminator:
+        propertyName: product
+    HomePurchaseSavingProvider:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/HomePurchaseSavingProviderKey'
+    DefaultSubmissionStatusChangedLogbookEntryDetails:
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+    Percentage:
+      description: 'DE: Prozentsatz als double. <br/> EN: Percentage as double.
+
+        '
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'DE: Prozentsatz. <br/> EN: Percentage.
+
+            '
+          type: number
+          format: double
+    TitleKey:
+      type: string
+      description: 'DE: Akademischer Titel des Antragstellers (nicht abschließende Aufzählung, zum Beispiel: DR, PH_D, PD_DR, PROF, PROF_DR). <br/> EN: Open ended enum contains possible title values, possible values are DR, PH_D, PD_DR, PROF, PROF_DR.
+
+        '
+      example: PROF_DR
+      x-extensible-enum:
+      - DR
+      - PH_D
+      - PD_DR
+      - PROF
+      - PROF_DR
+      - OTHER
+    AnnuityDetails:
+      description: 'DE: Detaillierte Information über das Annuitätsdarlehen. <br/>
+
+        EN: Detailed information about periodic loan.
+
+        '
+      type: object
+      required:
+      - rateType
+      allOf:
+      - $ref: '#/components/schemas/BaseRateDetails'
+      properties:
+        amortisationRate:
+          description: 'DE: Tilgungsrate (Prozent pro Periode). <br/>
+
+            EN: Amortisation rate (percent per period).
+
+            '
+          $ref: '#/components/schemas/PeriodicalPercentage'
+        fullAmortizer:
+          type: boolean
+          description: 'DE: Volltilger. <br/>
+
+            EN: Full Amortizer.
+
+            '
+    PhoneReachability:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/PhoneReachabilityKey'
+    LogbookEntryType:
+      type: string
+      description: 'DE: Art des Logbookentry (nicht abschließende Aufzählung), z.B. (SUBMISSION_CREATED, SUBMISSION_EDITED, DECISION_DATE_UPDATED, UPLOADED_DOCUMENT, STATUS). <br/> EN: open ended enum contains possible logbook entry types, possible values are (SUBMISSION_CREATED, SUBMISSION_EDITED, DECISION_DATE_UPDATED, UPLOADED_DOCUMENT, STATUS).
+
+        '
+      example: UPLOADED_DOCUMENT
+      x-extensible-enum:
+      - SUBMISSION_CREATED
+      - SUBMISSION_EDITED
+      - SUBMISSION_MIGRATED
+      - SUBMISSION_CREDIT_LOANS_UPDATED
+      - LOAN_PARTNER_PROCESSOR_ASSIGNED
+      - UPLOADED_DOCUMENT
+      - DECISION_DATE_UPDATED
+      - STATUS
+      - SUBMISSION_COUNTER_OFFER_REVOKED
+      - SUBMISSION_STATUS_CHANGED
+      - CONTACT_ADVISOR_UPDATED
+      - LOAN_CONTRACT_NUMBER_UPDATED
+      - SUBMISSION_DATA_VIOLATIONS_SET
+      - SUBMISSION_REVOKED
+      - SUBMISSION_LOAN_PARTNER_DOCUMENT_CREATED
+      - SUBMISSION_LOAN_PARTNER_DOCUMENT_UPDATED
+      - SUBMISSION_LOAN_PARTNER_DOCUMENT_DELETED
+      - LOAN_PARTNER_PROCESSING_UNIT_CHANGED
+      - SUBMISSION_NOTE_ADDED
+    BridgingLoanDetails:
+      oneOf:
+      - $ref: '#/components/schemas/OpenPropertySale'
+      - $ref: '#/components/schemas/ClosedPropertySale'
+      - $ref: '#/components/schemas/UnavailableEquity'
+      - $ref: '#/components/schemas/PublicPreFinancing'
+      - $ref: '#/components/schemas/ExistingBuildingSavingPlan'
+      discriminator:
+        propertyName: reason
+        mapping:
+          OPEN_PROPERTY_SALE: '#/components/schemas/OpenPropertySale'
+          CLOSED_PROPERTY_SALE: '#/components/schemas/ClosedPropertySale'
+          UNAVAILABLE: '#/components/schemas/UnavailableEquity'
+          PUBLIC_PRE_FINANCE: '#/components/schemas/PublicPreFinancing'
+          EXISTING_BUILDING_SAVING_PLAN: '#/components/schemas/ExistingBuildingSavingPlan'
+    UpcomingPayments:
+      type: object
+      description: 'DE: Kosten für das Tilgungssurrogat in den Folgeperioden. <br/> EN: Upcoming payments for repayment surrogate product.
+
+        '
+      properties:
+        upcomingFees:
+          deprecated: true
+          description: '@deprecated: Upcoming fees are inadmissible. This was decided by the Federal Court of Justice in its ruling of November 15, 2022.
+
+            DE: Höhe der wiederkehrenden Kosten. <br/>
+
+            EN: Upcoming costs.
+
+            '
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+        closingFee:
+          description: 'DE: Abschlussgebühr für das Tilgungssurrogat. <br/> EN: Acquisition fee for the repayment surrogate product.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        paymentDuration:
+          description: 'DE: Laufzeit des Tilgungssurrogats. <br/>
+
+            EN: Duration of the repayment surrogate product.
+
+            '
+          $ref: '#/components/schemas/Duration'
+    SuspendedAmortizationDetails:
+      type: object
+      required:
+      - rateType
+      description: 'DE: Information zum Tilgungssurrogat. <br/> EN: Information about the repayment surrogate.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/BaseRateDetails'
+      properties:
+        type:
+          $ref: '#/components/schemas/SuspendedRepaymentProductType'
+        sum:
+          description: 'DE: Tilgungsbetrag. <br/>
+
+            EN: Amortisation sum.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        contractSignedWith:
+          description: 'DE: Referenz zu den Antragsteller der den Vetrag unterschrieben hat. <br/>
+
+            EN: Reference to the applicant who signed the contract.
+
+            '
+          $ref: '#/components/schemas/ApplicantIdRef'
+        contractDuration:
+          description: 'DE: Vertragsdauer. <br/>
+
+            EN: Contract duration.
+
+            '
+          $ref: '#/components/schemas/Duration'
+        upcomingPayments:
+          $ref: '#/components/schemas/UpcomingPayments'
+        savingBurden:
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+        depositValue:
+          $ref: '#/components/schemas/EuroAmount'
+        contractNumber:
+          description: 'DE: Vertragsnummer. <br/> EN: Contract number.
+
+            '
+          type: string
+        combinedProduct:
+          $ref: '#/components/schemas/SuspendedAmortizationCombinedProduct'
+        debtId:
+          description: Id of an existing mortgage saving plan
+          $ref: '#/components/schemas/DebtId'
+        amortizationProvider:
+          description: Amortization product in case of mortgage saving plan or company providing life insurance in case of life insurance
+          type: string
+        homePurchaseSavingProvider:
+          $ref: '#/components/schemas/HomePurchaseSavingProvider'
+        externalId:
+          description: id (projection id) used to identify the product used as a suspended amortization in the bank external system
+          type: string
+    BaseSuspendedAmortizationCombinedProduct:
+      type: object
+      required:
+      - product
+      properties:
+        product:
+          $ref: '#/components/schemas/SuspendedRepaymentProductTypeKey'
+      discriminator:
+        propertyName: product
+    CreatedCounterOfferLogbookEntryDetails:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      properties:
+        originalComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditLoan'
+        offer:
+          $ref: '#/components/schemas/SubmissionCounterOffer'
+    RFC7807Problem:
+      type: object
+      title: RFC7807Problem
+      description: 'DE: Angaben zum zurueckgegebenen Fehler. EN: Holds information on the returned error.
+
+        '
+      required:
+      - timestamp
+      - traceId
+      - instance
+      - title
+      - status
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: 'DE: Ein UTC-Zeitstempel, der den Fehlerzeitpunkt angibt (https://de.wikipedia.org/wiki/Koordinierte_Weltzeit). EN: A UTC date-time indicating the error timestamp (https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+
+            '
+          example: 2024-06-29 19:22:50+00:00
+        type:
+          type: string
+          format: uri
+          description: 'DE: Verknuepfung zum Abruf von mehr Informationen zu dem Fehler. EN: URL referring to more information about the error.
+
+            '
+          default: about:blank
+        title:
+          type: string
+          description: 'DE: Kurzbeschreibung des Fehlers. EN: Error short description.
+
+            '
+          example: Bad Request
+        status:
+          type: integer
+          format: int32
+          description: 'DE: HTTP-Status-Code gemaess Konvention (https://tools.ietf.org/html/rfc2616#section-10). EN: HTTP status code following standared error codes (https://tools.ietf.org/html/rfc2616#section-10).
+
+            '
+          example: 400
+          minimum: 100
+          maximum: 599
+        detail:
+          type: string
+          description: 'DE: Detaillierte Beschreibung des Fehlers. EN: Detailed description for the returned error.
+
+            '
+          example: JSON parse error
+        traceId:
+          type: string
+          description: 'DE: Eindeutige Kennung zur Verfolgung der Anfrage. EN: Unique trace id for problematic request.
+
+            '
+          example: avx1234asd
+        instance:
+          type: string
+          format: uri
+          description: 'DE: Pfad zur betreffenden Resource. EN: Path of requested resource.
+
+            '
+          example: http://localhost/resources/123
+        violations:
+          type: array
+          description: 'DE: Abfolge der Verstoesse in der Anfrage. EN: Collection of the invalid content of the request.
+
+            '
+          items:
+            $ref: '#/components/schemas/Violation'
+    SubmissionStatusChangedLogbookEntryDetailsType:
+      type: string
+      description: 'DE: offenes Enum enthält mögliche Details zum Status der Einreichung von Logbucheinträgen geändert <br/> EN: open ended enum contains possible logbook entry submission status changed details
+
+        '
+      example: PROCESSING_PAUSED
+      x-extensible-enum:
+      - CONTRACT_DELIVERED
+      - CONTRACT_SIGNED
+      - CONTRACT_CANCELED
+      - AWAIT_EXTERNAL_PROCESSING
+      - PROCESSING_PAUSED
+      - PROCESSING_RESUMED
+      - REJECTED
+      - CANCELED
+      - REJECTION_REVOKED
+      - INWORK
+      - APPROVED
+      - CONFIRMED
+      - COUNTER_OFFER_CREATED
+      - COUNTER_OFFER_ACCEPTED
+      - COUNTER_OFFER_REJECTED
+    ContractDeliveredStatusLogbookEntryDetails:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseSubmissionStatusChangedLogbookEntryDetails'
+      properties:
+        contractDeliverDate:
+          $ref: '#/components/schemas/ISODate'
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtendedContractInfo'
+    Phone:
+      type: object
+      required:
+      - phoneNumber
+      - type
+      properties:
+        phoneNumber:
+          type: string
+          description: 'DE: Mobil- oder Festnetztelefonnummer des Antragstellers. <br/> EN: Mobile or landline telephone number of the customer.
+
+            '
+          example: +49 160 123456
+        type:
+          $ref: '#/components/schemas/PhoneType'
+        reachable:
+          $ref: '#/components/schemas/PhoneReachability'
+    ContactAdvisorUpdatedLogbookEntry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        updatedUserContact:
+          $ref: '#/components/schemas/UserData'
+    InterestMaturityType:
+      type: string
+      description: 'DE: Art der Sollzinsbindung(nicht abschließende Aufzählung), z.B. FIXED_PERIOD, VARIABLE. <br/> EN: Open ended enum contains types of the interest maturity, possible values are FIXED_PERIOD, VARIABLE.
+
+        '
+      example: FIXED_PERIOD
+      x-extensible-enum:
+      - FIXED_PERIOD
+      - VARIABLE
+      - OTHER
+    SubmissionStatusChangedLogbookEntry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        details:
+          $ref: '#/components/schemas/SubmissionStatusChangedLogbookEntryDetails'
+    SuspendedAmortizationCombinedProduct:
+      oneOf:
+      - $ref: '#/components/schemas/SuspendedAmortizationOtherProduct'
+      - $ref: '#/components/schemas/SuspendedAmortizationBuildingSavingProduct'
+      discriminator:
+        propertyName: product
+        mapping:
+          OTHER: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          DT_KAP_LV: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          DT_KAP_RV: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          BRIT_KAP_LV: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          BRIT_KAP_RV: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          FONDS_LV: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          FONDS_RV: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          FONDS_SPAR: '#/components/schemas/SuspendedAmortizationOtherProduct'
+          BAU_SPAR: '#/components/schemas/SuspendedAmortizationBuildingSavingProduct'
+    SubmissionDataViolationSeverityKey:
+      type: string
+      x-extensible-enum:
+      - INFO
+      - WARN
+      - ERROR
+    RegularPayment:
+      description: 'DE: Information über den regulären Zahlungen. <br/>
+
+        EN: Information about regular payment.
+
+        '
+      type: object
+      properties:
+        paymentTime:
+          $ref: '#/components/schemas/PaymentTime'
+        freePeriod:
+          description: 'DE: Tilgungsfreie Anlaufzeit. <br/>
+
+            EN: Amortisation-free period.
+
+            '
+          $ref: '#/components/schemas/Duration'
+        amount:
+          description: 'DE: Rate in der tilgungsfreien Anlaufzeit. <br/>
+
+            EN: Amortisation during amortisation-free period.
+
+            '
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+        amountAfterFreePeriod:
+          description: 'DE: Rate nach Ablauf der tilgungsfreien Anlaufzeit. <br/>
+
+            EN: Rate after amortisation-free period.
+
+            '
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+    BaseBridgingLoanDetails:
+      type: object
+      required:
+      - neededAmount
+      - reason
+      description: 'DE: Information zur Zwischenfinanzierung. <br/> EN: Details about bridging loan.
+
+        '
+      properties:
+        reason:
+          type: string
+          description: 'DE: Grund für die Zwischenfinanzierung (nicht abschließende Aufzaehlung), z.B. OPEN_PROPERTY_SALE, CLOSED_PROPERTY_SALE, UNAVAILABLE, PUBLIC_PRE_FINANCE, EXISTING_BUILDING_SAVING_PLAN. <br/> EN: Open ended enum contains bridging loan debt reason, possible values are OPEN_PROPERTY_SALE, CLOSED_PROPERTY_SALE, UNAVAILABLE, PUBLIC_PRE_FINANCE, EXISTING_BUILDING_SAVING_PLAN.
+
+            '
+          example: OPEN_PROPERTY_SALE
+          x-extensible-enum:
+          - OPEN_PROPERTY_SALE
+          - CLOSED_PROPERTY_SALE
+          - UNAVAILABLE
+          - PUBLIC_PRE_FINANCE
+          - EXISTING_BUILDING_SAVING_PLAN
+        neededAmount:
+          description: 'DE: Zwischenfinanzierungsbetrag. <br/>
+
+            EN: Bridging loan amount.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        equityAvailabilityDate:
+          description: 'DE: Verfügbarkeit des Kapitals. <br/>
+
+            EN: Bridging loan availability date.
+
+            '
+          $ref: '#/components/schemas/ISODate'
+      discriminator:
+        propertyName: reason
+    OAuthProblem:
+      type: object
+      description: Error while Authentication
+      required:
+      - error
+      - error_description
+      properties:
+        error:
+          type: string
+          description: Summary of the error type
+          example: invalid_token
+        error_description:
+          type: string
+          description: Detailed information about the error
+          example: Access token expired
+    ContractInfoLoanType:
+      description: 'DE: Type des Loans dessen Vertragsnummer aktualisiert werden soll. <br/>
+
+        EN: Type of loan where the contract number should be updated.
+
+        '
+      type: string
+      x-extensible-enum:
+      - LOAN
+      - SUSPENDED_AMORTIZATION_COMBINED_BUILDING_LOAN
+      - RESIDUAL_DEBT_PROTECTION_BUILDING_SAVING_PLAN
+    ProductType:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/ProductTypeKey'
     BridgingFinancingMainProduct:
       type: object
       description: 'DE: Information zur Zwischenfinanzierung im Annuitätendarlehen. <br/> EN: Information on the bridging financing product in the annuity product.
@@ -3014,6 +2803,217 @@ components:
       properties:
         details:
           $ref: '#/components/schemas/BridgingLoanDetails'
+    SubmissionStatusChangedLogbookEntryDetails:
+      oneOf:
+      - $ref: '#/components/schemas/ContractDeliveredStatusLogbookEntryDetails'
+      - $ref: '#/components/schemas/ContractSignedStatusLogbookEntryDetails'
+      - $ref: '#/components/schemas/ContractCanceledStatusLogbookEntryDetails'
+      - $ref: '#/components/schemas/ExternalProcessingAwaitedLogbookEntryDetails'
+      - $ref: '#/components/schemas/SubmissionProcessingPausedStatusLogbookEntryDetails'
+      - $ref: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+      - $ref: '#/components/schemas/SubmissionProcessingResumedStatusLogbookEntryDetails'
+      - $ref: '#/components/schemas/RejectSubmissionStatusChangedLogbookEntryDetails'
+      - $ref: '#/components/schemas/CreatedCounterOfferLogbookEntryDetails'
+      - $ref: '#/components/schemas/AcceptedCounterOfferLogbookEntryDetails'
+      - $ref: '#/components/schemas/RejectedCounterOfferLogbookEntryDetails'
+      - $ref: '#/components/schemas/ContractSignRefusedStatusLogbookEntryDetails'
+      discriminator:
+        propertyName: type
+        mapping:
+          CONTRACT_DELIVERED: '#/components/schemas/ContractDeliveredStatusLogbookEntryDetails'
+          CONTRACT_SIGNED: '#/components/schemas/ContractSignedStatusLogbookEntryDetails'
+          CONTRACT_CANCELED: '#/components/schemas/ContractCanceledStatusLogbookEntryDetails'
+          AWAIT_EXTERNAL_PROCESSING: '#/components/schemas/ExternalProcessingAwaitedLogbookEntryDetails'
+          PROCESSING_PAUSED: '#/components/schemas/SubmissionProcessingPausedStatusLogbookEntryDetails'
+          INWORK: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+          APPROVED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+          REJECTED_AND_CLOSED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+          PROCESSING_RESUMED: '#/components/schemas/SubmissionProcessingResumedStatusLogbookEntryDetails'
+          CANCELED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+          CONFIRMED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+          REJECTION_REVOKED: '#/components/schemas/DefaultSubmissionStatusChangedLogbookEntryDetails'
+          REJECTED: '#/components/schemas/RejectSubmissionStatusChangedLogbookEntryDetails'
+          COUNTER_OFFER_CREATED: '#/components/schemas/CreatedCounterOfferLogbookEntryDetails'
+          COUNTER_OFFER_ACCEPTED: '#/components/schemas/AcceptedCounterOfferLogbookEntryDetails'
+          COUNTER_OFFER_REJECTED: '#/components/schemas/RejectedCounterOfferLogbookEntryDetails'
+          CONTRACT_SIGN_REFUSED: '#/components/schemas/ContractSignRefusedStatusLogbookEntryDetails'
+    CreditPhaseInterest:
+      type: object
+      properties:
+        interestRate:
+          $ref: '#/components/schemas/InterestRate'
+        interestPayed:
+          description: 'DE: Sollzinsen insgesamt. <br/> EN: Total of credit interest payed.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+    RegularMainProduct:
+      allOf:
+      - $ref: '#/components/schemas/BaseMainProduct'
+    KfwLoanAdditionalInfo:
+      type: object
+      description: 'DE: Zustzäliche Information zum KFW Darlehen. <br/> EN: Additional informations for kfw loan.
+
+        '
+      properties:
+        provisionDetails:
+          type: array
+          description: 'DE: Zusätzliche Provisionsdetails für das KFW Darlehen (Schlüssel-Werte Paar). <br/> EN: Additional commission (provision) details for the kfw loan (key-value pairs).
+
+            '
+          items:
+            $ref: '#/components/schemas/AdditionalInfo'
+    RejectSubmissionCounterOfferReasonKey:
+      type: string
+      description: 'DE: offenes Enum enthält mögliche Gründe für die Ablehnung eines Gegenangebots, mögliche Werte sind (CONDITION_NOT_ATTRACTIVE_FOR_CUSTOMER = Konditionen waren für den Kunden nicht attraktiv, CUSTOMER_DECIDED_DIFFERENT_PROVIDER=Kunden hat sich für einen anderen Finanzierungspartner (besseres Angebot) entschieden, CONDITION_NOT_FEASIBLE_FOR_CUSTOMER=Bedingung der Bank für den Kunden nicht darstellbar, OTHER=Nicht aufgeführter Grund). EN: open ended enum contains possible counter offer rejection reasons, possible values are (CONDITION_NOT_ATTRACTIVE_FOR_CUSTOMER, CUSTOMER_DECIDED_DIFFERENT_PROVIDER, CONDITION_NOT_FEASIBLE_FOR_CUSTOMER, OTHER).
+
+        '
+      example: OTHER
+      x-extensible-enum:
+      - CONDITION_NOT_ATTRACTIVE_FOR_CUSTOMER
+      - CUSTOMER_DECIDED_DIFFERENT_PROVIDER
+      - CONDITION_NOT_FEASIBLE_FOR_CUSTOMER
+      - OTHER
+    CreditLoan:
+      type: object
+      description: 'DE: Informationen zur Finanzierungsstruktur. <br/>
+
+        EN: A Credit Loan represents specific financing structure component.
+
+        '
+      properties:
+        id:
+          $ref: '#/components/schemas/CreditLoanId'
+        financingLoans:
+          type: array
+          items:
+            $ref: '#/components/schemas/Loan'
+          minItems: 1
+        handover:
+          $ref: '#/components/schemas/Handover'
+    CounterOfferRevokedLogbookEntry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseLogbookEntry'
+      properties:
+        details:
+          $ref: '#/components/schemas/RevokedCounterOfferLogbookEntryDetails'
+    SavingPlanTariff:
+      type: object
+      required:
+      - id
+      - name
+      - loanPartner
+      properties:
+        id:
+          description: 'DE: ID der gewählter Bauspartarif. <br/>
+
+            EN: ID of the chosen savings plan tariff.
+
+            '
+          example: KF.195
+          type: string
+        name:
+          description: 'DE: Name der gewählter Bauspartarif. <br/>
+
+            EN: Name of the chosen savings plan tariff.
+
+            '
+          example: D/Komfort 1,95%
+          type: string
+        loanPartner:
+          deprecated: true
+          description: Can be removed after the changes to the loan partner structure have been released
+          $ref: '#/components/schemas/LoanPartnerProcessingUnit'
+        loanPartnerId:
+          $ref: '#/components/schemas/CompanyId'
+        variantPrice:
+          description: 'DE: einmalig Variantepreis. <br/> EN: costs for variant.
+
+            '
+          $ref: '#/components/schemas/EuroAmount'
+        magazineCosts:
+          description: 'DE: !!!. <br/> EN: The potential costs of the saving plan magazines.
+
+            '
+          $ref: '#/components/schemas/PeriodicalEuroAmount'
+    SubmissionDataViolation:
+      description: a specific submission violation
+      type: object
+      required:
+      - description
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        proposedSolution:
+          type: string
+        severity:
+          $ref: '#/components/schemas/SubmissionDataViolationSeverity'
+    KfwCallType:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          $ref: '#/components/schemas/KfwCallTypeKey'
+    BaseLogbookEntry:
+      type: object
+      required:
+      - id
+      - type
+      description: 'DE: Informationen zu einem Logbucheintrag. <br/>
+
+        EN: Holds information about a logbook entry.
+
+        '
+      properties:
+        id:
+          $ref: '#/components/schemas/LogbookEntryId'
+        type:
+          $ref: '#/components/schemas/LogbookEntryType'
+        createdAt:
+          description: 'DE: Ein UTC Zeitstempel wann die mit dem Logbucheintrag verknüpfte Aktion ausgelöst wurde. <br/> EN: A UTC date-time indicates when the event associated to the logbook entry took place.
+
+            '
+          $ref: '#/components/schemas/ISODateTime'
+        createdBy:
+          description: 'DE: Der Nutzer, welcher die Aktion ausgelöst hat, die zu dem Logbucheintrag führt. <br/> EN: User who triggered the event associated to the logbook entry.
+
+            '
+          $ref: '#/components/schemas/UserData'
+        remark:
+          type: string
+      discriminator:
+        propertyName: type
+    ApplicantId:
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          description: 'DE: Id des Antragstellers. <br/> EN: Id of the applicant.
+
+            '
+          type: string
+          example: '1'
+    ContractInfoReferenceId:
+      type: object
+      description: 'DE: Referenz zu einem Baustein, dessen Vertragsnummer aktualisiert werden soll. EN: Reference to a component whose contract number should be updated.
+
+        '
+      properties:
+        value:
+          type: string
+    PhoneReachabilityKey:
+      type: string
+      description: 'DE: Erreichbarkeit unter dieser Telefonnumer (nicht abschließende Aufzählung, zum Beispiel: DAYTIME = tagsüber, EVENING = abends). <br/> EN: Reachable by this phone number, possible values are DAYTIME, EVENING.
+
+        '
+      x-extensible-enum:
+      - DAYTIME
+      - EVENING
   parameters:
     submission-id:
       name: submissionId

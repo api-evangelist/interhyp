@@ -144,27 +144,6 @@ components:
             '
           items:
             $ref: '#/components/schemas/Violation'
-    CommandError:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorMessage:
-          type: string
-        errorCode:
-          type: string
-          x-extensible-enum:
-          - SBM_ARCHIVE_SUBMISSION_DENIED
-          - SBM_NOT_UNARCHIVABLE
-          - SBM_ASSIGN_PROCESSOR_UNIT_MISMATCH
-          - SBM_STATUS_CHANGE_DENIED
-          - UNEXPECTED_ERROR
-          - NO_PROCESSOR_ASSIGNED
-          - FINAL_STATE
-          - PRE_INQUIRY_NOT_SUBMITTED
-          - PRE_INQUIRY_ALREADY_SUBMITTED
-          - PRE_INQUIRY_NOT_ARCHIVABLE
-          - PRE_INQUIRY_IS_ARCHIVED
     OAuthProblem:
       type: object
       description: Error while Authentication
@@ -224,6 +203,27 @@ components:
           type: string
         error:
           $ref: '#/components/schemas/CommandError'
+    CommandError:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+          x-extensible-enum:
+          - SBM_ARCHIVE_SUBMISSION_DENIED
+          - SBM_NOT_UNARCHIVABLE
+          - SBM_ASSIGN_PROCESSOR_UNIT_MISMATCH
+          - SBM_STATUS_CHANGE_DENIED
+          - UNEXPECTED_ERROR
+          - NO_PROCESSOR_ASSIGNED
+          - FINAL_STATE
+          - PRE_INQUIRY_NOT_SUBMITTED
+          - PRE_INQUIRY_ALREADY_SUBMITTED
+          - PRE_INQUIRY_NOT_ARCHIVABLE
+          - PRE_INQUIRY_IS_ARCHIVED
   securitySchemes:
     BearerAuth:
       $ref: '#/components/securitySchemes/StandardBearerAuth'
