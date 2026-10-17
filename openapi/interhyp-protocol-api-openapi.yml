@@ -68,32 +68,6 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    Paging:
-      properties:
-        cursor:
-          $ref: '#/components/schemas/Cursor'
-        previous:
-          type: string
-          format: uri
-        next:
-          type: string
-          format: uri
-        first:
-          type: string
-          format: uri
-        last:
-          type: string
-          format: uri
-        self:
-          type: string
-          format: uri
-    SubmissionProtocolRef:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ResourceRef'
-      - properties:
-          embedded:
-            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
     SubmissionProtocolRefItem:
       type: object
       allOf:
@@ -102,41 +76,6 @@ components:
           legacyId:
             description: Legacy submission id
             type: string
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    SubmissionRef:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ResourceRef'
-      - properties:
-          id:
-            type: string
-            description: Submission id
-    EmbeddedSubmissionProtocol:
-      type: object
-      properties:
-        protocol:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtocolItem'
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Cursor:
-      properties:
-        before:
-          type: string
-        after:
-          type: string
-    ResourceRef:
-      required:
-      - href
-      properties:
-        href:
-          type: string
-          description: Link to retrieve a specific resource
-          example: http://some-domain/some/link/to/somewhere
     ProtocolItemType:
       type: string
       description: open ended enum contains possible protocol item types, possible values are (DOCUMENT, DATA, STATUS, NEW_SUBMISSION)
@@ -146,15 +85,32 @@ components:
       - DATA
       - STATUS
       - NEW_SUBMISSION
-    SubmissionProtocol:
+    SubmissionRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          id:
+            type: string
+            description: Submission id
+    SubmissionProtocolItem:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmissionProtocolItem'
-        paging:
-          $ref: '#/components/schemas/Paging'
+        submission:
+          $ref: '#/components/schemas/SubmissionProtocolRefItem'
+        protocol:
+          $ref: '#/components/schemas/SubmissionProtocolRef'
+    ResourceRef:
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          description: Link to retrieve a specific resource
+          example: http://some-domain/some/link/to/somewhere
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     ClientError:
       type: object
       required:
@@ -166,6 +122,38 @@ components:
             type: string
           exception:
             type: string
+    SubmissionProtocolRef:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ResourceRef'
+      - properties:
+          embedded:
+            $ref: '#/components/schemas/EmbeddedSubmissionProtocol'
+    SubmissionProtocol:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionProtocolItem'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    EmbeddedSubmissionProtocol:
+      type: object
+      properties:
+        protocol:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtocolItem'
+    Cursor:
+      properties:
+        before:
+          type: string
+        after:
+          type: string
+    Unauthorized:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
     ProtocolItem:
       type: object
       properties:
@@ -208,23 +196,42 @@ components:
         errorCode:
           type: integer
           format: int32
-    SubmissionProtocolItem:
-      type: object
+    Paging:
       properties:
-        submission:
-          $ref: '#/components/schemas/SubmissionProtocolRefItem'
-        protocol:
-          $ref: '#/components/schemas/SubmissionProtocolRef'
+        cursor:
+          $ref: '#/components/schemas/Cursor'
+        previous:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        first:
+          type: string
+          format: uri
+        last:
+          type: string
+          format: uri
+        self:
+          type: string
+          format: uri
   parameters:
-    since:
-      name: since
+    until:
+      name: until
       in: query
-      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-      required: true
+      description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: false
       schema:
         type: string
         format: date-time
         example: 2019-12-29 10:22:50+00:00
+    cursor-after:
+      name: after
+      in: query
+      description: Cursor that points to the end of the page of data that has been returned.
+      required: false
+      schema:
+        type: string
     cursor-before:
       name: before
       in: query
@@ -232,14 +239,6 @@ components:
       required: false
       schema:
         type: string
-    embed:
-      name: embed
-      in: query
-      style: form
-      required: false
-      schema:
-        type: boolean
-      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
     sbms-protocol-limit:
       name: limit
       in: query
@@ -251,6 +250,15 @@ components:
         minimum: 1
         maximum: 40
         default: 20
+    since:
+      name: since
+      in: query
+      description: A UTC date-time value that points to the start of the range of time-based data. <br> Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
+      required: true
+      schema:
+        type: string
+        format: date-time
+        example: 2019-12-29 10:22:50+00:00
     protocol-type-filter:
       name: protocolType
       in: query
@@ -263,22 +271,14 @@ components:
         - status
         - new_submission
       description: query parameter to restrict submissions associated to the provided protocol type.
-    cursor-after:
-      name: after
+    embed:
+      name: embed
       in: query
-      description: Cursor that points to the end of the page of data that has been returned.
+      style: form
       required: false
       schema:
-        type: string
-    until:
-      name: until
-      in: query
-      description: A UTC date-time value that points to the end of the range of time-based data. <br> If not provided, current date-time is used. Defined by date-time - [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14).
-      required: false
-      schema:
-        type: string
-        format: date-time
-        example: 2019-12-29 10:22:50+00:00
+        type: boolean
+      description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
   securitySchemes:
     BearerAuth:
       type: http

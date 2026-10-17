@@ -139,39 +139,12 @@ paths:
                 $ref: '#/components/schemas/UnexpectedError'
 components:
   schemas:
-    DocumentCategory:
-      type: object
-      properties:
-        name:
-          type: string
-          example: KONTOAUSZUG
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentCategoryTag'
-    Documents:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentItem'
-    Conflict:
+    NotFound:
       allOf:
       - $ref: '#/components/schemas/ClientError'
-    ClientError:
-      type: object
-      required:
-      - rootCause
+    Unauthorized:
       allOf:
-      - $ref: '#/components/schemas/UnexpectedError'
-      - properties:
-          message:
-            type: string
-          exception:
-            type: string
+      - $ref: '#/components/schemas/ClientError'
     DocumentItem:
       type: object
       required:
@@ -191,24 +164,6 @@ components:
           example: Mustermann, Max
         validity:
           $ref: '#/components/schemas/DocumentValidity'
-    BadRequest:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Binary:
-      type: string
-      format: binary
-    DocumentCategoryTag:
-      type: object
-      properties:
-        name:
-          type: string
-          example: MIETAUSGANG
-    NotFound:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
-    Unauthorized:
-      allOf:
-      - $ref: '#/components/schemas/ClientError'
     DocumentValidity:
       type: object
       required:
@@ -227,14 +182,24 @@ components:
         mapping:
           MONTH: '#/components/schemas/MonthlyResolution'
           YEAR: '#/components/schemas/YearlyResolution'
-    ResourceRef:
+    Conflict:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    Documents:
+      type: object
       required:
-      - href
+      - data
       properties:
-        href:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+    DocumentCategoryTag:
+      type: object
+      properties:
+        name:
           type: string
-          description: Link to retrieve a specific resource
-          example: http://some-domain/some/link/to/somewhere
+          example: MIETAUSGANG
     UnexpectedError:
       required:
       - status
@@ -258,6 +223,41 @@ components:
         errorCode:
           type: integer
           format: int32
+    Binary:
+      type: string
+      format: binary
+    ResourceRef:
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          description: Link to retrieve a specific resource
+          example: http://some-domain/some/link/to/somewhere
+    BadRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientError'
+    ClientError:
+      type: object
+      required:
+      - rootCause
+      allOf:
+      - $ref: '#/components/schemas/UnexpectedError'
+      - properties:
+          message:
+            type: string
+          exception:
+            type: string
+    DocumentCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          example: KONTOAUSZUG
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentCategoryTag'
   parameters:
     embed:
       name: embed
@@ -267,6 +267,13 @@ components:
       schema:
         type: boolean
       description: Flag to expand or embed sub-resources in the response resource.<br> By default is set to `FALSE` where only a **ref** to the sub-resources will be returned.<br> By set it to `TRUE` the sub-resources content will be embedded in the response which might affect the payload size
+    document-id:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Id for the requested submission document.
     startDate:
       name: startDate
       in: query
@@ -283,13 +290,6 @@ components:
       schema:
         type: string
       description: Id for the requested submission.
-    document-id:
-      name: documentId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Id for the requested submission document.
   securitySchemes:
     BearerAuth:
       type: http
