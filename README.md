@@ -64,17 +64,88 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Interhyp AG is Germany's leading platform for residential mortgage financing (Baufinanzierung), comparing offers from 500+ loan partners. It is part of ING Group and runs the broker brand Prohyp.
+Interhyp AG is Germany's leading platform for residential mortgage financing (Baufinanzierung), connecting homebuyers and partners with the best financing options by comparing offers from more than 500 loan partners. Through its Developer Studio (developer.ehyphome.de) Interhyp publishes a partner-facing REST API surface — most notably the Submission API — that lets brokers, referrers and platforms integrate mortgage submission workflows, financing applications, documents, logbooks and pre-submission checks directly into their own applications. The API is designed "API First" and "Mobile First", secured with OAuth 2.0 JWT bearer tokens plus an Api-Key header, uses cursor-based pagination, RFC 7807 problem+json error responses and traceId request tracing. Interhyp is part of the ING Group and operates the broker brand Prohyp.
 
-Through its Developer Studio ([developer.ehyphome.de](https://developer.ehyphome.de/)) Interhyp publishes partner-facing REST APIs — the **Submission API** (financing applications, applicants, estates, households, financial standings, offers, submissions, logbooks, commands, pre-submission checks) and the **Submission Documents API** — secured with OAuth 2.0 JWT bearer tokens plus an Api-Key header, using cursor pagination, RFC 7807 problem+json errors, and a `traceId` for support correlation.
+**Areas:** Company · Fintech · Mortgage · Lending · Baufinanzierung · Real Estate · Banking · Germany · API-First
 
-Source: added to the API Evangelist network as a portfolio company of earlybird (fintech), then enriched from the public developer portal and the [Interhyp GitHub org](https://github.com/Interhyp).
+## Interhyp on APIs.io
 
-## Artifacts
-- `openapi/` — Submission API (v6.10.0) + Submission Documents API OpenAPI 3.0 specs
-- `authentication/`, `conventions/`, `errors/`, `lifecycle/`, `conformance/`, `data-model/`
-- `mcp/` — candidate MCP tool list derived from operations
-- `skills/` — agent skills for reading a financing application and managing a submission
-- `sandbox/`, `changelog/`, `packages/`, `overlays/`, `security/`, `well-known/`, `llms/`
+Everything profiled for Interhyp is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/interhyp/](https://apis.io/providers/interhyp/)** — or go straight to one of the APIs or properties below.
 
-Backed by: earlybird
+### APIs (8)
+
+- [Interhyp Commands API](https://apis.io/apis/interhyp/interhyp-commands-api/) — provides endpoints to access to commands sent to the submission API
+- [Interhyp Documents API](https://apis.io/apis/interhyp/interhyp-documents-api/) — access to submission documents
+- [Interhyp Financing Application API](https://apis.io/apis/interhyp/interhyp-financing-application-api/) — provides endpoints for financing application resources not associate to a specific financing partner
+- [Interhyp Info API](https://apis.io/apis/interhyp/interhyp-info-api/) — provides basic info about service status and version of the submission API specs used
+- [Interhyp Logbook API](https://apis.io/apis/interhyp/interhyp-logbook-api/) — provides endpoints to access submission logbook
+- [Interhyp Pre Submission Checks API](https://apis.io/apis/interhyp/interhyp-pre-submission-checks-api/) — provides endpoints for pre-submission resources associated with a specific financing partner
+- [Interhyp Protocol API](https://apis.io/apis/interhyp/interhyp-protocol-api/) — access to submission protocol
+- [Interhyp Submissions API](https://apis.io/apis/interhyp/interhyp-submissions-api/) — provides endpoints for submission resources associated with a specific financing partner
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [interhyp-submission](https://apis.io/servers/interhyp/interhyp-submission/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Interhyp Submission commands API](https://apis.io/collections/interhyp/open-interhyp-commands-api/)
+- [Interhyp Submission commands documents API](https://apis.io/collections/interhyp/open-interhyp-documents-api/)
+- [Interhyp Submission commands financing-application API](https://apis.io/collections/interhyp/open-interhyp-financing-application-api/)
+- [Interhyp Submission commands info API](https://apis.io/collections/interhyp/open-interhyp-info-api/)
+- [Interhyp Submission commands logbook API](https://apis.io/collections/interhyp/open-interhyp-logbook-api/)
+- [Interhyp Submission commands pre-submission-checks API](https://apis.io/collections/interhyp/open-interhyp-pre-submission-checks-api/)
+- [Interhyp Submission commands protocol API](https://apis.io/collections/interhyp/open-interhyp-protocol-api/)
+- [Interhyp Submission commands submissions API](https://apis.io/collections/interhyp/open-interhyp-submissions-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Interhyp Submission Documents Overlay](https://apis.io/overlays/interhyp/interhyp-submission-documents-overlay/)
+- [Interhyp Submission Overlay](https://apis.io/overlays/interhyp/interhyp-submission-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Interhyp Authentication](https://apis.io/security/interhyp/interhyp-authentication/)
+- [Interhyp Domain Security](https://apis.io/security/interhyp/interhyp-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Documentation](https://developer.ehyphome.de/products)
+- [Getting started](https://developer.ehyphome.de/first-steps)
+- [Sign up](https://www.prohyp.de/partner-werden/)
+- [Changelog](https://developer.ehyphome.de/changelog)
+- [Terms of service](https://developer.ehyphome.de/assets/AGB.pdf)
+- [Privacy policy](https://www.interhyp.de/datenschutz.html)
+- [GitHub](https://github.com/Interhyp)
+
+## API Evangelist rating
+
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Interhyp: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/interhyp/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
